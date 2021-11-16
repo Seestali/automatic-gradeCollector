@@ -1,10 +1,16 @@
 import random
 import socket
+import time
+import sqlite3
+
+connection = sqlite3.connect('database.db')
+cursor = connection.cursor()
 
 bufferSize = 1024
+port = 42069
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_socket.bind(('', 12000))
+server_socket.bind(('', port))
 print('The server is ready to receive')
 
 while True:
