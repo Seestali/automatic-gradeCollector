@@ -16,5 +16,10 @@ namespace client
         {
             InitializeComponent();
         }
+
+        private void ButtonLogin_Click(object sender, EventArgs e)
+        {
+            // TODO: make login and proceed with program (close Login-Form and create new)
+        }
     }
 }
