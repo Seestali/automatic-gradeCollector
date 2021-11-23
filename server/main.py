@@ -2,27 +2,42 @@ import random
 import socket
 import time
 import sqlite3
+import hashlib
 
 
-# add student to student table
-def addStudent(studiengang, vorname, nachname, email):
-    cursor.execute("INSERT INTO students (Studiengang, Vorname, Nachname, Email) VALUES (?, ?, ?, ?)",
-                   (studiengang, vorname, nachname, email))
-    connection.commit()
+# add student to student table and check if email already exists
+def addStudent(studiengang, vorname, nachname, email, password):
+    cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+    student = cursor.fetchone()
+    if student is None:
+        cursor.execute("INSERT INTO students (Studiengang, Vorname, Nachname, Email, Passwort) VALUES (?, ?, ?, ?, ?)",
+                       (studiengang, vorname, nachname, email, hashlib.sha256(password.encode('utf-8')).hexdigest()))
+        connection.commit()
+        return True
+    else:
+        return False
 
 
-# return student from table by vorname
-def getStudent(vorname):
-    cursor.execute("SELECT * FROM students WHERE Vorname = ?", (vorname,))
-    return cursor.fetchone()
+def validateStudent(email, password):
+    cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+    student = cursor.fetchone()
+    if student is None:
+        return False
+    else:
+        if hashlib.sha256(password.encode('utf-8')).hexdigest() == student[5]:
+            return True
+        else:
+            return False
 
 
 connection = sqlite3.connect('database.db')
 cursor = connection.cursor()
 connection.commit()
-connection.close()
 bufferSize = 1024
 port = 42069
+
+# addStudent("Informatik", "Max", "Mustermann", "test@test.de", "test")
+print(validateStudent("test@test.de", "test"))
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind(('', port))
