@@ -147,6 +147,8 @@ print('The server is ready to receive')
 
 while True:
     message, address = server_socket.recvfrom(bufferSize)
+    # print the address of the client
+    print('Client connected from: ', address)
     message = message.upper()
     # returns message and address to client
     server_socket.sendto(message, address)
