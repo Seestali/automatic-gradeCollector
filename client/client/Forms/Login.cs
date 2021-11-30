@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using client.Network;
 
 namespace client
 {
@@ -25,8 +26,7 @@ namespace client
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             //TODO: make login and proceed with program (close Login-Form and create new)
-            MessageBox.Show(tbUser.Text);
-            MessageBox.Show(GetHashString(tbPassword.Text));
+            MessageBox.Show(tbUser.Text + "\n\n" + GetHashString(tbPassword.Text));
         }
 
         //TODO: Create separate class for hashing function
@@ -43,6 +43,12 @@ namespace client
                 //X2-Format: Formats string as two uppercase hexadecimal characters
                 sb.Append(hashbyte.ToString("X2"));
             return sb.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UDP.Send(Encoding.ASCII.GetBytes("Hallo Henny"));
+            UDP.Receive();
         }
     }
 }
