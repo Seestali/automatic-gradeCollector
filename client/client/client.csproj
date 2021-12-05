@@ -59,7 +59,7 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Network\PacketAssembler.cs" />
-    <Compile Include="Network\UDP.cs" />
+    <Compile Include="Network\UdpProtocol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Login.resx">
