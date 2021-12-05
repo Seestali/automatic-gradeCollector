@@ -62,7 +62,7 @@ namespace client
             this.btnSendReceive.TabIndex = 5;
             this.btnSendReceive.Text = "Send/Rec";
             this.btnSendReceive.UseVisualStyleBackColor = true;
-            this.btnSendReceive.Click += new System.EventHandler(this.button1_Click);
+            this.btnSendReceive.Click += new System.EventHandler(this.btnDebugSendReceive);
             // 
             // lbUser
             // 

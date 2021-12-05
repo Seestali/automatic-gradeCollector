@@ -45,10 +45,17 @@ namespace client
             return sb.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDebugSendReceive(object sender, EventArgs e)
         {
-            UDP.Send(Encoding.ASCII.GetBytes("Hallo Henny"));
-            UDP.Receive();
+            System.Diagnostics.Debug.WriteLine("Started Sever\n");
+           // UDP2 s = new UDP2();
+            //s.Server("127.0.0.1", 42069);
+            
+            UdpProtocol c = new UdpProtocol();
+            c.Client("178.203.36.119", 42069);
+            c.Send("Hallo Henny");
+            System.Diagnostics.Debug.WriteLine("Sent message");
+            System.Diagnostics.Debug.WriteLine("Closed Server \n Press any key to exit");
         }
     }
 }
