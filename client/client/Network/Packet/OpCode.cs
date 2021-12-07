@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace client.Network.Packet
 {
-    enum OpCode
+    public enum OpCode
     {
         DENY,
         ACK,

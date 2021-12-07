@@ -61,6 +61,7 @@
     <Compile Include="Network\CRC.cs" />
     <Compile Include="Network\PacketAssembler.cs" />
     <Compile Include="Network\Packet\OpCode.cs" />
+    <Compile Include="Network\Packet\Packet.cs" />
     <Compile Include="Network\UdpProtocol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
