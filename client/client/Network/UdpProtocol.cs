@@ -8,10 +8,11 @@ namespace client.Network
 {
     /// <summary>
     /// Short UDP-Protocol to manage communication between client and server.
+    /// Does only work for data bursts, not constant streams.
     /// </summary>
     public class UdpProtocol
     {
-        //public socket, otherwise usage can't read socket, maybe 
+        //public socket, otherwise usage can't read socket, maybe change to IDispsable, so _socket can be private
         public Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         private const int bufSize = 8 * 1024;   //declare bufferSize for receiving information into buffer
         private State state = new State();
@@ -87,8 +88,8 @@ namespace client.Network
             {
                 State so = (State)ar.AsyncState;
                 int bytes = _socket.EndReceiveFrom(ar, ref epFrom);
-                _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
                 System.Diagnostics.Debug.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));
+                _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
             }, state);
         }
     }
