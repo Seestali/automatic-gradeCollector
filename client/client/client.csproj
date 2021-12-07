@@ -58,7 +58,9 @@
     <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Network\CRC.cs" />
     <Compile Include="Network\PacketAssembler.cs" />
+    <Compile Include="Network\Packet\OpCode.cs" />
     <Compile Include="Network\UdpProtocol.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
