@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using client.Network;
-using client.utils;
+using client.Utils;
 
 
 namespace client
