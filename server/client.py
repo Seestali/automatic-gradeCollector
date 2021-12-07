@@ -1,9 +1,11 @@
 import socket
+import hashlib
 
-msgFromClient = "Hello UDP Server"
+msgFromClient = "12::2::crc::payloadlength::test@test.de::" + hashlib.sha256('test'.encode('utf-8')).hexdigest()
 bytesToSend = str.encode(msgFromClient)
 serverAddressPort = ("vollsm.art", 42069)
-bufferSize = 1024
+serverAddressPort = ("127.0.0.1", 42069)
+bufferSize = 16384
 
 # Create a UDP socket at client side
 UDPClientSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

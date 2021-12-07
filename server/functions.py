@@ -12,7 +12,7 @@ def addStudent(studiengang, vorname, nachname, email, password):
     if student is None:
         cursor.execute("INSERT INTO students (Studiengang, Vorname, Nachname, Email, Passwort) VALUES (?, ?, ?, ?, ?)",
                        (studiengang, vorname, nachname, email,
-                        hashlib.sha256(hashlib.sha256(password.encode('utf-8')).hexdigest()).hexdigest()))
+                        hashlib.sha256(hashlib.sha256(password.encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()))
         connection.commit()
         return True
     else:
