@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace client.Network.Packet
 {
-    public enum OpCode
+    /// <summary>
+    /// Represents the op codes in the protocol.
+    /// </summary>
+    public enum OpCode : byte
     {
         DENY,
         ACK,
