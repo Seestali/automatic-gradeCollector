@@ -11,11 +11,13 @@ namespace client.Network.Packet
     /// </summary>
     public enum OpCode : byte
     {
-        DENY,
-        ACK,
-        Login,
-        ReqSubjects,
-        ResSubjects,
-        SetGrades
+        Deny,
+        Ack,
+        LoginReq,
+        LoginAns,
+        SubjectsAndGradesReq,
+        SubjectsAndGradesAns,
+        SetGradesReq,
+        SetGradesAns
     }
 }
