@@ -13,7 +13,7 @@ namespace client.Network
     public class UdpProtocol
     {
         //public socket, otherwise usage can't read socket, maybe change to IDispsable, so _socket can be private
-        public Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        public Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp); //socket configuration for outgoing connection outside of local network and udp config
         private const int bufSize = 8 * 1024;   //declare bufferSize for receiving information into buffer
         private State state = new State();
         private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0); // new EndPoint listening on all ports [port: 0].
@@ -87,7 +87,11 @@ namespace client.Network
             _socket.BeginReceiveFrom(state.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv = (ar) =>
             {
                 State so = (State)ar.AsyncState;
-                int bytes = _socket.EndReceiveFrom(ar, ref epFrom);
+                int bytes = _socket.EndReceiveFrom(ar, ref epFrom); //saves received bytes in variable
+                //TODO: For outside usage of incoming data: Implementation of public delegate
+                //class needs public event for OnReveived data as listener
+                //receive function needs an OnReceived?.Invoke to trigger listener
+                //listener can now be attached to outside class like var socket = new UDPSocket(); socket.OnReceived += MyFunction
                 System.Diagnostics.Debug.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));
                 _socket.BeginReceiveFrom(so.buffer, 0, bufSize, SocketFlags.None, ref epFrom, recv, so);
             }, state);
