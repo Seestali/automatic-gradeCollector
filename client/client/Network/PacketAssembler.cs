@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace client.Network
 {
-    class PacketAssembler
+    public class PacketAssembler
     {
         // TODO:    Validation/checksum
         // TODO:    assemble packets
-        // TODO:    disassemble packets 
+        // TODO:    disassemble packets
+
+        public static void Assemble()
+        {
+
+        }
+
+        public static void Disassemble()
+        {
+
+        } 
     }
 }
