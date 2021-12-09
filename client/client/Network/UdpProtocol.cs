@@ -89,7 +89,7 @@ namespace client.Network
                 State so = (State)ar.AsyncState;
                 int bytes = _socket.EndReceiveFrom(ar, ref epFrom); //saves received bytes in variable
                 //TODO: For outside usage of incoming data: Implementation of public delegate
-                //class needs public event for OnReveived data as listener
+                //class needs public event for OnReceived data as listener
                 //receive function needs an OnReceived?.Invoke to trigger listener
                 //listener can now be attached to outside class like var socket = new UDPSocket(); socket.OnReceived += MyFunction
                 System.Diagnostics.Debug.WriteLine("RECV: {0}: {1}, {2}", epFrom.ToString(), bytes, Encoding.ASCII.GetString(so.buffer, 0, bytes));

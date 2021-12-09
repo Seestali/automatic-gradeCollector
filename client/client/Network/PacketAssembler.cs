@@ -8,15 +8,18 @@ namespace client.Network
 {
     public class PacketAssembler
     {
+        //TODO: Handle invalid packets (manage assembling class) 
+        
         // TODO:    Validation/checksum
-        // TODO:    assemble packets
-        // TODO:    disassemble packets
+        //call function of CRC.cs
+        
 
-        public static void Assemble()
+        // TODO:    assemble packets
+        public static void Assemble() //Avengers!
         {
 
         }
-
+        // TODO:    disassemble packets
         public static void Disassemble()
         {
 

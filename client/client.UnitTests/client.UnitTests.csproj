@@ -54,6 +54,7 @@
     <Compile Include="CRCTests.cs" />
     <Compile Include="HashTests.cs" />
     <Compile Include="OpCodeTest.cs" />
+    <Compile Include="PacketAssemblerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

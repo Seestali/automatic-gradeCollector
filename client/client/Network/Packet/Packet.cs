@@ -9,6 +9,8 @@ namespace client.Network.Packet
     /// <summary>
     /// 
     /// </summary>
+    //TODO: finish comments
+    //TODO: finish class if needed
     public class Packet
     {
         private readonly uint number;

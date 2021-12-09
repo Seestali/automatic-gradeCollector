@@ -92,7 +92,7 @@ namespace client.Network
 
             return output;
         }
-
+        //TODO: add function comment
         public static bool ChecksumMatches(byte[] checksumOne, byte[] checksumTwo)
         {
             return checksumOne.Equals(checksumTwo);

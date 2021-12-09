@@ -13,6 +13,11 @@ using client.Utils;
 
 namespace client
 {
+    //TODO: remove debug login button
+    //TODO: implement correct login function with packet assembly and udp send
+    //TODO: disassemble received package and continue to build MainWindow with received data
+    //TODO: deny message for failed auth.
+    //TODO: function in manager class
     public partial class Login : Form
     {
         /// <summary>

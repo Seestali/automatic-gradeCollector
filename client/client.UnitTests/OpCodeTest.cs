@@ -5,10 +5,12 @@ namespace client.UnitTests
 {
     public class OpCodeTest
     {
+        //TODO: check Xunit for byte testing Equal = string
+        //TODO: check for more test cases
         [Fact]
         public void Deny_DenyIsZero()
         {
-            Assert.Equal(OpCode.Deny, 0);
+            Assert.Equal(0,OpCode.Deny);
         }
 
         [Fact]
