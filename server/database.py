@@ -12,7 +12,8 @@ def addStudent(studiengang, vorname, nachname, email, password):
     if student is None:
         cursor.execute("INSERT INTO students (Studiengang, Vorname, Nachname, Email, Passwort) VALUES (?, ?, ?, ?, ?)",
                        (studiengang, vorname, nachname, email,
-                        hashlib.sha256(hashlib.sha256(password.encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()))
+                        hashlib.sha256(
+                            hashlib.sha256(password.encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()))
         connection.commit()
         return True
     else:
@@ -81,9 +82,8 @@ def getModules(studentID, semester):
     modules = cursor.fetchall()
     return modules
 
-    # add module to modules table and check if module already exists
 
-
+# add module to modules table and check if module already exists
 def addModule(name, beschreibung, leistung, ects):
     cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
     module = cursor.fetchone()

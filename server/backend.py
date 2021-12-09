@@ -1,4 +1,4 @@
-from functions import *
+from database import *
 
 
 def main():

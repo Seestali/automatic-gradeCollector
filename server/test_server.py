@@ -1,6 +1,6 @@
 import unittest
 import hashlib
-import functions
+import database
 
 
 class TestServerFunc(unittest.TestCase):
