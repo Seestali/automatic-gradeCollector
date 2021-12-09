@@ -1,48 +1,56 @@
 import unittest
-import hashlib
 import functions
+import hashlib
+import sqlite3
 
-
+connection = sqlite3.connect('database.db')
+cursor = connection.cursor()
+print("SQLite Database Version is: ", cursor.fetchall())
 class TestServerFunc(unittest.TestCase):
+
+	def test_addition(self):
+		self.assertEqual(10*10,100)
+
 	def test_addStudent(self):#studiengang, vorname, nachname, email, password
-		student1=functions.addStudent('TINF19', 'Max', 'Müller', 'MM@web.de', 'Password123')
-		student2=['0','TINF19','Max','Müller','MM@web.de', hashlib.sha256(hashlib.sha256(('Passwort123').encode('utf-8')).hexdigest()).hexdigest()]
-		self.assertEqual(student1[1:5],student2[1:5])
+			
+		student1=functions.addStudent('TINF19', 'Mix', 'Müzler', 'MO@web.de', '123meins')
+		self.assertEqual(student1,True)
 
 	def test_validateStudent(self):#email, password
-		validate1=functions.validateStudent('MM@web.de',hashlib.sha256(('Passwort123').encode('utf-8')).hexdigest())
+		validate1=functions.validateStudent('MO@web.de',hashlib.sha256(('123meins').encode('utf-8')).hexdigest())
 		self.assertEqual(validate1,True)
 
 	def test_getStudentId(self):#email
-		student1=functions.getStudentId('MM@web.de')
-		self.assertEqual(student1[4],'MM@web.de')
+		student1=functions.getStudentId('MO@web.de')
+		self.assertEqual(student1,5)
 		
 	def test_getStudentData(self):#email
-		student1=functions.getStudentData('MM@web.de')
-		self.assertEqual(student1[4],'MM@web.de')
+		student1=functions.getStudentData('MO@web.de')
+		self.assertEqual(student1[4],'MO@web.de')
 
 	def test_editStudent(self):#studiengang, vorname, nachname, password, email
-		student1=functions.editStudent('TINF19', 'Max', 'Müller', 'Password123', 'MM@web.de')
+		student1=functions.editStudent('TINF19', 'Max', 'Müller', 'Password123', 'MO@web.de')
 		self.assertEqual(student1,True)
 
 	def test_removeStudent(self):#id
-		student1=functions.removeStudent('id')######
+		student1=functions.removeStudent(5)###### gibt immer true zurück
 		self.assertEqual(student1,True)
 
 	def test_getModuleId(self):#name
-		student1=functions.getModuleId('name')######
-		self.assertEqual(student1[1],'name')
+		student1=functions.getModuleId('Analysis')######
+		self.assertEqual(student1,1)
 
 	def test_getModule(self):#id
-		student1=functions.getModule('id')
-		self.assertEqual(student1[0],'id')
+		student1=functions.getModule(1)
+		self.assertEqual(student1[0],1)
 
 	def test_getModules(self):#studentID, semester
-		modules1=functions.getModules('studentID', 'semester')#########
-		self.assertEqual(modules1.count,7)#############
+		modules1=functions.getModules(2, 1)#########
+		a=modules1.count
+		self.assertEqual(a,-1)#############
 
 	def test_addModule(self):#name, beschreibung, leistung, ects
-		module1=functions.addModule('name', 'beschreibung', 'leistung', 'ects')########
+		module1=functions.addModule('name', 'beschreibung', 'leistung', 'ects', 'semester')########
 		self.assertEqual(module1,True)############
 
 	def test_removeModule(self):#id
