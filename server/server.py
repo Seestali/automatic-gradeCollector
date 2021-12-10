@@ -7,6 +7,7 @@ from database import *
 from threading import Timer
 import zlib
 import binascii
+import json
 
 # ToDo clear connected sockets
 connectedSockets = {5: [0]}
@@ -52,7 +53,7 @@ while True:
         answer.extend(packageNumber.to_bytes(4, byteorder='big'))
         answer.extend(userID.to_bytes(1, byteorder='big'))
         answer.extend(b'\x00')
-        answer.extend(b'\x07')
+        answer.extend(b'\x00\x00\x00\x07')
         answer.extend(packageNumber.to_bytes(4, byteorder='big'))
         answer.extend(b'::')
         answer.extend(b'\x02')
@@ -67,7 +68,7 @@ while True:
     answer.extend(packageNumber.to_bytes(4, byteorder='big'))
     answer.extend(userID.to_bytes(1, byteorder='big'))
     answer.extend(b'\x01')
-    answer.extend(b'\x04')
+    answer.extend(b'\x00\x00\x00\x04')
     answer.extend(packageNumber.to_bytes(4, byteorder='big'))
     crc = zlib.crc32(answer)
     answer[6:6] = crc.to_bytes(4, byteorder='big')
@@ -97,7 +98,7 @@ while True:
             answer.extend(b'\x00\x00\x00\x00')
             answer.extend(userID.to_bytes(1, byteorder='big'))
             answer.extend(b'\x03')
-            answer.extend(b'\x00')
+            answer.extend(b'\x00\x00\x00\x00')
             crc = zlib.crc32(answer)
             answer[6:6] = crc.to_bytes(4, byteorder='big')
             server_socket.sendto(answer, address)
@@ -108,7 +109,7 @@ while True:
             answer.extend(packageNumber.to_bytes(4, byteorder='big'))
             answer.extend(userID.to_bytes(1, byteorder='big'))
             answer.extend(b'\x00')
-            answer.extend(b'\x07')
+            answer.extend(b'\x00\x00\x00\x07')
             answer.extend(packageNumber.to_bytes(4, byteorder='big'))
             answer.extend(b'::')
             answer.extend(b'\x01')
@@ -120,25 +121,36 @@ while True:
     elif opCode == 4:
         # check if userID is in connectedSockets
         if userID in connectedSockets:
-            print(payload)
             email, password, semester = payload.split(b'::')
-            semester= int.from_bytes(semester, byteorder='big')
-            print(email.decode(), password.decode(), semester)
+            semester = int.from_bytes(semester, byteorder='big')
             if validateStudent(email.decode(), password.decode()):
                 rawClasses = getModules(getStudentId(email.decode()), semester)
-                print(rawClasses)
-                classes={}
+                classes = {}
                 for x in rawClasses:
-                    print(x, x[0], x[1],x[2],x[3])
-                    classes[getModule(x[1])[1]]=x[3]
+                    module = getModule(x[1])
+                    classes[module[1]] = {'ID': module[0], 'Note': x[3], 'beschreibung': module[2],
+                                          'leistung': module[3], 'ects': module[4]}
+                classes = json.dumps(classes, separators=(',', ':')).encode('utf-8')
                 print(classes)
+                answer = bytearray()
+                connectedSockets[userID].append(connectedSockets[userID][-1] + 1)
+                answer.extend(connectedSockets[userID][-1].to_bytes(4, byteorder='big'))
+                answer.extend(userID.to_bytes(1, byteorder='big'))
+                answer.extend(b'\x05')
+                answer.extend(len(classes).to_bytes(4, byteorder='big'))
+                answer.extend(classes)
+                crc = zlib.crc32(answer)
+                answer[6:6] = crc.to_bytes(4, byteorder='big')
+                server_socket.sendto(answer, address)
+
+
             else:
                 print('Login failed')
                 answer = bytearray()
                 answer.extend(packageNumber.to_bytes(4, byteorder='big'))
                 answer.extend(userID.to_bytes(1, byteorder='big'))
                 answer.extend(b'\x00')
-                answer.extend(b'\x07')
+                answer.extend(b'\x00\x00\x00\x07')
                 answer.extend(packageNumber.to_bytes(4, byteorder='big'))
                 answer.extend(b'::')
                 answer.extend(b'\x01')
@@ -152,7 +164,57 @@ while True:
             answer.extend(packageNumber.to_bytes(4, byteorder='big'))
             answer.extend(userID.to_bytes(1, byteorder='big'))
             answer.extend(b'\x00')
-            answer.extend(b'\x07')
+            answer.extend(b'\x00\x00\x00\x07')
+            answer.extend(packageNumber.to_bytes(4, byteorder='big'))
+            answer.extend(b'::')
+            answer.extend(b'\x02')
+            crc = zlib.crc32(answer)
+            answer[6:6] = crc.to_bytes(4, byteorder='big')
+            print('UserID is not in connectedSockets')
+            server_socket.sendto(answer, address)
+            continue
+
+    elif opCode == 6:
+        if userID in connectedSockets:
+            email, password, noten = payload.split(b'::')
+            noten = json.loads(noten.decode('utf-8'))
+            if validateStudent(email.decode(), password.decode()):
+                studentId = getStudentId(email.decode())
+                modules = getModulesByStudentID(studentId)
+                for x in noten:
+                    editStudentModule(studentId, x, noten[x])
+                print('noten gespeichert')
+                answer = bytearray()
+                connectedSockets[userID].append(connectedSockets[userID][-1] + 1)
+                answer.extend(connectedSockets[userID][-1].to_bytes(4, byteorder='big'))
+                answer.extend(userID.to_bytes(1, byteorder='big'))
+                answer.extend(b'\x07')
+                answer.extend(b'\x00\x00\x00\x00')
+                crc = zlib.crc32(answer)
+                answer[6:6] = crc.to_bytes(4, byteorder='big')
+                server_socket.sendto(answer, address)
+
+            else:
+                print('Login failed')
+                answer = bytearray()
+                answer.extend(packageNumber.to_bytes(4, byteorder='big'))
+                answer.extend(userID.to_bytes(1, byteorder='big'))
+                answer.extend(b'\x00')
+                answer.extend(b'\x00\x00\x00\x07')
+                answer.extend(packageNumber.to_bytes(4, byteorder='big'))
+                answer.extend(b'::')
+                answer.extend(b'\x01')
+                crc = zlib.crc32(answer)
+                answer[6:6] = crc.to_bytes(4, byteorder='big')
+                print('login failed')
+                server_socket.sendto(answer, address)
+
+        else:
+            answer = bytearray()
+            answer.extend(packageNumber.to_bytes(4, byteorder='big'))
+            answer.extend(userID.to_bytes(1, byteorder='big'))
+            answer.extend(b'\x00')
+            answer.extend(b'\x00\x00\x00\x07')
             answer.extend(packageNumber.to_bytes(4, byteorder='big'))
             answer.extend(b'::')
             answer.extend(b'\x02')

@@ -82,6 +82,11 @@ def getModules(studentID, semester):
     modules = cursor.fetchall()
     return modules
 
+#get modules of student by student id
+def getModulesByStudentID(studentID):
+    cursor.execute("SELECT * FROM studentModul WHERE studentID = ?", (studentID,))
+    modules = cursor.fetchall()
+    return modules
 
 # add module to modules table and check if module already exists
 def addModule(name, beschreibung, leistung, ects):
