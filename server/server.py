@@ -4,9 +4,8 @@ import time
 import sqlite3
 import hashlib
 from database import *
-from threading import Timer
+from threading import Thread
 import zlib
-import binascii
 import json
 
 # ToDo clear connected sockets
@@ -15,16 +14,23 @@ connectedSockets = {5: [0]}
 bufferSize = 16384
 port = 42069
 resendInterval = 5
+maxResend = 3
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind(('', port))
 print('The server is ready to receive')
 
 
-def resendMessage(message, address):
-    server_socket.sendto(message, address)
-
-    # Timer(resendInterval, resendMessage, [messageList, address]).start()
+def resendMessage(message, address, userID, packageNumber):
+    print('thread started')
+    count = 0
+    while packageNumber in connectedSockets[userID] and count < maxResend:
+        time.sleep(resendInterval)
+        print('Resending message to user ' + str(userID) + ': ' + str(message))
+        server_socket.sendto(message, address)
+        count += 1
+    print('closing thread')
+    return
 
 
 while True:
@@ -60,7 +66,7 @@ while True:
         crc = zlib.crc32(answer)
         answer[6:6] = crc.to_bytes(4, byteorder='big')
         print('Payload length is incorrect or crc32 is incorrect')
-        server_socket.sendto(answer, address)
+        server_socket.sendto(bytes(answer), address)
         continue
 
     print('Payload length is correct and crc32 is correct')
@@ -73,7 +79,7 @@ while True:
     crc = zlib.crc32(answer)
     answer[6:6] = crc.to_bytes(4, byteorder='big')
     # sending acknowledgement
-    server_socket.sendto(answer, address)
+    server_socket.sendto(bytes(answer), address)
 
     if opCode == 1:
         # check if userId in connectedSockets
@@ -101,8 +107,8 @@ while True:
             answer.extend(b'\x00\x00\x00\x00')
             crc = zlib.crc32(answer)
             answer[6:6] = crc.to_bytes(4, byteorder='big')
-            server_socket.sendto(answer, address)
-            # ToDo setup a timer to resend the message if it is not received
+            server_socket.sendto(bytes(answer), address)
+            Thread(target=resendMessage, args=(bytes(answer), address, userID, 0)).start()
         else:
             print('Login failed')
             answer = bytearray()
@@ -116,7 +122,7 @@ while True:
             crc = zlib.crc32(answer)
             answer[6:6] = crc.to_bytes(4, byteorder='big')
             print('login failed')
-            server_socket.sendto(answer, address)
+            server_socket.sendto(bytes(answer), address)
 
     elif opCode == 4:
         # check if userID is in connectedSockets
@@ -141,9 +147,9 @@ while True:
                 answer.extend(classes)
                 crc = zlib.crc32(answer)
                 answer[6:6] = crc.to_bytes(4, byteorder='big')
-                server_socket.sendto(answer, address)
-
-
+                server_socket.sendto(bytes(answer), address)
+                Thread(target=resendMessage,
+                       args=(bytes(answer), address, userID, connectedSockets[userID][-1])).start()
             else:
                 print('Login failed')
                 answer = bytearray()
@@ -157,7 +163,7 @@ while True:
                 crc = zlib.crc32(answer)
                 answer[6:6] = crc.to_bytes(4, byteorder='big')
                 print('login failed')
-                server_socket.sendto(answer, address)
+                server_socket.sendto(bytes(answer), address)
 
         else:
             answer = bytearray()
@@ -171,7 +177,7 @@ while True:
             crc = zlib.crc32(answer)
             answer[6:6] = crc.to_bytes(4, byteorder='big')
             print('UserID is not in connectedSockets')
-            server_socket.sendto(answer, address)
+            server_socket.sendto(bytes(answer), address)
             continue
 
     elif opCode == 6:
@@ -192,8 +198,9 @@ while True:
                 answer.extend(b'\x00\x00\x00\x00')
                 crc = zlib.crc32(answer)
                 answer[6:6] = crc.to_bytes(4, byteorder='big')
-                server_socket.sendto(answer, address)
-
+                server_socket.sendto(bytes(answer), address)
+                Thread(target=resendMessage,
+                       args=(bytes(answer), address, userID, connectedSockets[userID][-1])).start()
             else:
                 print('Login failed')
                 answer = bytearray()
@@ -207,7 +214,7 @@ while True:
                 crc = zlib.crc32(answer)
                 answer[6:6] = crc.to_bytes(4, byteorder='big')
                 print('login failed')
-                server_socket.sendto(answer, address)
+                server_socket.sendto(bytes(answer), address)
 
         else:
             answer = bytearray()
@@ -221,5 +228,5 @@ while True:
             crc = zlib.crc32(answer)
             answer[6:6] = crc.to_bytes(4, byteorder='big')
             print('UserID is not in connectedSockets')
-            server_socket.sendto(answer, address)
+            server_socket.sendto(bytes(answer), address)
             continue
