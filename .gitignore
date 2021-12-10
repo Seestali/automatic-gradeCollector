@@ -5,6 +5,15 @@ __pycache__/
 
 # Exclude macOS DS_Store
 .DS_Store
+
+# Exclude Visual Studio
+.vs
+bin
+obj
+
+# Exclude CLion
+.idea
+
 # C extensions
 *.so
 
@@ -129,4 +138,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-.idea
+
