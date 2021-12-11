@@ -39,6 +39,13 @@ def getStudentId(email):
     return student[0]
 
 
+# get student email from id
+def getStudentMail(id):
+    cursor.execute("SELECT * FROM students WHERE ID = ?", (id,))
+    student = cursor.fetchone()
+    return student[4]
+
+
 # get student data from email
 def getStudentData(email):
     cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
@@ -60,6 +67,14 @@ def removeStudent(id):
     cursor.execute("DELETE FROM studentModul WHERE studentID = ?", (id,))
     connection.commit()
     return True
+    ##############wird nicht erkannt wenn kein student unter der id vorhanden ist
+
+
+# show table students
+def getTableStudents():
+    cursor.execute("SELECT * FROM [students]")
+    tableStudents = cursor.fetchall()
+    return tableStudents
 
 
 # get module id from module name
@@ -82,7 +97,7 @@ def getModules(studentID, semester):
     modules = cursor.fetchall()
     return modules
 
-#get modules of student by student id
+# get modules of student by student id
 def getModulesByStudentID(studentID):
     cursor.execute("SELECT * FROM studentModul WHERE studentID = ?", (studentID,))
     modules = cursor.fetchall()
@@ -108,6 +123,19 @@ def removeModule(id):
     connection.commit()
     return True
 
+
+# edit module
+def editModule(name, beschreibung, leistung, ects, id):
+    cursor.execute("UPDATE modules SET Name = ?, Beschreibung = ?, Prüfungsleistung = ?, ECTS = ? WHERE ID = ?", (name, beschreibung, leistung, ects, id))
+    connection.commit()
+    return True
+
+
+# show table modules
+def getTableModules():
+    cursor.execute("SELECT * FROM [modules]")
+    tableModules = cursor.fetchall()
+    return tableModules
 
 # add student to module and check if it already exists
 def addStudentModule(studentID, moduleID, semester):
