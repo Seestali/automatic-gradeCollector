@@ -60,9 +60,9 @@
     </Compile>
     <Compile Include="Network\CRC.cs" />
     <Compile Include="Network\PacketAssembler.cs" />
-    <Compile Include="Network\Packet\ErrorCode.cs" />
-    <Compile Include="Network\Packet\OpCode.cs" />
-    <Compile Include="Network\Packet\Packet.cs" />
+    <Compile Include="Network\Error.cs" />
+    <Compile Include="Network\OpCode.cs" />
+    <Compile Include="Network\Packet.cs" />
     <Compile Include="Network\UdpProtocol.cs" />
     <Compile Include="PacketManager.cs" />
     <Compile Include="Program.cs" />
