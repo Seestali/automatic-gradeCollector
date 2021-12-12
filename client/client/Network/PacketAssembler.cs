@@ -1,25 +1,82 @@
-﻿
-
-namespace client.Network
+﻿namespace client.Network
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PacketAssembler
     {
         // TODO: Handle invalid packets (manage assembling class) 
 
-        // TODO: Validation/checksum
-        // call function of CRC.cs
+        private ushort packetNumber;
+        private byte userID;
 
-        private static uint packetNumber = 0U;
+        public PacketAssembler()
+        {
+            packetNumber = 0U;
+            userID = 0;
+        }
 
         // TODO:    assemble packets
-        public static void Assemble() // Avengers!
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="packetNumber"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public Packet AssembleDENY(ushort packetNumber, Error error)
         {
-            
+            return null;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="packetNumber"></param>
+        /// <returns></returns>
+        public Packet AssembleACK(ushort packetNumber)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="auth"></param>
+        /// <returns></returns>
+        public Packet AssembleLogin(string auth)
+        {
+            return null;
+        }
+
+        public Packet AssembleGetSubjectsAndGrades()
+        {
+            return null;
+        }
+
+        public Packet AssembleSetGrades()
+        {
+            return null;
+        }
+
         // TODO:    disassemble packets
-        public static void Disassemble()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        public void Disassemble(byte[] data)
         {
 
-        } 
+        }
+
+        private uint GetPacketNumberAndInc()
+        {
+            return packetNumber++;
+        }
+
+        private void SetUserID(byte userID)
+        {
+            this.userID = userID;
+        }
     }
 }
