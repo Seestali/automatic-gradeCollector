@@ -1,166 +1,157 @@
 import sqlite3
 import hashlib
 
-connection = sqlite3.connect('database.db')
-cursor = connection.cursor()
 
+class Database:
+    def __init__(self, file):
+        self.connection = sqlite3.connect(file)
+        self.cursor = self.connection.cursor()
 
-# add student to student table and check if email already exists
-def addStudent(studiengang, vorname, nachname, email, password):
-    cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
-    student = cursor.fetchone()
-    if student is None:
-        cursor.execute("INSERT INTO students (Studiengang, Vorname, Nachname, Email, Passwort) VALUES (?, ?, ?, ?, ?)",
-                       (studiengang, vorname, nachname, email,
-                        hashlib.sha256(
-                            hashlib.sha256(password.encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()))
-        connection.commit()
-        return True
-    else:
-        return False
-
-
-def validateStudent(email, password):
-    cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
-    student = cursor.fetchone()
-    if student is None:
-        return False
-    else:
-        if hashlib.sha256(password.encode('utf-8')).hexdigest() == student[5]:
+    # add student to student table and check if email already exists
+    def addStudent(self, studiengang, vorname, nachname, email, password):
+        self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+        student = self.cursor.fetchone()
+        if student is None:
+            self.cursor.execute(
+                "INSERT INTO students (Studiengang, Vorname, Nachname, Email, Passwort) VALUES (?, ?, ?, ?, ?)",
+                (studiengang, vorname, nachname, email,
+                 hashlib.sha256(
+                     hashlib.sha256(password.encode('utf-8')).hexdigest().encode('utf-8')).hexdigest()))
+            self.connection.commit()
             return True
         else:
             return False
 
+    def validateStudent(self, email, password):
+        self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+        student = self.cursor.fetchone()
+        if student is None:
+            return False
+        else:
+            if hashlib.sha256(password.encode('utf-8')).hexdigest() == student[5]:
+                return True
+            else:
+                return False
 
-# get student id from email
-def getStudentId(email):
-    cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
-    student = cursor.fetchone()
-    return student[0]
+    # get student id from email
+    def getStudentId(self, email):
+        self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+        student = self.cursor.fetchone()
+        return student[0]
 
+    # get student email from id
+    def getStudentMail(self, id):
+        self.cursor.execute("SELECT * FROM students WHERE ID = ?", (id,))
+        student = self.cursor.fetchone()
+        return student[4]
 
-# get student email from id
-def getStudentMail(id):
-    cursor.execute("SELECT * FROM students WHERE ID = ?", (id,))
-    student = cursor.fetchone()
-    return student[4]
+    # get student data from email
+    def getStudentData(self, email):
+        self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+        student = self.cursor.fetchone()
+        return student
 
-
-# get student data from email
-def getStudentData(email):
-    cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
-    student = cursor.fetchone()
-    return student
-
-
-# edit student
-def editStudent(studiengang, vorname, nachname, password, email):
-    cursor.execute("UPDATE students SET Studiengang = ?, Vorname = ?, Nachname = ?, Passwort = ? WHERE Email = ?",
-                   (studiengang, vorname, nachname, hashlib.sha256(password.encode('utf-8')).hexdigest(), email))
-    connection.commit()
-    return True
-
-
-# remove student by id and all entries in student module combination
-def removeStudent(id):
-    cursor.execute("DELETE FROM students WHERE ID = ?", (id,))
-    cursor.execute("DELETE FROM studentModul WHERE studentID = ?", (id,))
-    connection.commit()
-    return True
-    ##############wird nicht erkannt wenn kein student unter der id vorhanden ist
-
-
-# show table students
-def getTableStudents():
-    cursor.execute("SELECT * FROM [students]")
-    tableStudents = cursor.fetchall()
-    return tableStudents
-
-
-# get module id from module name
-def getModuleId(name):
-    cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
-    module = cursor.fetchone()
-    return module[0]
-
-
-# get module by id
-def getModule(id):
-    cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
-    module = cursor.fetchone()
-    return module
-
-
-# get modules of student by student id and semester
-def getModules(studentID, semester):
-    cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND Semester = ?", (studentID, semester))
-    modules = cursor.fetchall()
-    return modules
-
-# get modules of student by student id
-def getModulesByStudentID(studentID):
-    cursor.execute("SELECT * FROM studentModul WHERE studentID = ?", (studentID,))
-    modules = cursor.fetchall()
-    return modules
-
-# add module to modules table and check if module already exists
-def addModule(name, beschreibung, leistung, ects):
-    cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
-    module = cursor.fetchone()
-    if module is None:
-        cursor.execute("INSERT INTO modules (Name, Beschreibung, Prüfungsleistung, ECTS) VALUES (?, ?, ?, ?)",
-                       (name, beschreibung, leistung, ects))
-        connection.commit()
+    # edit student
+    def editStudent(self, studiengang, vorname, nachname, password, email):
+        self.cursor.execute(
+            "UPDATE students SET Studiengang = ?, Vorname = ?, Nachname = ?, Passwort = ? WHERE Email = ?",
+            (studiengang, vorname, nachname, hashlib.sha256(password.encode('utf-8')).hexdigest(), email))
+        self.connection.commit()
         return True
-    else:
-        return False
 
-
-# remove module from modules table amd delete all entries in studentModul table
-def removeModule(id):
-    cursor.execute("DELETE FROM modules WHERE ID = ?", (id,))
-    cursor.execute("DELETE FROM studentModul WHERE moduleID = ?", (id,))
-    connection.commit()
-    return True
-
-
-# edit module
-def editModule(name, beschreibung, leistung, ects, id):
-    cursor.execute("UPDATE modules SET Name = ?, Beschreibung = ?, Prüfungsleistung = ?, ECTS = ? WHERE ID = ?", (name, beschreibung, leistung, ects, id))
-    connection.commit()
-    return True
-
-
-# show table modules
-def getTableModules():
-    cursor.execute("SELECT * FROM [modules]")
-    tableModules = cursor.fetchall()
-    return tableModules
-
-# add student to module and check if it already exists
-def addStudentModule(studentID, moduleID, semester):
-    cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ? AND Semester = ?",
-                   (studentID, moduleID, semester))
-    studentModule = cursor.fetchone()
-    if studentModule is None:
-        cursor.execute("INSERT INTO studentModul (studentID, moduleID, Semester) VALUES (?, ?, ?)",
-                       (studentID, moduleID, semester))
-        connection.commit()
+    # remove student by id and all entries in student module combination
+    def removeStudent(self, id):
+        self.cursor.execute("DELETE FROM students WHERE ID = ?", (id,))
+        self.cursor.execute("DELETE FROM studentModul WHERE studentID = ?", (id,))
+        self.connection.commit()
         return True
-    else:
-        return False
+        ##############wird nicht erkannt wenn kein student unter der id vorhanden ist
 
+    # show table students
+    def getTableStudents(self):
+        self.cursor.execute("SELECT * FROM [students]")
+        tableStudents = self.cursor.fetchall()
+        return tableStudents
 
-# edit student module combination
-def editStudentModule(studentID, moduleID, note):
-    cursor.execute("UPDATE studentModul SET Note = ? WHERE studentID = ? AND moduleID = ?",
-                   (note, studentID, moduleID))
-    connection.commit()
-    return True
+    # get module id from module name
+    def getModuleId(self, name):
+        self.cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
+        module = self.cursor.fetchone()
+        return module[0]
 
+    # get module by id
+    def getModule(self, id):
+        self.cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
+        module = self.cursor.fetchone()
+        return module
 
-# remove student from module
-def removeStudentModule(studentID, moduleID):
-    cursor.execute("DELETE FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
-    connection.commit()
-    return True
+    # get modules of student by student id and semester
+    def getModules(self, studentID, semester):
+        self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND Semester = ?", (studentID, semester))
+        modules = self.cursor.fetchall()
+        return modules
+
+    # get modules of student by student id
+    def getModulesByStudentID(self, studentID):
+        self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ?", (studentID,))
+        modules = self.cursor.fetchall()
+        return modules
+
+    # add module to modules table and check if module already exists
+    def addModule(self, name, beschreibung, leistung, ects):
+        self.cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
+        module = self.cursor.fetchone()
+        if module is None:
+            self.cursor.execute("INSERT INTO modules (Name, Beschreibung, Prüfungsleistung, ECTS) VALUES (?, ?, ?, ?)",
+                                (name, beschreibung, leistung, ects))
+            self.connection.commit()
+            return True
+        else:
+            return False
+
+    # remove module from modules table amd delete all entries in studentModul table
+    def removeModule(self, id):
+        self.cursor.execute("DELETE FROM modules WHERE ID = ?", (id,))
+        self.cursor.execute("DELETE FROM studentModul WHERE moduleID = ?", (id,))
+        self.connection.commit()
+        return True
+
+    # edit module
+    def editModule(self, name, beschreibung, leistung, ects, id):
+        self.cursor.execute(
+            "UPDATE modules SET Name = ?, Beschreibung = ?, Prüfungsleistung = ?, ECTS = ? WHERE ID = ?",
+            (name, beschreibung, leistung, ects, id))
+        self.connection.commit()
+        return True
+
+    # show table modules
+    def getTableModules(self):
+        self.cursor.execute("SELECT * FROM [modules]")
+        tableModules = self.cursor.fetchall()
+        return tableModules
+
+    # add student to module and check if it already exists
+    def addStudentModule(self, studentID, moduleID, semester):
+        self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ? AND Semester = ?",
+                            (studentID, moduleID, semester))
+        studentModule = self.cursor.fetchone()
+        if studentModule is None:
+            self.cursor.execute("INSERT INTO studentModul (studentID, moduleID, Semester) VALUES (?, ?, ?)",
+                                (studentID, moduleID, semester))
+            self.connection.commit()
+            return True
+        else:
+            return False
+
+    # edit student module combination
+    def editStudentModule(self, studentID, moduleID, note):
+        self.cursor.execute("UPDATE studentModul SET Note = ? WHERE studentID = ? AND moduleID = ?",
+                            (note, studentID, moduleID))
+        self.connection.commit()
+        return True
+
+    # remove student from module
+    def removeStudentModule(self, studentID, moduleID):
+        self.cursor.execute("DELETE FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
+        self.connection.commit()
+        return True

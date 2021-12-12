@@ -3,10 +3,12 @@ import socket
 import time
 import sqlite3
 import hashlib
-from database import *
+from database import Database
 from threading import Thread
 import zlib
 import json
+
+db = Database('database.db')
 
 # ToDo clear connected sockets
 connectedSockets = {5: [0]}
@@ -24,11 +26,12 @@ print('The server is ready to receive')
 def resendMessage(message, address, userID, packageNumber):
     print('thread started')
     count = 0
+    time.sleep(resendInterval)
     while packageNumber in connectedSockets[userID] and count < maxResend:
-        time.sleep(resendInterval)
         print('Resending message to user ' + str(userID) + ': ' + str(message))
         server_socket.sendto(message, address)
         count += 1
+        time.sleep(resendInterval)
     print('closing thread')
     return
 
@@ -91,7 +94,7 @@ while True:
         # check if login is correct
         email, password = payload.split(b'::')
         print(email, password)
-        if validateStudent(email.decode(), password.decode()):
+        if db.validateStudent(email.decode(), password.decode()):
             print('Login successful')
             # create a userId between 1 and 255 and check if it is already in connectedSockets
             while True:
@@ -129,11 +132,11 @@ while True:
         if userID in connectedSockets:
             email, password, semester = payload.split(b'::')
             semester = int.from_bytes(semester, byteorder='big')
-            if validateStudent(email.decode(), password.decode()):
-                rawClasses = getModules(getStudentId(email.decode()), semester)
+            if db.validateStudent(email.decode(), password.decode()):
+                rawClasses = db.getModules(db.getStudentId(email.decode()), semester)
                 classes = {}
                 for x in rawClasses:
-                    module = getModule(x[1])
+                    module = db.getModule(x[1])
                     classes[module[1]] = {'ID': module[0], 'Note': x[3], 'beschreibung': module[2],
                                           'leistung': module[3], 'ects': module[4]}
                 classes = json.dumps(classes, separators=(',', ':')).encode('utf-8')
@@ -184,11 +187,11 @@ while True:
         if userID in connectedSockets:
             email, password, noten = payload.split(b'::')
             noten = json.loads(noten.decode('utf-8'))
-            if validateStudent(email.decode(), password.decode()):
-                studentId = getStudentId(email.decode())
-                modules = getModulesByStudentID(studentId)
+            if db.validateStudent(email.decode(), password.decode()):
+                studentId = db.getStudentId(email.decode())
+                modules = db.getModulesByStudentID(studentId)
                 for x in noten:
-                    editStudentModule(studentId, x, noten[x])
+                    db.editStudentModule(studentId, x, noten[x])
                 print('noten gespeichert')
                 answer = bytearray()
                 connectedSockets[userID].append(connectedSockets[userID][-1] + 1)
