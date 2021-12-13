@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ByteUtilTest.cs" />
     <Compile Include="CRCTests.cs" />
     <Compile Include="HashTests.cs" />
     <Compile Include="ErrorTest.cs" />
