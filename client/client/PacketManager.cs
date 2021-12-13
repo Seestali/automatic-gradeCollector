@@ -1,4 +1,7 @@
-﻿namespace client
+﻿using client.Network;
+using System.Collections.Generic;
+
+namespace client
 {
     public class PacketManager
     {
@@ -11,5 +14,11 @@
         //TODO: create unittest class
         //TODO: gives ready packets to UDP class
 
+        private List<Packet> packetList;
+
+        public PacketManager()
+        {
+            packetList = new List<Packet>();
+        }
     }
 }
