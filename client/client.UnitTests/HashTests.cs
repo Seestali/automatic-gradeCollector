@@ -18,11 +18,17 @@ namespace client.UnitTests
         }
         
         [Fact]
-        public void GetHashString_DifferentTypeInput_DenyInput()
+        public void GetHashString_EmptyInput_ReturnsSame()
         {
-
-        private string a = "hello";
-            Assert.Equal(1223,Hash.GetHashString("HalloHenny"));
+            Assert.Throws<ArgumentException>(() => Hash.GetHashString(""));
         }
+        
+        //[Fact]
+        // public void GetHashString_DifferentTypeInput_DenyInput()
+        // {
+        //
+        // private string a = "hello";
+        //     Assert.Equal(1223,Hash.GetHashString("HalloHenny"));
+        // }
     }
 }

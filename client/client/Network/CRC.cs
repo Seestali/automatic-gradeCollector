@@ -92,7 +92,12 @@ namespace client.Network
 
             return output;
         }
-        //TODO: add function comment
+        /// <summary>
+        /// Checks if tho checksums are equal to each other
+        /// </summary>
+        /// <param name="checksumOne">Checksum of first packet</param>
+        /// <param name="checksumTwo">Checksum of second packet</param>
+        /// <returns></returns>
         public static bool ChecksumMatches(byte[] checksumOne, byte[] checksumTwo)
         {
             return checksumOne.Equals(checksumTwo);
