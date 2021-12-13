@@ -1,7 +1,6 @@
-﻿using client.Network;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace client
+namespace client.Network
 {
     public class PacketManager
     {
