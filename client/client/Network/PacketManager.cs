@@ -14,10 +14,12 @@ namespace client.Network
         //TODO: gives ready packets to UDP class
 
         private List<Packet> packetList;
+        private PacketAssembler packetAssembler;
 
         public PacketManager()
         {
             packetList = new List<Packet>();
+            packetAssembler = new PacketAssembler();
         }
     }
 }
