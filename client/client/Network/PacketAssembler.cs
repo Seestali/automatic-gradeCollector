@@ -1,4 +1,7 @@
-﻿namespace client.Network
+﻿using client.Utils;
+using System.Text;
+
+namespace client.Network
 {
     /// <summary>
     /// 
@@ -7,16 +10,17 @@
     {
         // TODO: Handle invalid packets (manage assembling class) 
 
-        private ushort packetNumber;
+        public const byte DENY_PAYLOAD_LENGTH = 5;
+        public const byte ACK_PAYLOAD_LENGTH = 4;
+
+        private uint packetNumber;
         private byte userID;
 
         public PacketAssembler()
         {
-            packetNumber = 0U;
+            packetNumber = 0;
             userID = 0;
         }
-
-        // TODO:    assemble packets
 
         /// <summary>
         /// 
@@ -24,9 +28,16 @@
         /// <param name="packetNumber"></param>
         /// <param name="error"></param>
         /// <returns></returns>
-        public Packet AssembleDENY(ushort packetNumber, Error error)
+        public Packet BuildDeny(uint packetNumberToDeny, Error error)
         {
-            return null;
+            byte[] payload = new byte[DENY_PAYLOAD_LENGTH];
+            ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToDeny);
+            //payload[0] = (byte)(packetNumber >> 24);
+            //payload[1] = (byte)(packetNumber >> 16);
+            //payload[2] = (byte)(packetNumber >> 8);
+            //payload[3] = (byte)packetNumber;
+            payload[4] = (byte)error;
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Deny, DENY_PAYLOAD_LENGTH, payload);
         }
 
         /// <summary>
@@ -34,9 +45,15 @@
         /// </summary>
         /// <param name="packetNumber"></param>
         /// <returns></returns>
-        public Packet AssembleACK(ushort packetNumber)
+        public Packet BuildAck(ushort packetNumberToAck)
         {
-            return null;
+            byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
+            ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToAck);
+            //payload[0] = (byte)(packetNumber >> 24);
+            //payload[1] = (byte)(packetNumber >> 16);
+            //payload[2] = (byte)(packetNumber >> 8);
+            //payload[3] = (byte)packetNumber;
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Ack, ACK_PAYLOAD_LENGTH, payload);
         }
 
         /// <summary>
@@ -44,17 +61,18 @@
         /// </summary>
         /// <param name="auth"></param>
         /// <returns></returns>
-        public Packet AssembleLogin(string auth)
+        public Packet BuildLoginReq(string auth)
+        {
+            byte[] payload = Encoding.UTF8.GetBytes(auth);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginReq, (uint)payload.Length, payload);
+        }
+
+        public Packet BuildGetSubjectsAndGrades()
         {
             return null;
         }
 
-        public Packet AssembleGetSubjectsAndGrades()
-        {
-            return null;
-        }
-
-        public Packet AssembleSetGrades()
+        public Packet BuildSetGrades()
         {
             return null;
         }
@@ -64,19 +82,19 @@
         /// 
         /// </summary>
         /// <param name="data"></param>
-        public void Disassemble(byte[] data)
+        public Packet DisassemblePacket(byte[] data)
         {
-
+            Packet packet = new Packet(data);
+            if (userID == 0)    // If local user ID is still zero, take ID from received packet.
+            {
+                userID = packet.GetUserID();
+            }
+            return packet;
         }
 
         private uint GetPacketNumberAndInc()
         {
             return packetNumber++;
-        }
-
-        private void SetUserID(byte userID)
-        {
-            this.userID = userID;
         }
     }
 }
