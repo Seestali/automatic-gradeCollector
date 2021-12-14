@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using client.Forms;
 using client.Network;
 using client.Utils;
 
@@ -39,6 +40,8 @@ namespace client
                     //TODO: send packets with credentials to server
                     //TODO: get ACK/DEC back with data
                     //TODO: open MainWindow with received information and show courses and grades
+                    Manager.getInstance().OpenForm<MainWindow>();
+                    this.Close();
                 }
                 else
                 {

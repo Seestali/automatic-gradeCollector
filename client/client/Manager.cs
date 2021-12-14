@@ -41,7 +41,7 @@ namespace client.Network
             packetAssembler = new PacketAssembler();
             OpenForm<Login>();
         }
-
+        
         /// <summary>
         /// Opens Form by identification
         /// </summary>
