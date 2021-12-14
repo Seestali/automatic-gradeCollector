@@ -4,7 +4,7 @@ using Xunit;
 
 namespace client.UnitTests
 {
-    public class PacketTest
+    public class PacketTests
     {
         [Fact]
         public void ConversionCtor_ByteArray_Equal()
