@@ -139,3 +139,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# C# Visual Studio Xunit Assembly
+/client/packages
