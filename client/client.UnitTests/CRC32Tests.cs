@@ -26,5 +26,12 @@ namespace client.UnitTests
             byte[] array = null;
             Assert.Throws<NullReferenceException>(() => CRC32.CalculateChecksum( ref array));
         }
+        
+        [Fact]
+        public void CalculateChecksum_EmptyArray_ThrowsException()
+        {
+            byte[] array = new byte[0];
+            Assert.Throws<ArgumentException>(() => CRC32.CalculateChecksum( ref array));
+        }
     }
 }

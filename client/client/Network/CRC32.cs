@@ -59,10 +59,17 @@ namespace client.Network
         {
             try
             {
-                uint crc = 0xffffffff;
-                for (int i = 0; i < data.Length; i++)
-                    crc = (crc >> 8) ^ crctab[(crc & 0xff) ^ data[i]];
-                return crc ^ 0xffffffff;
+                if (data.Length > 0)
+                { 
+                    uint crc = 0xffffffff;
+                    for (int i = 0; i < data.Length; i++)
+                        crc = (crc >> 8) ^ crctab[(crc & 0xff) ^ data[i]];
+                    return crc ^ 0xffffffff;
+                } 
+                else
+                {
+                    throw new ArgumentException("Data cannot be empty");
+                }
             }
             catch (Exception e)
             {
