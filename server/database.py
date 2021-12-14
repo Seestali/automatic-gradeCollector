@@ -11,7 +11,7 @@ class Database:
     def addStudent(self, studiengang, vorname, nachname, email, password):
         self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
         student = self.cursor.fetchone()
-        if len(student) == 0:
+        if student is None:
             self.cursor.execute(
                 "INSERT INTO students (Studiengang, Vorname, Nachname, Email, Passwort) VALUES (?, ?, ?, ?, ?)",
                 (studiengang, vorname, nachname, email,
@@ -25,7 +25,7 @@ class Database:
     def validateStudent(self, email, password):
         self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
         student = self.cursor.fetchone()
-        if len(student) == 0:
+        if student is None:
             return False
         else:
             if hashlib.sha256(password.encode('utf-8')).hexdigest() == student[5]:
@@ -55,7 +55,7 @@ class Database:
     def editStudent(self, studiengang, vorname, nachname, password, email):
         self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
         student = self.cursor.fetchone()
-        if len(student) == 0:
+        if student is None:
             return False
         else:
             self.cursor.execute(
@@ -68,7 +68,7 @@ class Database:
     def removeStudent(self, id):
         self.cursor.execute("SELECT * FROM students WHERE ID = ?", (id,))
         student = self.cursor.fetchone()
-        if len(student) == 0:
+        if student is None:
             return False
         else:
             self.cursor.execute("DELETE FROM students WHERE ID = ?", (id,))
@@ -110,7 +110,7 @@ class Database:
     def addModule(self, name, beschreibung, leistung, ects):
         self.cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
         module = self.cursor.fetchone()
-        if len(module) == 0:
+        if module is None:
             self.cursor.execute("INSERT INTO modules (Name, Beschreibung, Prüfungsleistung, ECTS) VALUES (?, ?, ?, ?)",
                                 (name, beschreibung, leistung, ects))
             self.connection.commit()
@@ -122,7 +122,7 @@ class Database:
     def removeModule(self, id):
         self.cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
         module = self.cursor.fetchone()
-        if len(module) == 0:
+        if module is None:
             return False
         else:
             self.cursor.execute("DELETE FROM modules WHERE ID = ?", (id,))
@@ -134,7 +134,7 @@ class Database:
     def editModule(self, name, beschreibung, leistung, ects, id):
         self.cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
         module = self.cursor.fetchone()
-        if len(module) == 0:
+        if module is None:
             return False
         else:
             self.cursor.execute(
@@ -154,7 +154,7 @@ class Database:
         self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ? AND Semester = ?",
                             (studentID, moduleID, semester))
         studentModule = self.cursor.fetchone()
-        if len(studentModule) == 0:
+        if studentModule is None:
             self.cursor.execute("INSERT INTO studentModul (studentID, moduleID, Semester) VALUES (?, ?, ?)",
                                 (studentID, moduleID, semester))
             self.connection.commit()
@@ -166,7 +166,7 @@ class Database:
     def editStudentModule(self, studentID, moduleID, note):
         self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
         studentModule = self.cursor.fetchone()
-        if len(studentModule) == 0:
+        if studentModule is None:
             return False
         else:
             self.cursor.execute("UPDATE studentModul SET Note = ? WHERE studentID = ? AND moduleID = ?",
@@ -178,7 +178,7 @@ class Database:
     def removeStudentModule(self, studentID, moduleID):
         self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
         studentModule = self.cursor.fetchone()
-        if len(studentModule) == 0:
+        if studentModule is None:
             return False
         else:
             self.cursor.execute("DELETE FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))

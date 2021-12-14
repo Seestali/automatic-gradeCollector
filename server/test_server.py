@@ -21,7 +21,7 @@ class TestServerFunc(unittest.TestCase):
 
     def test_addStudent(self):  # studiengang, vorname, nachname, email, password
         student1 = self.db.addStudent('TINF19', 'Mix', 'Müzler', 'MI@web.de', '123meins')
-        self.assertEqual(self.studentidtest, True)
+        self.assertEqual(student1, True)
 
     def test_validateStudent(self):  # email, password
         validate1 = self.db.validateStudent('MI@web.de', hashlib.sha256(('123meins').encode('utf-8')).hexdigest())
