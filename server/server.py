@@ -10,6 +10,7 @@ import json
 
 db = Database('database.db')
 
+# Dictionary of all users
 # ToDo clear connected sockets
 connectedSockets = {5: [0]}
 

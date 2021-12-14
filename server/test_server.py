@@ -107,11 +107,11 @@ class TestServerFunc(unittest.TestCase):
 
     def test_getModule_StringInput_TypesArgumentsEqual(self):  # name
         modul = self.db.getModule(self.modulIdTest)
-        print(type(modul[0]))
         self.assertEqual(type(modul[0]), int)
-        self.assertEqual(type(modul[1]), int)
-        self.assertEqual(type(modul[2]), int)
-        self.assertEqual(type(modul[3]), int)
+        self.assertEqual(type(modul[1]), str)
+        self.assertEqual(type(modul[2]), str)
+        self.assertEqual(type(modul[3]), str)
+        self.assertEqual(type(modul[4]), float)
 
     def test_getModule_WrongStringInput_TypeEqual_False(self):  # name
         self.assertFalse(self.db.getModuleId('self.modulNameTest'))
