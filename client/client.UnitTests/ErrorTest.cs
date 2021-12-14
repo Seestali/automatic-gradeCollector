@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using client.Network.Packet;
+using client.Network;
 
 namespace client.UnitTests
 {
@@ -8,13 +8,13 @@ namespace client.UnitTests
         [Fact]
         public void AuthFailed_AuthFailedIsZero()
         {
-            Assert.Equal(0,OpCode.Deny);
+            Assert.Equal(0,(byte)OpCode.Deny);
         }
 
         [Fact]
         public void PayloadInvalid_PayloadInvalidIsOne()
         {
-            Assert.Equal(OpCode.Ack, 1);
+            Assert.Equal(1, (byte)OpCode.Ack);
         }
     }
 }

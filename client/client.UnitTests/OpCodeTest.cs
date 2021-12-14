@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using client.Network.Packet;
+using client.Network;
 
 namespace client.UnitTests
 {
@@ -10,49 +10,49 @@ namespace client.UnitTests
         [Fact]
         public void Deny_DenyIsZero()
         {
-            Assert.Equal(0,OpCode.Deny);
+            Assert.Equal<byte>(0,(byte)OpCode.Deny);
         }
 
         [Fact]
         public void Ack_AckIsOne()
         {
-            Assert.Equal(OpCode.Ack, 1);
+            Assert.Equal<byte>(1, (byte)OpCode.Ack);
         }
 
         [Fact]
         public void LoginReq_LoginReqIsTwo()
         {
-            Assert.Equal(OpCode.LoginReq, 2);
+            Assert.Equal<byte>(2,(byte)OpCode.LoginReq);
         }
 
         [Fact]
         public void LoginAns_LoginAnsIsThree()
         {
-            Assert.Equal(OpCode.LoginAns, 3);
+            Assert.Equal<byte>(3,(byte)OpCode.LoginAns);
         }
 
         [Fact]
         public void SubjectsAndGradesReq_SubjectsAndGradesReqIsFour()
         {
-            Assert.Equal(OpCode.SubjectsAndGradesReq, 4);
+            Assert.Equal<byte>(4,(byte)OpCode.SubjectsAndGradesReq);
         }
 
         [Fact]
         public void SubjectsAndGradesAns_SubjectsAndGradesAnsIsFive()
         {
-            Assert.Equal(OpCode.SubjectsAndGradesAns, 5);
+            Assert.Equal<byte>(5,(byte)OpCode.SubjectsAndGradesAns);
         }
 
         [Fact]
         public void SetGradesReq_SetGradesReqIsSix()
         {
-            Assert.Equal(OpCode.SetGradesReq, 6);
+            Assert.Equal<byte>(6,(byte)OpCode.SetGradesReq);
         }
 
         [Fact]
         public void SetGradesAns_SetGradesAnsIsSeven()
         {
-            Assert.Equal(OpCode.Deny, 7);
+            Assert.Equal<byte>(7,(byte)OpCode.SetGradesAns);
         }
     }
 }
