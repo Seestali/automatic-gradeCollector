@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteUtilTest.cs" />
+    <Compile Include="ByteUtilTests.cs" />
     <Compile Include="CRC32Tests.cs" />
     <Compile Include="HashTests.cs" />
     <Compile Include="ErrorTest.cs" />

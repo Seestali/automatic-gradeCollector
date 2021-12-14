@@ -5,54 +5,24 @@ namespace client.UnitTests
 {
     public class OpCodeTest
     {
-        //TODO: check Xunit for byte testing Equal = string
-        //TODO: check for more test cases
-        [Fact]
-        public void Deny_DenyIsZero()
+        /// <summary>
+        /// This Theory checks for correct return of opcode byte value
+        /// 
+        /// </summary>
+        /// <param name="expected">Expected byte value for opcode</param>
+        /// <param name="opCode">opcode for expected byte</param>
+        [Theory]
+        [InlineData(0,OpCode.Deny)]
+        [InlineData(1,OpCode.Ack)]
+        [InlineData(2,OpCode.LoginReq)]
+        [InlineData(3,OpCode.LoginAns)]
+        [InlineData(4,OpCode.SubjectsAndGradesReq)]
+        [InlineData(5,OpCode.SubjectsAndGradesAns)]
+        [InlineData(6,OpCode.SetGradesReq)]
+        [InlineData(7,OpCode.SetGradesAns)]
+        public void CheckOpCodes_OpCodesPass(byte expected, byte opCode)
         {
-            Assert.Equal<byte>(0,(byte)OpCode.Deny);
-        }
-
-        [Fact]
-        public void Ack_AckIsOne()
-        {
-            Assert.Equal<byte>(1, (byte)OpCode.Ack);
-        }
-
-        [Fact]
-        public void LoginReq_LoginReqIsTwo()
-        {
-            Assert.Equal<byte>(2,(byte)OpCode.LoginReq);
-        }
-
-        [Fact]
-        public void LoginAns_LoginAnsIsThree()
-        {
-            Assert.Equal<byte>(3,(byte)OpCode.LoginAns);
-        }
-
-        [Fact]
-        public void SubjectsAndGradesReq_SubjectsAndGradesReqIsFour()
-        {
-            Assert.Equal<byte>(4,(byte)OpCode.SubjectsAndGradesReq);
-        }
-
-        [Fact]
-        public void SubjectsAndGradesAns_SubjectsAndGradesAnsIsFive()
-        {
-            Assert.Equal<byte>(5,(byte)OpCode.SubjectsAndGradesAns);
-        }
-
-        [Fact]
-        public void SetGradesReq_SetGradesReqIsSix()
-        {
-            Assert.Equal<byte>(6,(byte)OpCode.SetGradesReq);
-        }
-
-        [Fact]
-        public void SetGradesAns_SetGradesAnsIsSeven()
-        {
-            Assert.Equal<byte>(7,(byte)OpCode.SetGradesAns);
+            Assert.Equal<byte>(expected,opCode);
         }
     }
 }
