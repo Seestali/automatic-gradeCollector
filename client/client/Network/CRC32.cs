@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace client.Network
+﻿namespace client.Network
 {
     /// <summary>
-    /// CRC Checksummen-Berechnung
+    /// 32-bit CRC value (CRC32, Cyclic Redundancy Check).
+    /// CRC32 is used to detect transmission errors. You can also use
+    /// CRC32 to ensure that data stored in a file has not been modified.
     /// </summary>
-    public static class CRC
+    public static class CRC32
     {
         /// <summary>
-        /// CRC32 Tabelle (Lookup-Tabelle)
-        /// wird für die Berechnung der CRC32 Checksumme benötigt
+        /// Lookup table needed for the calculation of the CRC32 checksum.
         /// </summary>
         private static readonly uint[] crctab =
         {
@@ -73,13 +68,15 @@ namespace client.Network
         };
 
         /// <summary>
-        /// CRC32 Checksummen Berechnung
+        /// Returns a 32-bit CRC value (CRC32, Cyclic Redundancy Check).
+        /// CRC32 is used to detect transmission errors. You can also use
+        /// CRC32 to ensure that data stored in a file has not been modified.
         /// </summary>
-        /// <param name="data">ByteArray des Befehls</param>
-        /// <returns>4 byte CRC Checksumme</returns>
-        public static byte[] CRC32(byte[] data)
+        /// <param name="data">Data from which the checksum is to be calculated.</param>
+        /// <returns>32-bit CRC value</returns>
+        public static uint calculateChecksum(ref byte[] data)
         {
-            UInt32 crc = 0xffffffff;
+            uint crc = 0xffffffff;
             for (int i = 0; i < data.Length; i++)
                 crc = (crc >> 8) ^ crctab[(crc & 0xff) ^ data[i]];
             crc ^= 0xffffffff;
@@ -92,12 +89,7 @@ namespace client.Network
 
             return output;
         }
-        /// <summary>
-        /// Checks if tho checksums are equal to each other
-        /// </summary>
-        /// <param name="checksumOne">Checksum of first packet</param>
-        /// <param name="checksumTwo">Checksum of second packet</param>
-        /// <returns></returns>
+        //TODO: add function comment
         public static bool ChecksumMatches(byte[] checksumOne, byte[] checksumTwo)
         {
             return checksumOne.Equals(checksumTwo);
