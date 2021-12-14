@@ -5,16 +5,12 @@ namespace client.UnitTests
 {
     public class ErrorTests
     {
-        [Fact]
-        public void AuthFailed_AuthFailedIsZero()
+        [Theory]
+        [InlineData(0,Error.AuthFailed)] // Authentification failed
+        [InlineData(1,Error.PayloadInvalid)] // Payload is invalid
+        public void ErrorCode_IsEqual(byte expected, byte error)
         {
-            Assert.Equal(0,(byte)OpCode.Deny);
-        }
-
-        [Fact]
-        public void PayloadInvalid_PayloadInvalidIsOne()
-        {
-            Assert.Equal(1, (byte)OpCode.Ack);
+            Assert.Equal(expected,error);
         }
     }
 }
