@@ -74,25 +74,12 @@
         /// </summary>
         /// <param name="data">Data from which the checksum is to be calculated.</param>
         /// <returns>32-bit CRC value</returns>
-        public static uint calculateChecksum(ref byte[] data)
+        public static uint CalculateChecksum(ref byte[] data)
         {
             uint crc = 0xffffffff;
             for (int i = 0; i < data.Length; i++)
                 crc = (crc >> 8) ^ crctab[(crc & 0xff) ^ data[i]];
-            crc ^= 0xffffffff;
-            byte[] output = new byte[4];
-
-            output[0] = (byte)(crc >> 24);
-            output[1] = (byte)(crc >> 16);
-            output[2] = (byte)(crc >> 8);
-            output[3] = (byte)(crc);
-
-            return output;
-        }
-        //TODO: add function comment
-        public static bool ChecksumMatches(byte[] checksumOne, byte[] checksumTwo)
-        {
-            return checksumOne.Equals(checksumTwo);
+            return crc ^ 0xffffffff;
         }
     }
 }
