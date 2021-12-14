@@ -1,4 +1,6 @@
-﻿namespace client.Network
+﻿using System;
+
+namespace client.Network
 {
     /// <summary>
     /// 32-bit CRC value (CRC32, Cyclic Redundancy Check).
@@ -55,10 +57,18 @@
         /// <returns>32-bit CRC value</returns>
         public static uint CalculateChecksum(ref byte[] data)
         {
-            uint crc = 0xffffffff;
-            for (int i = 0; i < data.Length; i++)
-                crc = (crc >> 8) ^ crctab[(crc & 0xff) ^ data[i]];
-            return crc ^ 0xffffffff;
+            try
+            {
+                uint crc = 0xffffffff;
+                for (int i = 0; i < data.Length; i++)
+                    crc = (crc >> 8) ^ crctab[(crc & 0xff) ^ data[i]];
+                return crc ^ 0xffffffff;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e);
+                throw;
+            }
         }
     }
 }

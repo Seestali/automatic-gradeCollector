@@ -3,13 +3,13 @@ using Xunit;
 
 namespace client.UnitTests
 {
-    public class ByteUtilTest
+    public class ByteUtilTests
     {
         // TODO:    write tests
         [Fact]
         public void InsertUInt32ToByteArray_IntAtArrayBegin_Inplace()
         {
-
+            
         }
 
         [Fact]
