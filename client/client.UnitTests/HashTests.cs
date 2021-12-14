@@ -7,8 +7,8 @@ namespace client.UnitTests
 {
     public class HashTests
     {
-        //TODO: add test cases for wrong input type
-        //TODO: add test cases for no input
+
+
         //TODO: empty string
         [Fact]
         public void GetHashString_StringInput_ReturnsSame()
@@ -17,17 +17,16 @@ namespace client.UnitTests
         }
         
         [Fact]
-        public void GetHashString_EmptyInput_ReturnsSame()
+        public void GetHashString_EmptyInput_ThrowsException()
         {
             Assert.Throws<ArgumentException>(() => Hash.GetHashString(""));
         }
         
-        //[Fact]
-        // public void GetHashString_DifferentTypeInput_DenyInput()
-        // {
-        //
-        // private string a = "hello";
-        //     Assert.Equal(1223,Hash.GetHashString("HalloHenny"));
-        // }
+
+        [Fact]
+        public void GetHashString_NullInput_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => Hash.GetHashString(null));
+        }
     }
 }
