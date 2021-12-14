@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Threading;
 using client.Network;
 using Xunit;
-using Xunit.Sdk;
 
 namespace client.UnitTests
 {

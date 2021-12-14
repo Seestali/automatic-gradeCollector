@@ -3,7 +3,7 @@ using client.Network;
 
 namespace client.UnitTests
 {
-    public class OpCodeTest
+    public class OpCodeTests
     {
         /// <summary>
         /// This Theory checks for correct return of opcode byte value

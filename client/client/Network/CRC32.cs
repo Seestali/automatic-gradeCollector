@@ -66,10 +66,9 @@ namespace client.Network
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                System.Diagnostics.Debug.WriteLine(e);
                 throw;
             }
-            
         }
     }
 }

@@ -3,7 +3,7 @@ using client.Network;
 
 namespace client.UnitTests
 {
-    public class ErrorTest
+    public class ErrorTests
     {
         [Fact]
         public void AuthFailed_AuthFailedIsZero()

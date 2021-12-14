@@ -3,7 +3,6 @@ using client;
 using client.Utils;
 using Xunit;
 
-
 namespace client.UnitTests
 {
     public class HashTests
