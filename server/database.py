@@ -51,21 +51,30 @@ class Database:
         student = self.cursor.fetchone()
         return student
 
-    # edit student
+    # edit student and check if he exists
     def editStudent(self, studiengang, vorname, nachname, password, email):
-        self.cursor.execute(
-            "UPDATE students SET Studiengang = ?, Vorname = ?, Nachname = ?, Passwort = ? WHERE Email = ?",
-            (studiengang, vorname, nachname, hashlib.sha256(password.encode('utf-8')).hexdigest(), email))
-        self.connection.commit()
-        return True
+        self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
+        student = self.cursor.fetchone()
+        if student is None:
+            return False
+        else:
+            self.cursor.execute(
+                "UPDATE students SET Studiengang = ?, Vorname = ?, Nachname = ?, Passwort = ? WHERE Email = ?",
+                (studiengang, vorname, nachname, hashlib.sha256(password.encode('utf-8')).hexdigest(), email))
+            self.connection.commit()
+            return True
 
-    # remove student by id and all entries in student module combination
+    # remove student by id and all entries in student module combination but check if student exists
     def removeStudent(self, id):
-        self.cursor.execute("DELETE FROM students WHERE ID = ?", (id,))
-        self.cursor.execute("DELETE FROM studentModul WHERE studentID = ?", (id,))
-        self.connection.commit()
-        return True
-        ##############wird nicht erkannt wenn kein student unter der id vorhanden ist
+        self.cursor.execute("SELECT * FROM students WHERE ID = ?", (id,))
+        student = self.cursor.fetchone()
+        if student is None:
+            return False
+        else:
+            self.cursor.execute("DELETE FROM students WHERE ID = ?", (id,))
+            self.cursor.execute("DELETE FROM studentModul WHERE studentID = ?", (id,))
+            self.connection.commit()
+            return True
 
     # show table students
     def getTableStudents(self):
@@ -109,20 +118,30 @@ class Database:
         else:
             return False
 
-    # remove module from modules table amd delete all entries in studentModul table
+    # remove module from modules table amd delete all entries in studentModul table but check if module exists
     def removeModule(self, id):
-        self.cursor.execute("DELETE FROM modules WHERE ID = ?", (id,))
-        self.cursor.execute("DELETE FROM studentModul WHERE moduleID = ?", (id,))
-        self.connection.commit()
-        return True
+        self.cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
+        module = self.cursor.fetchone()
+        if module is None:
+            return False
+        else:
+            self.cursor.execute("DELETE FROM modules WHERE ID = ?", (id,))
+            self.cursor.execute("DELETE FROM studentModul WHERE moduleID = ?", (id,))
+            self.connection.commit()
+            return True
 
-    # edit module
+    # edit module and check if module exists
     def editModule(self, name, beschreibung, leistung, ects, id):
-        self.cursor.execute(
-            "UPDATE modules SET Name = ?, Beschreibung = ?, Prüfungsleistung = ?, ECTS = ? WHERE ID = ?",
-            (name, beschreibung, leistung, ects, id))
-        self.connection.commit()
-        return True
+        self.cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
+        module = self.cursor.fetchone()
+        if module is None:
+            return False
+        else:
+            self.cursor.execute(
+                "UPDATE modules SET Name = ?, Beschreibung = ?, Prüfungsleistung = ?, ECTS = ? WHERE ID = ?",
+                (name, beschreibung, leistung, ects, id))
+            self.connection.commit()
+            return True
 
     # show table modules
     def getTableModules(self):
@@ -143,15 +162,25 @@ class Database:
         else:
             return False
 
-    # edit student module combination
+    # edit student module combination and check if it already exists
     def editStudentModule(self, studentID, moduleID, note):
-        self.cursor.execute("UPDATE studentModul SET Note = ? WHERE studentID = ? AND moduleID = ?",
-                            (note, studentID, moduleID))
-        self.connection.commit()
-        return True
+        self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
+        studentModule = self.cursor.fetchone()
+        if studentModule is None:
+            return False
+        else:
+            self.cursor.execute("UPDATE studentModul SET Note = ? WHERE studentID = ? AND moduleID = ?",
+                                (note, studentID, moduleID))
+            self.connection.commit()
+            return True
 
-    # remove student from module
+    # remove student from module and check if it already exists
     def removeStudentModule(self, studentID, moduleID):
-        self.cursor.execute("DELETE FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
-        self.connection.commit()
-        return True
+        self.cursor.execute("SELECT * FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
+        studentModule = self.cursor.fetchone()
+        if studentModule is None:
+            return False
+        else:
+            self.cursor.execute("DELETE FROM studentModul WHERE studentID = ? AND moduleID = ?", (studentID, moduleID))
+            self.connection.commit()
+            return True

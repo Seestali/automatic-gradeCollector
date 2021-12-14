@@ -1,4 +1,4 @@
-from database import *
+from database import Database
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
         password = input('> ')
         print('enter the student\'s course of study')
         module = input('> ')
-        if addStudent(module, firstname, lastname, email, password):
+        if db.addStudent(module, firstname, lastname, email, password):
             print('student added')
         else:
             print('student not added')
@@ -38,34 +38,34 @@ def main():
         exam = input('> ')
         print('enter the module\'s ects')
         ects = input('> ')
-        if addModule(name, description, exam, ects):
+        if db.addModule(name, description, exam, ects):
             print('module added')
         else:
             print('module already exists')
     elif choice == '3':
-        print('select a student from the list')#
-        for row in getTableStudents():
+        print('Please select a student from the list')
+        for row in db.getTableStudents():
             print(row)
-        print('enter the student\'s id')#
-        studentID = input('> ')#
-        print('enter the semster (1-6)')#
-        semester = input('> ')#
-        print('select a module from the list (ID)')#
-        for row in getTableModules():
+        print('enter the student\'s id')
+        studentID = input('> ')
+        print('enter the semster (1-6)')
+        semester = input('> ')
+        print('Please select a module from the list (ID)')
+        for row in db.getTableModules():
             print(row)
-        print('enter the module\'s id')#
-        moduleID = input('> ')#
-        if addStudentModule(studentID, moduleID, semester):
+        print('enter the module\'s id')
+        moduleID = input('> ')
+        if db.addStudentModule(studentID, moduleID, semester):
             print('module/student added')
         else:
             print('module/student already exists')
-    elif choice == '4': 
-        print('select a student from the list')#
-        for row in getTableStudents():
+    elif choice == '4':
+        print('Please select a student from the list')
+        for row in db.getTableStudents():
             print(row)
-        print('enter the student\'s id')#
-        studentID = input('> ')#
-        print(getStudentData(getStudentMail(studentID)))
+        print('enter the student\'s id')
+        studentID = input('> ')
+        print(db.getStudentData(db.getStudentMail(studentID)))
         print('enter the student\'s firstname')
         firstname = input('> ')
         print('enter the student\'s lastname')
@@ -74,18 +74,18 @@ def main():
         password = input('> ')
         print('enter the student\'s course of study')
         module = input('> ')
-        if editStudent(module, firstname, lastname, password, getStudentMail(studentID)):
+        if db.editStudent(module, firstname, lastname, password, db.getStudentMail(studentID)):
             print('student changed')
-            print(getStudentData(getStudentMail(studentID)))
+            print(db.getStudentData(db.getStudentMail(studentID)))
         else:
             print('failed to change student')
-    elif choice == '5': 
-        print('select a module from the list (ID)')#
-        for row in getTableModules():
+    elif choice == '5':
+        print('Please select a module from the list (ID)')
+        for row in db.getTableModules():
             print(row)
-        print('enter the module\'s id')#
-        moduleID = input('> ')#
-        print(getModule(moduleID))
+        print('enter the module\'s id')
+        moduleID = input('> ')
+        print(db.getModule(moduleID))
         print('enter the module\'s name')
         name = input('> ')
         print('enter the module\'s description')
@@ -94,44 +94,44 @@ def main():
         exam = input('> ')
         print('enter the module\'s ects')
         ects = input('> ')
-        if editModule(name, description, exam, ects, moduleID):
+        if db.editModule(name, description, exam, ects, moduleID):
             print('module changed')
-            print(getModule(moduleID))
+            print(db.getModule(moduleID))
         else:
             print('failed to change module')
 
-    elif choice == '6':  
-        print('select a student from the list')#
-        for row in getTableStudents():
+    elif choice == '6':
+        print('Please select a student from the list')
+        for row in db.getTableStudents():
             print(row)
-        print('enter the student\'s id')#
-        studentID = input('> ')#
-        if removeStudent(studentID):
+        print('enter the student\'s id')
+        studentID = input('> ')
+        if db.removeStudent(studentID):
             print('student deleted')
         else:
             print('student not deleted')
     elif choice == '7':
-        print('select a module from the list (ID)')#
-        for row in getTableModules():
+        print('Please select a module from the list (ID)')
+        for row in db.getTableModules():
             print(row)
-        print('enter the module\'s id')#
-        moduleID = input('> ')#
-        if removeModule(moduleID):
+        print('enter the module\'s id')
+        moduleID = input('> ')
+        if db.removeModule(moduleID):
             print('module deleted')
         else:
             print('module doesnt exists')
-    elif choice == '8':  
-        print('select a student from the list')#
-        for row in getTableStudents():
+    elif choice == '8':
+        print('Please select a student from the list')
+        for row in db.getTableStudents():
             print(row)
-        print('enter the student\'s id')#
-        studentID = input('> ')# 
-        print('select a module from the list (ID)')#
-        for row in getTableModules():
+        print('enter the student\'s id')
+        studentID = input('> ')  #
+        print('Please select a module from the list (ID)')
+        for row in db.getTableModules():
             print(row)
-        print('enter the module\'s id')#
-        moduleID = input('> ')#
-        if removeStudentModule(studentID, moduleID):
+        print('enter the module\'s id')
+        moduleID = input('> ')
+        if db.removeStudentModule(studentID, moduleID):
             print('module form student deleted')
         else:
             print('module drom student doesnt exist')
@@ -140,4 +140,5 @@ def main():
     main()
 
 
+db = Database('database.db')
 main()
