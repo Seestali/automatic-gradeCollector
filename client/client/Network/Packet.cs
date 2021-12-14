@@ -120,7 +120,7 @@ namespace client.Network
         /// <returns>Length of the Payload data</returns>
         public uint GetPayLoadLength()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, PAYLOAD_LENGTH_BEGIN)
+            return ByteUtil.GetUInt32FromByteArray(ref data, PAYLOAD_LENGTH_BEGIN);
             //return (uint)(data[10] << 24 + data[11] << 16 + data[12] << 8 + data[13]);
         }
 
