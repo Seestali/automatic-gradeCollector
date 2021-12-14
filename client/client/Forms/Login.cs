@@ -31,11 +31,34 @@ namespace client
         //TODO: Real documentation for function
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(tbUser.Text + "\n\n" + Hash.GetHashString(tbPassword.Text));
-            System.Diagnostics.Debug.WriteLine(Hash.GetHashString(tbPassword.Text));
-            //TODO: send packets with credentials to server
-            //TODO: get ACK/DEC back with data
-            //TODO: open MainWindow with received information and show courses and grades
+            try
+            {
+                if (UserInputIsValid(tbUser.Text) && UserInputIsValid(tbPassword.Text))
+                {
+                    System.Diagnostics.Debug.WriteLine(Hash.GetHashString(tbPassword.Text));
+                    //TODO: send packets with credentials to server
+                    //TODO: get ACK/DEC back with data
+                    //TODO: open MainWindow with received information and show courses and grades
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect user input.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        
+        /// <summary>
+        /// Check user input for wrong input.
+        /// </summary>
+        /// <param name="text">Text from inputfields for Mail and Password</param>
+        /// <returns>Returns false if string is empty. True for valid input. </returns>
+        private bool UserInputIsValid(string text)
+        {
+            return !string.IsNullOrEmpty(text);
         }
 
         private void btnDebugSendReceive(object sender, EventArgs e)
