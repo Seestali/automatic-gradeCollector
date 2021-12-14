@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace client.Network
 {
-    public class PacketManager
+    public class Manager
     {
         //TODO: class between UI and PacketAssembler.cs
         //TODO: consider relocation
@@ -16,10 +18,29 @@ namespace client.Network
         private List<Packet> packetList;
         private PacketAssembler packetAssembler;
 
-        public PacketManager()
+        private static Manager instance;
+
+        public static Manager getInstance()
+        {
+            if (instance == null)
+                instance = new Manager();
+            return instance;
+        }
+        
+        private Manager()
         {
             packetList = new List<Packet>();
             packetAssembler = new PacketAssembler();
+            OpenForm<Login>();
+        }
+
+        /// <summary>
+        /// Opens Form by identification
+        /// </summary>
+        /// <typeparam name="T">Form identification</typeparam>
+        public void OpenForm<T>() where T : Form, new()
+        {
+            new T().Show();
         }
     }
 }

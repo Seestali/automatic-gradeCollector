@@ -5,7 +5,7 @@ namespace client.Network
     /// <summary>
     /// Represents a packet to sent or to receive.
     /// </summary>
-    //TODO: finish comments
+
     //TODO: finish class if needed
     public class Packet
     {
