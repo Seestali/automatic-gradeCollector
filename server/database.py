@@ -37,19 +37,28 @@ class Database:
     def getStudentId(self, email):
         self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
         student = self.cursor.fetchone()
-        return student[0]
+        if student is None:
+            return False
+        else:
+            return student[0]
 
     # get student email from id
     def getStudentMail(self, id):
         self.cursor.execute("SELECT * FROM students WHERE ID = ?", (id,))
         student = self.cursor.fetchone()
-        return student[4]
+        if student is None:
+            return False
+        else:
+            return student[4]
 
     # get student data from email
     def getStudentData(self, email):
         self.cursor.execute("SELECT * FROM students WHERE Email = ?", (email,))
         student = self.cursor.fetchone()
-        return student
+        if student is None:
+            return False
+        else:
+            return student
 
     # edit student and check if he exists
     def editStudent(self, studiengang, vorname, nachname, password, email):
@@ -86,13 +95,19 @@ class Database:
     def getModuleId(self, name):
         self.cursor.execute("SELECT * FROM modules WHERE Name = ?", (name,))
         module = self.cursor.fetchone()
-        return module[0]
+        if module is None:
+            return False
+        else:
+            return module[0]
 
     # get module by id
     def getModule(self, id):
         self.cursor.execute("SELECT * FROM modules WHERE ID = ?", (id,))
         module = self.cursor.fetchone()
-        return module
+        if module is None:
+            return False
+        else:
+            return module
 
     # get modules of student by student id and semester
     def getModules(self, studentID, semester):
