@@ -20,6 +20,10 @@ namespace client.Network
 
         private static Manager instance;
 
+        /// <summary>
+        /// Singleton of Manager.
+        /// </summary>
+        /// <returns>Returns instance of active manager</returns>
         public static Manager getInstance()
         {
             if (instance == null)
@@ -27,6 +31,10 @@ namespace client.Network
             return instance;
         }
         
+        /// <summary>
+        /// Private constructor of Manager.
+        /// Used for Singleton.
+        /// </summary>
         private Manager()
         {
             packetList = new List<Packet>();
