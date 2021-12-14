@@ -47,7 +47,7 @@ namespace client.Network
             for (uint i = 0; i < payloadLength; i++)
                 content[BEFORE_CRC + i] = payloadData[i];
             
-            uint crc = CRC32.calculateChecksum(ref content);
+            uint crc = CRC32.CalculateChecksum(ref content);
 
             data = new byte[HEADER_LENGTH + payloadLength];
             
