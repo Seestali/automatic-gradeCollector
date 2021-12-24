@@ -28,20 +28,20 @@ namespace client.Network
         /// <param name="opCode">Op code</param>
         /// <param name="payloadLength">Length of payload data</param>
         /// <param name="payloadData">Payload data</param>
-        public Packet(uint number, byte userID, OpCode opCode, uint payloadLength, byte[] payloadData)
+        public Packet(uint number, byte userID, OpCode opCode, byte[] payloadData)
         {
-            byte[] content = new byte[BEFORE_CRC + payloadLength];
+            byte[] content = new byte[BEFORE_CRC + payloadData.Length];
             ByteUtil.InsertUInt32ToByteArray(ref content, 0, number);
             content[4] = userID;
             content[5] = (byte)opCode;
-            ByteUtil.InsertUInt32ToByteArray(ref content, 6, payloadLength);
+            ByteUtil.InsertUInt32ToByteArray(ref content, 6, (uint)payloadData.Length);
 
-            for (uint i = 0; i < payloadLength; i++)
+            for (uint i = 0; i < payloadData.Length; i++)
                 content[BEFORE_CRC + i] = payloadData[i];
             
             uint crc = CRC32.CalculateChecksum(ref content);
 
-            data = new byte[HEADER_LENGTH + payloadLength];
+            data = new byte[HEADER_LENGTH + payloadData.Length];
             
             for (byte i = 0; i < CRC32_BEGIN; i++)
                 data[i] = content[i];
@@ -51,7 +51,7 @@ namespace client.Network
             for (byte i = BEFORE_CRC; i < HEADER_LENGTH; i++)
                 data[i] = content[i - CRC32_LENGTH];
             
-            for (ushort i = 0; i < payloadLength; i++)
+            for (ushort i = 0; i < payloadData.Length; i++)
                 data[HEADER_LENGTH + i] = payloadData[i];
         }
 

@@ -32,12 +32,8 @@ namespace client.Network
         {
             byte[] payload = new byte[DENY_PAYLOAD_LENGTH];
             ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToDeny);
-            //payload[0] = (byte)(packetNumber >> 24);
-            //payload[1] = (byte)(packetNumber >> 16);
-            //payload[2] = (byte)(packetNumber >> 8);
-            //payload[3] = (byte)packetNumber;
             payload[4] = (byte)error;
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Deny, DENY_PAYLOAD_LENGTH, payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Deny, payload);
         }
 
         /// <summary>
@@ -49,11 +45,7 @@ namespace client.Network
         {
             byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
             ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToAck);
-            //payload[0] = (byte)(packetNumber >> 24);
-            //payload[1] = (byte)(packetNumber >> 16);
-            //payload[2] = (byte)(packetNumber >> 8);
-            //payload[3] = (byte)packetNumber;
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Ack, ACK_PAYLOAD_LENGTH, payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Ack, payload);
         }
 
         /// <summary>
@@ -64,7 +56,7 @@ namespace client.Network
         public Packet BuildLoginReq(string auth)
         {
             byte[] payload = Encoding.UTF8.GetBytes(auth);
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginReq, (uint)payload.Length, payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginReq, payload);
         }
 
         public Packet BuildGetSubjectsAndGrades()
