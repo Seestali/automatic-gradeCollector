@@ -32,17 +32,9 @@ namespace client.Network
         {
             byte[] content = new byte[BEFORE_CRC + payloadLength];
             ByteUtil.InsertUInt32ToByteArray(ref content, 0, number);
-            //content[0] = (byte)(number >> 24);
-            //content[1] = (byte)(number >> 16);
-            //content[2] = (byte)(number >> 8);
-            //content[3] = (byte)number;
             content[4] = userID;
             content[5] = (byte)opCode;
             ByteUtil.InsertUInt32ToByteArray(ref content, 6, payloadLength);
-            //content[6] = (byte)(payloadLength >> 24);
-            //content[7] = (byte)(payloadLength >> 16);
-            //content[8] = (byte)(payloadLength >> 8);
-            //content[9] = (byte)payloadLength;
 
             for (uint i = 0; i < payloadLength; i++)
                 content[BEFORE_CRC + i] = payloadData[i];
@@ -55,10 +47,6 @@ namespace client.Network
                 data[i] = content[i];
             
             ByteUtil.InsertUInt32ToByteArray(ref data, 6, crc);
-            //data[6] = (byte)(crc >> 24);
-            //data[7] = (byte)(crc >> 16);
-            //data[8] = (byte)(crc >> 8);
-            //data[9] = (byte)crc;
             
             for (byte i = 10; i < 14; i++)
                 data[i] = content[i];
@@ -83,7 +71,6 @@ namespace client.Network
         public uint GetNumber()
         {
             return ByteUtil.GetUInt32FromByteArray(ref data, NUMBER_BEGIN);
-            //return (uint)(data[0] << 24 + data[1] << 16 + data[2] << 8 + data[3]);
         }
 
         /// <summary>
@@ -111,7 +98,6 @@ namespace client.Network
         public uint GetCRC()
         {
             return ByteUtil.GetUInt32FromByteArray(ref data, CRC32_BEGIN);
-            //return (uint)(data[6] << 24 + data[7] << 16 + data[8] << 8 + data[9]);
         }
 
         /// <summary>
@@ -121,7 +107,6 @@ namespace client.Network
         public uint GetPayLoadLength()
         {
             return ByteUtil.GetUInt32FromByteArray(ref data, PAYLOAD_LENGTH_BEGIN);
-            //return (uint)(data[10] << 24 + data[11] << 16 + data[12] << 8 + data[13]);
         }
 
         /// <summary>
