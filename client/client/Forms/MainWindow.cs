@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using client.Utils;
 using System.Windows.Forms;
 
 namespace client.Forms
@@ -21,6 +15,11 @@ namespace client.Forms
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void cbSemester_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // TODO: Send packet to request subjects and grades
         }
     }
 }
