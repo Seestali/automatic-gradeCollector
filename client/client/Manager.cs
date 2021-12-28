@@ -79,5 +79,11 @@ namespace client.Network
                     break;
             }
         }
+        public bool CheckIfFormIsOpen(string formname)
+        {
+            bool formOpen= Application.OpenForms.Cast<Form>().Any(form => form.Name == formname);
+            return formOpen;
+        }
+
     }
 }
