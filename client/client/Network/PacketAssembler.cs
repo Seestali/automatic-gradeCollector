@@ -53,8 +53,9 @@ namespace client.Network
         /// </summary>
         /// <param name="auth"></param>
         /// <returns></returns>
-        public Packet BuildLoginReq(string auth)
+        public Packet BuildLoginReq(string email, string passwordHash)
         {
+            string auth = email  + "::" +  passwordHash;
             byte[] payload = Encoding.UTF8.GetBytes(auth);
             return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginReq, payload);
         }
