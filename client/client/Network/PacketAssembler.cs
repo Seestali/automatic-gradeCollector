@@ -1,4 +1,5 @@
 ﻿using client.Utils;
+using client.Exception;
 using System.Text;
 
 namespace client.Network
@@ -78,6 +79,11 @@ namespace client.Network
         public Packet DisassemblePacket(byte[] data)
         {
             Packet packet = new Packet(data);
+            byte[] content = packet.GetContentWithoutCRC();
+            if (packet.GetCRC() != CRC32.CalculateChecksum(ref content))
+            {
+                throw new ChecksumMismatchException();
+            }
             if (userID == 0)    // If local user ID is still zero, take ID from received packet.
             {
                 userID = packet.GetUserID();
