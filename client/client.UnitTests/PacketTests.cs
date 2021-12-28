@@ -30,7 +30,7 @@ namespace client.UnitTests
             string auth = "max.mustermann@email.com::643F6BA68C9333859694078A905B90C4F036D01CF7E81D6EF0A6CA79A344B6B7";
             byte[] payload = Encoding.UTF8.GetBytes(auth);
 
-            Packet packet = new Packet(packetNumber, userID, opCode, (uint)payload.Length, payload);
+            Packet packet = new Packet(packetNumber, userID, opCode, payload);
             Assert.Equal(packetNumber, packet.GetNumber());
             Assert.Equal(userID, packet.GetUserID());
             Assert.Equal(opCode, packet.GetOpCode());
