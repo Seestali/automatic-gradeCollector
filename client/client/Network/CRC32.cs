@@ -71,7 +71,7 @@ namespace client.Network
                     throw new ArgumentException("Data cannot be empty");
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e);
                 throw;

@@ -54,7 +54,7 @@ namespace client
                     MessageBox.Show("Incorrect user input.");
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
