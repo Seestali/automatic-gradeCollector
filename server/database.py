@@ -12,7 +12,7 @@ class Database:
         This method initializes the database connection.
         :param file: the location of the database file
         '''
-        self.connection = sqlite3.connect(file)
+        self.connection = sqlite3.connect(file, timeout=5)
         self.cursor = self.connection.cursor()
 
     # add student to student table and check if email already exists
