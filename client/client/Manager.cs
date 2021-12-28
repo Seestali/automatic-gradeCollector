@@ -15,6 +15,7 @@ namespace client.Network
         //TODO: create unittest class
         //TODO: gives ready packets to UDP class
 
+        private List<Form> forms;
         private List<Packet> packetList;
         private PacketAssembler packetAssembler;
 
@@ -37,6 +38,7 @@ namespace client.Network
         /// </summary>
         private Manager()
         {
+            forms = new List<Form>();
             packetList = new List<Packet>();
             packetAssembler = new PacketAssembler();
             OpenForm<Login>();
@@ -48,6 +50,7 @@ namespace client.Network
         /// <typeparam name="T">Form identification</typeparam>
         public void OpenForm<T>() where T : Form, new()
         {
+
             new T().Show();
         }
 
