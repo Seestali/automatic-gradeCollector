@@ -46,7 +46,7 @@ namespace client
                     //TODO: send packets with credentials to server
                     //TODO: get ACK/DEC back with data
                     //TODO: open MainWindow with received information and show courses and grades
-                    Manager.getInstance().OpenForm<MainWindow>();
+                    Manager.GetInstance().OpenForm<MainWindow>();
                     this.Close();
                 }
                 else
