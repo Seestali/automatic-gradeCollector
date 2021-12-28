@@ -80,6 +80,7 @@ namespace client.UnitTests
                 0x00, 0x00, 0x00, 0x00  // Payload data
             };
             Packet packet = new Packet(data);
+            Assert.Equal(new byte[] { 0x00, 0x00, 0x00, 0x00 }, packet.GetPayloadData());
         }
 
         [Fact]
