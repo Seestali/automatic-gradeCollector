@@ -2,6 +2,9 @@ from database import Database
 
 
 def main():
+    '''
+    This functionen is used for the backend in order to edit the database.
+    '''
     print('what do you want to do?')
     print('1. create a new student')
     print('2. create a new module')

@@ -26,8 +26,16 @@ server_socket.bind(('', port))
 print('The server is ready to receive')
 
 
-# Function to resend a message after a certain amount of time
+# Function to resend a message after a certain amount of timeø
 def resendMessage(message, address, userID, packageNumber):
+    '''
+    Function to resend a message after a certain amount of time. It will be called by a thread and therminates itselft.
+    :param address: Address to send the message to
+    :param userID: UserID of the user to send the message to
+    :param packageNumber: Package number of the message to resend
+    :return: Returns if the message was sent successfully or the maximum amount of resends was reached    
+    '''
+
     print('thread started')
     count = 0
     time.sleep(resendInterval)
@@ -42,6 +50,9 @@ def resendMessage(message, address, userID, packageNumber):
 
 # start listening for messages
 while True:
+    '''
+    This is the main loop of the server. It will listen for messages and will handle them accordingly.
+    '''
     # save the message and the address of the sender to answer later
     message, address = server_socket.recvfrom(bufferSize)
     print('Client connected from: ', address)
