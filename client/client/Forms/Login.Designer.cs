@@ -54,17 +54,6 @@ namespace client
             this.credentialsBox.TabIndex = 5;
             this.credentialsBox.TabStop = false;
             // 
-            // btnSendReceive
-            // 
-            this.btnSendReceive.Location = new System.Drawing.Point(10, 96);
-            this.btnSendReceive.Name = "btnSendReceive";
-            this.btnSendReceive.Size = new System.Drawing.Size(75, 23);
-            this.btnSendReceive.TabIndex = 5;
-            this.btnSendReceive.Text = "Send/Rec";
-            this.btnSendReceive.UseVisualStyleBackColor = true;
-            this.btnSendReceive.Visible = false;
-            this.btnSendReceive.Click += new System.EventHandler(this.btnDebugSendReceive);
-            // 
             // lbUser
             // 
             this.lbUser.AutoSize = true;
