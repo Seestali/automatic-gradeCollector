@@ -97,5 +97,27 @@ namespace client.UnitTests
             Packet packet = new Packet(data);
             Assert.Equal(data, packet.ToByteArray());
         }
+
+        [Fact]
+        public void GetContentWithoutCRC_ReturnCorrectContentArray()
+        {
+            byte[] data = {
+                0x00, 0x00, 0x00, 0x00, // Packet number
+                0x2A,                   // User ID
+                0x01,                   // Op code
+                0x6B, 0x3F, 0x58, 0x5D, // CRC32 checksum
+                0x00, 0x00, 0x00, 0x04, // Payload length
+                0x00, 0x00, 0x00, 0x00  // Payload data
+            };
+            Packet packet = new Packet(data);
+            byte[] content = {
+                0x00, 0x00, 0x00, 0x00, // Packet number
+                0x2A,                   // User ID
+                0x01,                   // Op code
+                0x00, 0x00, 0x00, 0x04, // Payload length
+                0x00, 0x00, 0x00, 0x00  // Payload data
+            };
+            Assert.Equal(content, packet.GetContentWithoutCRC());
+        }
     }
 }
