@@ -24,7 +24,7 @@ namespace client.Network
         /// Singleton of Manager.
         /// </summary>
         /// <returns>Returns instance of active manager</returns>
-        public static Manager getInstance()
+        public static Manager GetInstance()
         {
             if (instance == null)
                 instance = new Manager();
@@ -49,6 +49,32 @@ namespace client.Network
         public void OpenForm<T>() where T : Form, new()
         {
             new T().Show();
+        }
+
+        public void ReceivePseudo(byte[] array)
+        {
+            Packet packet = packetAssembler.DisassemblePacket(array);
+            // ... Fehler? try catch
+            switch (packet.GetOpCode())
+            {
+                case OpCode.Deny:
+                    // ...
+                    break;
+                case OpCode.Ack:
+                    // ...
+                    break;
+                case OpCode.LoginAns:
+                    // ...
+                    break;
+                case OpCode.SubjectsAndGradesAns:
+                    // ...
+                    break;
+                case OpCode.SetGradesAns:
+                    // ...
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
