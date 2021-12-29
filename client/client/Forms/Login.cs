@@ -42,7 +42,6 @@ namespace client
             {
                 if (UserInputIsValid(tbUser.Text) && UserInputIsValid(tbPassword.Text))
                 {
-                    System.Diagnostics.Debug.WriteLine(Hash.GetHashString(tbPassword.Text));
                     //TODO: send packets with credentials to server
                     //TODO: get ACK/DEC back with data
                     //TODO: open MainWindow with received information and show courses and grades
