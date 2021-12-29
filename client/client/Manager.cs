@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using client.Exception;
+using client.Network;
 
 namespace client.Network
 {
@@ -17,7 +19,7 @@ namespace client.Network
         //TODO: gives ready packets to UDP class
 
         private List<Form> forms;
-        private List<Packet> packetList;
+        private Dictionary<uint, Packet> packets;
         private PacketAssembler packetAssembler;
 
         private static Manager instance;
@@ -40,7 +42,7 @@ namespace client.Network
         private Manager()
         {
             forms = new List<Form>();
-            packetList = new List<Packet>();
+            packets = new Dictionary<uint, Packet>();
             packetAssembler = new PacketAssembler();
             OpenForm<Login>();
         }
@@ -57,34 +59,74 @@ namespace client.Network
 
         public void ReceivePseudo(byte[] array)
         {
-            Packet packet = packetAssembler.DisassemblePacket(array);
-            // ... Fehler? try catch
+            Packet packet;
+            try 
+            {
+                packet = packetAssembler.DisassemblePacket(array);
+            }
+            catch (ChecksumMismatchException e)
+            {
+                return SendDeny(packet.GetNumber(), Error.ChecksumMismatch);
+            }
+
             switch (packet.GetOpCode())
             {
                 case OpCode.Deny:
-                    // ...
+                    HandleDeny(packet);
                     break;
                 case OpCode.Ack:
-                    // ...
+                    HandleAck(packet);
                     break;
                 case OpCode.LoginAns:
-                    // ...
+                    HandleLoginAns(packet);
                     break;
                 case OpCode.SubjectsAndGradesAns:
-                    // ...
+                    HandleSubjectsAndGradesAns(packet);
                     break;
                 case OpCode.SetGradesAns:
-                    // ...
+                    HandleSetGradesAns(packet);
                     break;
                 default:
+                    // Ignore invalid op codes
                     break;
             }
         }
+
+        public void HandleDeny(Packet packet)
+        {
+
+        }
+
+        public void HandleAck(Packet packet)
+        {
+            
+        }
+
+        public void HandleLoginAns(Packet packet)
+        {
+            
+        }
+
+        public void HandleSubjectsAndGradesAns(Packet packet)
+        {
+            
+        }
+
+        public void HandleSetGradesAns(Packet packet)
+        {
+            
+        }
+
         public bool CheckIfFormIsOpen(string formname)
         {
             bool formOpen= Application.OpenForms.Cast<Form>().Any(form => form.Name == formname);
             return formOpen;
         }
 
+        private void SendDeny(uint packetNumberToDeny, Error error)
+        {
+            Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
+
+        }
     }
 }
