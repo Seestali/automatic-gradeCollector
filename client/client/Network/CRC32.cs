@@ -55,7 +55,7 @@ namespace client.Network
         /// </summary>
         /// <param name="data">Data from which the checksum is to be calculated.</param>
         /// <returns>32-bit CRC value</returns>
-        public static uint CalculateChecksum(ref byte[] data)
+        public static uint CalculateChecksum(byte[] data)
         {
             try
             {
