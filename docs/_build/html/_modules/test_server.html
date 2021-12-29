@@ -1,35 +1,68 @@
-
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>test_server &#8212; automatic-gradeCollectorServer 29.12.2021 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>test_server &mdash; automatic-gradeCollectorServer 29.12.2021 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
 
-  </head><body>
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> automatic-gradeCollectorServer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">server</a></li>
+</ul>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          
+        </div>
+      </div>
+    </nav>
 
-          <div class="body" role="main">
-            
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">automatic-gradeCollectorServer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>test_server</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <h1>Source code for test_server</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">NoneType</span>
 <span class="kn">import</span> <span class="nn">unittest</span>
@@ -67,79 +100,79 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addModule</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">),</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="s1">&#39;keine&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModuleId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span><span class="p">)</span>
-        
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the addStudent function is executed successfully.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_addStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudent</span><span class="p">(</span><span class="s1">&#39;TINF19&#39;</span><span class="p">,</span> <span class="s1">&#39;Max&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;Müller&#39;</span><span class="p">,</span> <span class="s1">&#39;self.studentMailTest&#39;</span><span class="p">,</span> <span class="s1">&#39;123meins&#39;</span><span class="p">))</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span><span class="p">)</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the addStudent function aborts execution on duplicates.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<div class="viewcode-block" id="TestServerFunc.test_addStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the addStudent function is executed successfully.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudent</span><span class="p">(</span><span class="s1">&#39;TINF19&#39;</span><span class="p">,</span> <span class="s1">&#39;Max&#39;</span><span class="p">,</span>
+                                           <span class="s1">&#39;Müller&#39;</span><span class="p">,</span> <span class="s1">&#39;self.studentMailTest&#39;</span><span class="p">,</span> <span class="s1">&#39;123meins&#39;</span><span class="p">))</span></div>
+
 <div class="viewcode-block" id="TestServerFunc.test_addStudent_ExistingMailInput_DenyInput"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudent_ExistingMailInput_DenyInput">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudent_ExistingMailInput_DenyInput</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the addStudent function aborts execution on duplicates.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudent</span><span class="p">(</span>
             <span class="s1">&#39;TINF19&#39;</span><span class="p">,</span> <span class="s1">&#39;Max&#39;</span><span class="p">,</span> <span class="s1">&#39;Müller&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">,</span> <span class="s1">&#39;123meins&#39;</span><span class="p">))</span></div>
-    
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the validateStudent function is executed successfully.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_validateStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_validateStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_validateStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># email, password</span>
+
+<div class="viewcode-block" id="TestServerFunc.test_validateStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_validateStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_validateStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the validateStudent function is executed successfully.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">validateStudent</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">((</span><span class="s1">&#39;123meins&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the validateStudent function aborts execution on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_validateStudent_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_validateStudent_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_validateStudent_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the validateStudent function aborts execution on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">validateStudent</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">((</span><span class="s1">&#39;12meins&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the validateStudent function aborts execution on empty input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_validateStudent_EmptyStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_validateStudent_EmptyStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_validateStudent_EmptyStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the validateStudent function aborts execution on empty input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">validateStudent</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">((</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentId function returns int type.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getStudentId_StringInput_ReturnsTypeIntIsSame"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentId_StringInput_ReturnsTypeIntIsSame">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentId_StringInput_ReturnsTypeIntIsSame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getStudentId_StringInput_ReturnsTypeIntIsSame"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentId_StringInput_ReturnsTypeIntIsSame">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentId_StringInput_ReturnsTypeIntIsSame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentId function returns int type.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="nb">type</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">))),</span> <span class="nb">int</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentId function aborts execution on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getStudentId_WrongStringInput_ReturnsNone"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentId_WrongStringInput_ReturnsNone">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentId_WrongStringInput_ReturnsNone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getStudentId_WrongStringInput_ReturnsNone"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentId_WrongStringInput_ReturnsNone">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentId_WrongStringInput_ReturnsNone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentId function aborts execution on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentId</span><span class="p">(</span><span class="s1">&#39;wrong@Mail.com&#39;</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentMail function returns same mail as expected.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_getStudentMail_IntInput_ReturnsSame"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentMail_IntInput_ReturnsSame">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentMail_IntInput_ReturnsSame</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentMail function returns same mail as expected.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentMail</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentMail function returns false on not existing id.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_getStudentMail_WrongIntInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentMail_WrongIntInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentMail_WrongIntInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentMail function returns false on not existing id.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentMail</span><span class="p">(</span><span class="mi">99</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentMail function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_getStudentMail_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentMail_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentMail_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentMail function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentMail</span><span class="p">(</span><span class="s1">&#39;self.studentIdTest&#39;</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentData function returns the correct types.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getStudentData_StringInput_TypesEqual"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentData_StringInput_TypesEqual">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentData_StringInput_TypesEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getStudentData_StringInput_TypesEqual"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentData_StringInput_TypesEqual">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentData_StringInput_TypesEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentData function returns the correct types.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">student1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentData</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">student1</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">student1</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span>
@@ -148,30 +181,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">student1</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">student1</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getStudentData function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getStudentData_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentData_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentData_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getStudentData_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getStudentData_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getStudentData_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getStudentData function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getStudentData</span><span class="p">(</span><span class="s1">&#39;self.studentIdTest&#39;</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the editStudent function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_editStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_editStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the editStudent function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editStudent</span><span class="p">(</span><span class="s1">&#39;TINF19&#39;</span><span class="p">,</span> <span class="s1">&#39;Moritz&#39;</span><span class="p">,</span>
-                        <span class="s1">&#39;Müller&#39;</span><span class="p">,</span> <span class="s1">&#39;Password123&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span></div>
+                                            <span class="s1">&#39;Müller&#39;</span><span class="p">,</span> <span class="s1">&#39;Password123&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">studentMailTest</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the editStudent function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_editStudent_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editStudent_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_editStudent_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the editStudent function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editStudent</span><span class="p">(</span>
             <span class="s1">&#39;TINF19&#39;</span><span class="p">,</span> <span class="s1">&#39;Moritz&#39;</span><span class="p">,</span> <span class="s1">&#39;Müller&#39;</span><span class="p">,</span> <span class="s1">&#39;Password123&#39;</span><span class="p">,</span> <span class="s1">&#39;self.studentMailTest&#39;</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getTableStudents function returns the correct types.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getTableStudents_"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getTableStudents_">[docs]</a>    <span class="k">def</span> <span class="nf">test_getTableStudents_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getTableStudents_"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getTableStudents_">[docs]</a>    <span class="k">def</span> <span class="nf">test_getTableStudents_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getTableStudents function returns the correct types.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">studenttable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getTableStudents</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">studenttable</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">studenttable</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span>
@@ -180,34 +213,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">studenttable</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">studenttable</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the addModule function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_addModule_InputString_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addModule_InputString_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_addModule_InputString_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the addModule function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addModule</span><span class="p">(</span><span class="s1">&#39;Testmodul2&#39;</span><span class="p">,</span> <span class="s1">&#39;Test2&#39;</span><span class="p">,</span> <span class="s1">&#39;keine&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the addModule function returns false on input of existing module.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
 <div class="viewcode-block" id="TestServerFunc.test_addModule_DuplicatedInputString_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addModule_DuplicatedInputString_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_addModule_DuplicatedInputString_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the addModule function returns false on input of existing module.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">,</span> <span class="s1">&#39;Test&#39;</span><span class="p">,</span> <span class="s1">&#39;keine&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModuleId function returns the correct type.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getModuleId_StringInput_TypeEqualInt"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModuleId_StringInput_TypeEqualInt">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModuleId_StringInput_TypeEqualInt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getModuleId_StringInput_TypeEqualInt"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModuleId_StringInput_TypeEqualInt">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModuleId_StringInput_TypeEqualInt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModuleId function returns the correct type.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModuleId</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">)),</span> <span class="nb">int</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModuleId function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getModuleId_WrongStringInput_TypeEqualInt_False"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModuleId_WrongStringInput_TypeEqualInt_False">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModuleId_WrongStringInput_TypeEqualInt_False</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getModuleId_WrongStringInput_TypeEqualInt_False"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModuleId_WrongStringInput_TypeEqualInt_False">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModuleId_WrongStringInput_TypeEqualInt_False</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModuleId function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModuleId</span><span class="p">(</span><span class="s1">&#39;self.modulNameTest&#39;</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModule function returns the correct types.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getModule_StringInput_TypesArgumentsEqual"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModule_StringInput_TypesArgumentsEqual">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModule_StringInput_TypesArgumentsEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getModule_StringInput_TypesArgumentsEqual"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModule_StringInput_TypesArgumentsEqual">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModule_StringInput_TypesArgumentsEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModule function returns the correct types.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">modul</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modul</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modul</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span>
@@ -215,174 +248,136 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modul</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="nb">str</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modul</span><span class="p">[</span><span class="mi">4</span><span class="p">]),</span> <span class="nb">float</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModules function returns the correct types.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getModules_IntInput_TypeArgumentsEqual"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModules_IntInput_TypeArgumentsEqual">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModules_IntInput_TypeArgumentsEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>         
-        <span class="n">modules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModules</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span><span class="p">)</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getModules_IntInput_TypeArgumentsEqual"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModules_IntInput_TypeArgumentsEqual">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModules_IntInput_TypeArgumentsEqual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModules function returns the correct types.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">modules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModules</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modules</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modules</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">modules</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]),</span> <span class="nb">int</span><span class="p">)</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModules function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getModules_WrongIntInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModules_WrongIntInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModules_WrongIntInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>          
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModules</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span><span class="p">))</span> </div>
-            
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the editModule function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_editModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_editModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editModule</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;Keine&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span> </div>
-    
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the editModule function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_editModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_editModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editModule</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;Keine&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> </div>
+<div class="viewcode-block" id="TestServerFunc.test_getModules_WrongIntInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModules_WrongIntInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModules_WrongIntInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModules function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModules</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">semesterTest</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the addStudentModule function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_addStudentModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudentModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudentModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">))</span> </div>
-    
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the addStudentModule function returns false on input of already existing element.</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
-<div class="viewcode-block" id="TestServerFunc.test_addStudentModule_DuplicatedStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudentModule_DuplicatedStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudentModule_DuplicatedStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_editModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_editModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the editModule function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;Keine&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_editModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_editModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the editModule function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulNameTest</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;Keine&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_addStudentModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudentModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudentModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the addStudentModule function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_addStudentModule_DuplicatedStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_addStudentModule_DuplicatedStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_addStudentModule_DuplicatedStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the addStudentModule function returns false on input of already existing element.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">addStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">))</span></div>
-                     
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModulesByStudentID function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_getModulesByStudentID_IntInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModulesByStudentID_IntInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModulesByStudentID_IntInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModulesByStudentID</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">))</span>  </div>
-    
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the getModulesByStudentID function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
-<div class="viewcode-block" id="TestServerFunc.test_getModulesByStudentID_WrongInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModulesByStudentID_WrongInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModulesByStudentID_WrongInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModulesByStudentID</span><span class="p">(</span><span class="s1">&#39;self.studentIdTest&#39;</span><span class="p">))</span> </div>
-        
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the editStudentModule function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_editStudentModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editStudentModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_editStudentModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span> </div>
-    
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the editStudentModule function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>   
-<div class="viewcode-block" id="TestServerFunc.test_editStudentModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editStudentModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_editStudentModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editStudentModule</span><span class="p">(</span><span class="s1">&#39;self.studentIdTest&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span> </div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the removeStudent function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
-<div class="viewcode-block" id="TestServerFunc.test_removeStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">))</span> </div>
+<div class="viewcode-block" id="TestServerFunc.test_getModulesByStudentID_IntInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModulesByStudentID_IntInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModulesByStudentID_IntInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModulesByStudentID function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModulesByStudentID</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the removeStudent function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_removeStudent_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeStudent_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeStudent_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_getModulesByStudentID_WrongInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_getModulesByStudentID_WrongInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_getModulesByStudentID_WrongInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the getModulesByStudentID function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">getModulesByStudentID</span><span class="p">(</span><span class="s1">&#39;self.studentIdTest&#39;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_editStudentModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editStudentModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_editStudentModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the editStudentModule function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_editStudentModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_editStudentModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_editStudentModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the editStudentModule function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">editStudentModule</span><span class="p">(</span><span class="s1">&#39;self.studentIdTest&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_removeStudent_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeStudent_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeStudent_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the removeStudent function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_removeStudent_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeStudent_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeStudent_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the removeStudent function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">))</span> </div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the removeModule function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_removeModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span>  </div>
+<div class="viewcode-block" id="TestServerFunc.test_removeModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the removeModule function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the removeModule function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_removeModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_removeModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the removeModule function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span> </div>
-        
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the removeStudentModule function returns true on correct input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-<div class="viewcode-block" id="TestServerFunc.test_z_removeStudentModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_z_removeStudentModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_z_removeStudentModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span> </div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span></div>
 
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    This test passes if the removeStudentModule function returns false on wrong input.</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
-<div class="viewcode-block" id="TestServerFunc.test_removeStudentModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeStudentModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeStudentModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+<div class="viewcode-block" id="TestServerFunc.test_z_removeStudentModule_StringInput_ReturnsTrue"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_z_removeStudentModule_StringInput_ReturnsTrue">[docs]</a>    <span class="k">def</span> <span class="nf">test_z_removeStudentModule_StringInput_ReturnsTrue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the removeStudentModule function returns true on correct input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="TestServerFunc.test_removeStudentModule_WrongStringInput_ReturnsFalse"><a class="viewcode-back" href="../test_server.html#test_server.TestServerFunc.test_removeStudentModule_WrongStringInput_ReturnsFalse">[docs]</a>    <span class="k">def</span> <span class="nf">test_removeStudentModule_WrongStringInput_ReturnsFalse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        This test passes if the removeStudentModule function returns false on wrong input.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">removeStudentModule</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">studentIdTest</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulIdTest</span><span class="p">))</span></div></div>
-        
+      
 </pre></div>
 
+           </div>
           </div>
-          
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Michael Oder &amp; Ben Leitzbach.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">automatic-gradeCollectorServer</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../modules.html">server</a></li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2021, Michael Oder & Ben Leitzbach.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
