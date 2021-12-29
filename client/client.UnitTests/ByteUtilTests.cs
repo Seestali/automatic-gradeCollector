@@ -8,7 +8,7 @@ namespace client.UnitTests
         [Fact]
         public void InsertUInt32ToByteArray_IntAtArrayBegin_Inplace()
         {
-            int toInsert = 42069420;
+            uint toInsert = 42069420;
             byte[] actual = new byte[8];
             byte[] expected = new byte[] { 0x02, 0x81, 0xED, 0xAC, 0, 0, 0, 0 };
             ByteUtil.InsertUInt32ToByteArray(actual, 0, toInsert);
@@ -29,14 +29,14 @@ namespace client.UnitTests
         public void GetUInt32FromByteArray_IntAtArrayBegin_ReturnsCorrectInt()
         {
             byte[] array = new byte[] { 0x02, 0x81, 0xED, 0xAC, 0, 0, 0, 0 };
-            Assert.Equal(42069420, ByteUtil.GetUInt32FromByteArray(array, 0));
+            Assert.Equal(42069420U, ByteUtil.GetUInt32FromByteArray(array, 0));
         }
 
         [Fact]
         public void GetUInt32FromByteArray_IntAtIndex_ReturnsCorrectInt()
         {
             byte[] array = new byte[] { 0, 0, 0, 0, 0x02, 0x81, 0xED, 0xAC };
-            Assert.Equal(42069420, ByteUtil.GetUInt32FromByteArray(array, 4));
+            Assert.Equal(42069420U, ByteUtil.GetUInt32FromByteArray(array, 4));
         }
     }
 }
