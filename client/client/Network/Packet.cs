@@ -31,22 +31,22 @@ namespace client.Network
         public Packet(uint number, byte userID, OpCode opCode, byte[] payloadData)
         {
             byte[] content = new byte[BEFORE_CRC + payloadData.Length];
-            ByteUtil.InsertUInt32ToByteArray(ref content, 0, number);
+            ByteUtil.InsertUInt32ToByteArray(content, 0, number);
             content[4] = userID;
             content[5] = (byte)opCode;
-            ByteUtil.InsertUInt32ToByteArray(ref content, 6, (uint)payloadData.Length);
+            ByteUtil.InsertUInt32ToByteArray(content, 6, (uint)payloadData.Length);
 
             for (uint i = 0; i < payloadData.Length; i++)
                 content[BEFORE_CRC + i] = payloadData[i];
             
-            uint crc = CRC32.CalculateChecksum(ref content);
+            uint crc = CRC32.CalculateChecksum(content);
 
             data = new byte[HEADER_LENGTH + payloadData.Length];
             
             for (byte i = 0; i < CRC32_BEGIN; i++)
                 data[i] = content[i];
             
-            ByteUtil.InsertUInt32ToByteArray(ref data, 6, crc);
+            ByteUtil.InsertUInt32ToByteArray(data, 6, crc);
             
             for (byte i = BEFORE_CRC; i < HEADER_LENGTH; i++)
                 data[i] = content[i - CRC32_LENGTH];
@@ -70,7 +70,7 @@ namespace client.Network
         /// <returns>Packet number</returns>
         public uint GetNumber()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, NUMBER_BEGIN);
+            return ByteUtil.GetUInt32FromByteArray(data, NUMBER_BEGIN);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace client.Network
         /// <returns>CRC32 checksum</returns>
         public uint GetCRC()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, CRC32_BEGIN);
+            return ByteUtil.GetUInt32FromByteArray(data, CRC32_BEGIN);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace client.Network
         /// <returns>Length of the Payload data</returns>
         public uint GetPayLoadLength()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, PAYLOAD_LENGTH_BEGIN);
+            return ByteUtil.GetUInt32FromByteArray(data, PAYLOAD_LENGTH_BEGIN);
         }
 
         /// <summary>

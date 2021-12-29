@@ -32,7 +32,7 @@ namespace client.Network
         public Packet BuildDeny(uint packetNumberToDeny, Error error)
         {
             byte[] payload = new byte[DENY_PAYLOAD_LENGTH];
-            ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToDeny);
+            ByteUtil.InsertUInt32ToByteArray(payload, 0, packetNumberToDeny);
             payload[4] = (byte)error;
             return new Packet(GetPacketNumberAndInc(), userID, OpCode.Deny, payload);
         }
@@ -45,7 +45,7 @@ namespace client.Network
         public Packet BuildAck(ushort packetNumberToAck)
         {
             byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
-            ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToAck);
+            ByteUtil.InsertUInt32ToByteArray(payload, 0, packetNumberToAck);
             return new Packet(GetPacketNumberAndInc(), userID, OpCode.Ack, payload);
         }
 
@@ -80,7 +80,7 @@ namespace client.Network
         {
             Packet packet = new Packet(data);
             byte[] content = packet.GetContentWithoutCRC();
-            if (packet.GetCRC() != CRC32.CalculateChecksum(ref content))
+            if (packet.GetCRC() != CRC32.CalculateChecksum(content))
             {
                 throw new ChecksumMismatchException();
             }
