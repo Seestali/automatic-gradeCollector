@@ -19,7 +19,7 @@ namespace client.Network
         //TODO: gives ready packets to UDP class
 
         private List<Form> forms;
-        private Dictionary<uint, Packet> packets;
+        private Dictionary<uint, Tuple<Packet, ulong>> packets;
         private PacketAssembler packetAssembler;
 
         private static Manager instance;
@@ -42,7 +42,7 @@ namespace client.Network
         private Manager()
         {
             forms = new List<Form>();
-            packets = new Dictionary<uint, Packet>();
+            packets = new Dictionary<uint, Tuple<Packet, ulong>>();
             packetAssembler = new PacketAssembler();
             OpenForm<Login>();
         }
@@ -66,7 +66,7 @@ namespace client.Network
             }
             catch (ChecksumMismatchException e)
             {
-                return SendDeny(packet.GetNumber(), Error.ChecksumMismatch);
+                return SendDeny(e.GetPacketNumber(), Error.ChecksumMismatch);
             }
 
             switch (packet.GetOpCode())
@@ -128,5 +128,13 @@ namespace client.Network
             Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
 
         }
+
+        private void SendAck(uint packetNumberToAck, Error error)
+        {
+            Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
+
+        }
+
+        
     }
 }
