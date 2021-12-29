@@ -6,6 +6,7 @@
     public enum Error : byte
     {
         AuthFailed,
+        ChecksumMismatch,
         PayloadInvalid
     }
 }
