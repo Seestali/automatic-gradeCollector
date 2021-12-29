@@ -32,19 +32,12 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnDone = new System.Windows.Forms.Button();
             this.lbUser = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbUser = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cbSemester
             // 
             this.cbSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemester.Items.AddRange(new string[] {
-            "Semester 1",
-            "Semester 2",
-            "Semester 3",
-            "Semester 4",
-            "Semester 5",
-            "Semester 6"});
             this.cbSemester.Location = new System.Drawing.Point(13, 13);
             this.cbSemester.Name = "cbSemester";
             this.cbSemester.Size = new System.Drawing.Size(125, 28);
@@ -78,19 +71,19 @@
             this.lbUser.TabIndex = 3;
             this.lbUser.Text = "Benutzer";
             // 
-            // textBox1
+            // tbUser
             // 
-            this.textBox1.Location = new System.Drawing.Point(426, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 26);
-            this.textBox1.TabIndex = 4;
+            this.tbUser.Location = new System.Drawing.Point(426, 12);
+            this.tbUser.Name = "tbUser";
+            this.tbUser.Size = new System.Drawing.Size(260, 26);
+            this.tbUser.TabIndex = 4;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 424);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbUser);
             this.Controls.Add(this.lbUser);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.listBox1);
@@ -98,10 +91,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainWindow";
             this.Text = "MainWindow";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
+
+        private System.Windows.Forms.TextBox tbUser;
 
         #endregion
 
