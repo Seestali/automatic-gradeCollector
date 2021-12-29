@@ -66,7 +66,8 @@ namespace client.Network
             }
             catch (ChecksumMismatchException e)
             {
-                return SendDeny(e.GetPacketNumber(), Error.ChecksumMismatch);
+                SendDeny(e.GetPacketNumber(), Error.ChecksumMismatch);
+                return;
             }
 
             switch (packet.GetOpCode())
@@ -135,6 +136,9 @@ namespace client.Network
 
         }
 
-        
+        private void AddPacketToDictionary(Packet packet)
+        {
+            packets.Add(packet.GetNumber(), )
+        }
     }
 }

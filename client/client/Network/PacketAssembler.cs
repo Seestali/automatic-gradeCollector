@@ -82,7 +82,7 @@ namespace client.Network
             byte[] content = packet.GetContentWithoutCRC();
             if (packet.GetCRC() != CRC32.CalculateChecksum(content))
             {
-                throw new ChecksumMismatchException();
+                throw new ChecksumMismatchException(packet.GetNumber());
             }
             if (userID == 0)    // If local user ID is still zero, take ID from received packet.
             {
