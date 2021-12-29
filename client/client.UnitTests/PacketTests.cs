@@ -10,12 +10,12 @@ namespace client.UnitTests
         public void ConversionCtor_ByteArray_Equal()
         {
             byte[] data = { 
-                0x00, 0x00, 0x00, 0x00, // Packet number
-                0x2A,                   // User ID
-                0x01,                   // Op code
-                0x6B, 0x3F, 0x58, 0x5D, // CRC32 checksum
-                0x00, 0x00, 0x00, 0x04, // Payload length
-                0x00, 0x00, 0x00, 0x00  // Payload data
+                0, 0, 0, 0,         // Packet number
+                42,                 // User ID
+                1,                  // Op code
+                107, 63, 88, 93,    // CRC32 checksum
+                0, 0, 0, 4,         // Payload length
+                0, 0, 0, 0          // Payload data
             };
             Packet packet = new Packet(data);
             Assert.Equal(data, packet.ToByteArray());
@@ -29,8 +29,15 @@ namespace client.UnitTests
             OpCode opCode = OpCode.LoginReq;
             string auth = "max.mustermann@email.com::643F6BA68C9333859694078A905B90C4F036D01CF7E81D6EF0A6CA79A344B6B7";
             byte[] payload = Encoding.UTF8.GetBytes(auth);
-
             Packet packet = new Packet(packetNumber, userID, opCode, payload);
+            byte[] expected = { 
+                0, 0, 0, 0,         // Packet number
+                42,                 // User ID
+                1,                  // Op code
+                107, 63, 88, 93,    // CRC32 checksum
+                0, 0, 0, 4,         // Payload length
+                0, 0, 0, 0          // Payload data     // TODO: correct payload data
+            };
             Assert.Equal(packetNumber, packet.GetNumber());
             Assert.Equal(userID, packet.GetUserID());
             Assert.Equal(opCode, packet.GetOpCode());
