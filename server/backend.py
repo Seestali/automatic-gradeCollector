@@ -143,5 +143,6 @@ def main():
     main()
 
 
-db = Database('database.db')
-main()
+if __name__ == '__main__':
+    db = Database('database.db')
+    main()

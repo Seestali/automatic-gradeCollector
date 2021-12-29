@@ -16,9 +16,18 @@ UDPClientSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # Send to server using created UDP socket
 UDPClientSocket.sendto(msgFromClient, serverAddressPort)
 
-while True:
-    msgFromServer = UDPClientSocket.recvfrom(bufferSize)
-    msg = "Message from Server {}".format(msgFromServer[0])
-    print(msg)
-    if input("Continue? (y/n)") == "n":
-        break
+
+def main():
+    '''
+    Main function of the client.
+    It can send a request to the server and receive a response.
+    '''
+    while True:
+        msgFromServer = UDPClientSocket.recvfrom(bufferSize)
+        msg = "Message from Server {}".format(msgFromServer[0])
+        print(msg)
+        if input("Continue? (y/n)") == "n":
+            break
+
+if __name__ == "__main__":
+    main()
