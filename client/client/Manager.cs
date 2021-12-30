@@ -18,11 +18,11 @@ namespace client.Network
         //TODO: create unittest class
         //TODO: gives ready packets to UDP class
 
-        private List<Form> forms;
-        private Dictionary<uint, Tuple<Packet, ulong>> packets;
-        private PacketAssembler packetAssembler;
-
         private static Manager instance;
+        private List<Form> forms;
+        private Dictionary<uint, Tuple<Packet, long>> packets;
+        private PacketAssembler packetAssembler;
+        private string auth;
 
         /// <summary>
         /// Singleton of Manager.
@@ -53,7 +53,6 @@ namespace client.Network
         /// <typeparam name="T">Form identification</typeparam>
         public void OpenForm<T>() where T : Form, new()
         {
-
             new T().Show();
         }
 
@@ -127,18 +126,37 @@ namespace client.Network
         private void SendDeny(uint packetNumberToDeny, Error error)
         {
             Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
-
         }
 
-        private void SendAck(uint packetNumberToAck, Error error)
+        private void SendAck(uint packetNumberToAck)
         {
-            Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
+            Packet packet = packetAssembler.BuildAck(packetNumberToAck);
+        }
 
+        private void SendLoginReq(string email, string password)
+        {
+            Packet packet = packetAssembler.BuildLoginReq(email, password)
+            AddPacketToDictionary(packet);
+        }
+
+        private void SendGetSubjectsAndGrades(int semester)
+        {
+            Packet packet = packetAssembler.BuildDeny(packetNumberToAck, error);
+            AddPacketToDictionary(packet);
+        }
+
+        private void SendSetGrades(/* ... */)
+        {
+            Packet packet = packetAssembler.BuildDeny(packetNumberToAck, error);
+            AddPacketToDictionary(packet);
         }
 
         private void AddPacketToDictionary(Packet packet)
         {
-            packets.Add(packet.GetNumber(), )
+            OpCode opCode = OpCode.Ack;
+            long millis = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            Tuple<Packet, long> packetTuple = new Tuple<Packet, long>(packet, millis);
+            packets.Add(packet.GetNumber(), packetTuple);
         }
     }
 }

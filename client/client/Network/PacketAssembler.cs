@@ -42,7 +42,7 @@ namespace client.Network
         /// </summary>
         /// <param name="packetNumber"></param>
         /// <returns></returns>
-        public Packet BuildAck(ushort packetNumberToAck)
+        public Packet BuildAck(uint packetNumberToAck)
         {
             byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
             ByteUtil.InsertUInt32ToByteArray(payload, 0, packetNumberToAck);
