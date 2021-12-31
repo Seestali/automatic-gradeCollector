@@ -28,6 +28,14 @@ namespace client
         public Login()
         {
             InitializeComponent();
+            regexUser = new Regex(EMAIL_REGEX);
+            regexPassword = new Regex(PASSWORD_REGEX);
+        }
+
+        private void TbUser_TextChanged(object sender, EventArgs e)
+        {
+            userValid = regexUser.IsMatch(TbUser.Text.Trim());
+            Evaluate();
         }
         /// <summary>
         /// Login button which sends credentials to configured server.
@@ -38,35 +46,50 @@ namespace client
         /// <param name="e">button click event</param>
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            try
+            Manager.GetInstance().SendLoginRequest(TbUser.Text.Trim(), TbPassword.Text);
+            BtnLogin.Enabled = false;
+        }
+
+        public void LoginVerified()
+        {
+            LbError.Text = "Login successful";
+            Console.WriteLine("Login successful");
+            Hide();
+            Form mainWindow = Manager.GetInstance().GetForm(Forms.CustomForms.MainWindow);
+            mainWindow.FormClosed += (s, args) => Close();
+            mainWindow.Show();
+        }
+
+        public void SetErrorText(string error)
+        {
+            LbError.Text = error;
+        }
+
+        private void TbUser_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((Keys)e.KeyChar == Keys.Enter)
             {
-                if (UserInputIsValid(tbUser.Text) && UserInputIsValid(tbPassword.Text))
-                {
-                    //TODO: send packets with credentials to server
-                    //TODO: get ACK/DEC back with data
-                    //TODO: open MainWindow with received information and show courses and grades
-                    Manager.GetInstance().OpenForm<MainWindow>();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Incorrect user input.");
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                BtnLogin.PerformClick();
             }
         }
-        
-        /// <summary>
-        /// Check user input for wrong input.
-        /// </summary>
-        /// <param name="text">Text from inputfields for Mail and Password</param>
-        /// <returns>Returns false if string is empty. True for valid input. </returns>
-        private bool UserInputIsValid(string text)
+
+        private void TbPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
-            return !string.IsNullOrEmpty(text);
+            if ((Keys)e.KeyChar == Keys.Enter)
+            {
+                BtnLogin.PerformClick();
+            }
+        }
+
+        private void BtnSkip_Click(object sender, EventArgs e)
+        {
+            LoginVerified();
+        }
+
+        private void BtnTest_Click(object sender, EventArgs e)
+        {
+            Manager.GetInstance().SendLoginRequest("henrik.kaltenbach@de.abb.com", "password");
+            BtnLogin.Enabled = false;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace client.Network
         public const byte CRC32_BEGIN = 6;
         public const byte PAYLOAD_LENGTH_BEGIN = 10;
 
-        private byte[] data;
+        private readonly byte[] data;
 
         /// <summary>
         /// Ctor to create a packet out of the single contents.

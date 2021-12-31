@@ -42,7 +42,7 @@ namespace client.Network
         /// </summary>
         /// <param name="packetNumber"></param>
         /// <returns></returns>
-        public Packet BuildAck(ushort packetNumberToAck)
+        public Packet BuildAck(uint packetNumberToAck)
         {
             byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
             ByteUtil.InsertUInt32ToByteArray(payload, 0, packetNumberToAck);
@@ -54,21 +54,24 @@ namespace client.Network
         /// </summary>
         /// <param name="auth"></param>
         /// <returns></returns>
-        public Packet BuildLoginReq(string email, string passwordHash)
+        public Packet BuildLoginRequest(string email, string passwordHash)
         {
             string auth = email  + "::" +  passwordHash;
             byte[] payload = Encoding.UTF8.GetBytes(auth);
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginReq, payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginRequest, payload);
         }
 
-        public Packet BuildGetSubjectsAndGrades()
+        public Packet BuildGetSubjectsAndGradesRequest(string auth, int semester)
         {
-            return null;
+            string payload = auth + semester;
+            byte[] payloadData = Encoding.UTF8.GetBytes(payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.GetSubjectsAndGradesRequest, payloadData);
         }
 
-        public Packet BuildSetGrades()
+        public Packet BuildSetGradesRequest(string auth/*, ... */)
         {
-            return null;
+            /* ... */
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.SetGradesRequest, null);
         }
 
         // TODO:    disassemble packets
