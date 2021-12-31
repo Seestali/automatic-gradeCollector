@@ -82,7 +82,7 @@ namespace client.Forms
 
         private void BtnTest_Click(object sender, EventArgs e)
         {
-            Manager.GetInstance().SendLoginRequest("henrik.kaltenbach@de.abb.com", "password");
+            Manager.GetInstance().SendLoginRequest("test@test.de", "test");
             BtnLogin.Enabled = false;
         }
     }
