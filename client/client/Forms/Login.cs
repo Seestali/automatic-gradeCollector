@@ -46,17 +46,22 @@ namespace client.Forms
 
         public void LoginVerified()
         {
-            LbError.Text = "Login successful";
-            Console.WriteLine("Login successful");
-            Hide();
-            Form mainWindow = Manager.GetInstance().GetForm(Forms.CustomForms.MainWindow);
-            mainWindow.FormClosed += (s, args) => Close();
-            mainWindow.Show();
+            LbError.Invoke((MethodInvoker)delegate
+            {
+                LbError.Text = "Login successful";
+                Hide();
+                Form mainWindow = Manager.GetInstance().GetForm(Forms.CustomForms.MainWindow);
+                mainWindow.FormClosed += (s, args) => Close();
+                mainWindow.Show();
+            });
         }
 
         public void SetErrorText(string error)
         {
-            LbError.Text = error;
+            LbError.Invoke((MethodInvoker)delegate
+            {
+                LbError.Text = error;
+            });
         }
 
         private void TbUser_KeyPress(object sender, KeyPressEventArgs e)
@@ -73,11 +78,6 @@ namespace client.Forms
             {
                 BtnLogin.PerformClick();
             }
-        }
-
-        private void BtnSkip_Click(object sender, EventArgs e)
-        {
-            LoginVerified();
         }
 
         private void BtnTest_Click(object sender, EventArgs e)

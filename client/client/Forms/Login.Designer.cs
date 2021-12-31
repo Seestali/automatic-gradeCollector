@@ -34,7 +34,6 @@
             this.TbPassword = new System.Windows.Forms.TextBox();
             this.BtnLogin = new System.Windows.Forms.Button();
             this.LbError = new System.Windows.Forms.Label();
-            this.BtnSkip = new System.Windows.Forms.Button();
             this.BtnTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -94,19 +93,9 @@
             this.LbError.Size = new System.Drawing.Size(0, 20);
             this.LbError.TabIndex = 5;
             // 
-            // BtnSkip
-            // 
-            this.BtnSkip.Location = new System.Drawing.Point(96, 80);
-            this.BtnSkip.Name = "BtnSkip";
-            this.BtnSkip.Size = new System.Drawing.Size(75, 35);
-            this.BtnSkip.TabIndex = 6;
-            this.BtnSkip.Text = "skip";
-            this.BtnSkip.UseVisualStyleBackColor = true;
-            this.BtnSkip.Click += new System.EventHandler(this.BtnSkip_Click);
-            // 
             // BtnTest
             // 
-            this.BtnTest.Location = new System.Drawing.Point(177, 80);
+            this.BtnTest.Location = new System.Drawing.Point(96, 80);
             this.BtnTest.Name = "BtnTest";
             this.BtnTest.Size = new System.Drawing.Size(75, 35);
             this.BtnTest.TabIndex = 7;
@@ -120,7 +109,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(378, 144);
             this.Controls.Add(this.BtnTest);
-            this.Controls.Add(this.BtnSkip);
             this.Controls.Add(this.LbError);
             this.Controls.Add(this.BtnLogin);
             this.Controls.Add(this.TbPassword);
@@ -143,7 +131,6 @@
         private System.Windows.Forms.TextBox TbPassword;
         private System.Windows.Forms.Button BtnLogin;
         private System.Windows.Forms.Label LbError;
-        private System.Windows.Forms.Button BtnSkip;
         private System.Windows.Forms.Button BtnTest;
     }
 }
