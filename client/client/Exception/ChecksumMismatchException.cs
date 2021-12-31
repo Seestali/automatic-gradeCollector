@@ -2,16 +2,16 @@
 {
     public class ChecksumMismatchException : System.Exception
     {
-        private uint packetnumber;
+        private readonly uint packetNumber;
         
         public ChecksumMismatchException(uint packetNumber)
         {
-            this.packetnumber = packetnumber;
+            this.packetNumber = packetNumber;
         }
 
         public uint GetPacketNumber()
         {
-            return packetnumber;
+            return packetNumber;
         }
     }
 }
