@@ -1,5 +1,4 @@
-﻿
-namespace client
+﻿namespace client.Forms
 {
     partial class Login
     {
@@ -29,105 +28,122 @@ namespace client
         /// </summary>
         private void InitializeComponent()
         {
-            this.credentialsBox = new System.Windows.Forms.GroupBox();
-            this.btnSendReceive = new System.Windows.Forms.Button();
-            this.lbUser = new System.Windows.Forms.Label();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.tbUser = new System.Windows.Forms.TextBox();
-            this.lbPassword = new System.Windows.Forms.Label();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.credentialsBox.SuspendLayout();
+            this.LbUser = new System.Windows.Forms.Label();
+            this.TbUser = new System.Windows.Forms.TextBox();
+            this.LbPassword = new System.Windows.Forms.Label();
+            this.TbPassword = new System.Windows.Forms.TextBox();
+            this.BtnLogin = new System.Windows.Forms.Button();
+            this.LbError = new System.Windows.Forms.Label();
+            this.BtnSkip = new System.Windows.Forms.Button();
+            this.BtnTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // credentialsBox
+            // LbUser
             // 
-            this.credentialsBox.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.credentialsBox.Controls.Add(this.btnSendReceive);
-            this.credentialsBox.Controls.Add(this.lbUser);
-            this.credentialsBox.Controls.Add(this.btnLogin);
-            this.credentialsBox.Controls.Add(this.tbUser);
-            this.credentialsBox.Controls.Add(this.lbPassword);
-            this.credentialsBox.Controls.Add(this.tbPassword);
-            this.credentialsBox.Location = new System.Drawing.Point(12, 12);
-            this.credentialsBox.Name = "credentialsBox";
-            this.credentialsBox.Size = new System.Drawing.Size(173, 125);
-            this.credentialsBox.TabIndex = 5;
-            this.credentialsBox.TabStop = false;
+            this.LbUser.AutoSize = true;
+            this.LbUser.Location = new System.Drawing.Point(12, 15);
+            this.LbUser.Name = "LbUser";
+            this.LbUser.Size = new System.Drawing.Size(53, 20);
+            this.LbUser.TabIndex = 0;
+            this.LbUser.Text = "E-Mail";
             // 
-            // lbUser
+            // TbUser
             // 
-            this.lbUser.AutoSize = true;
-            this.lbUser.Location = new System.Drawing.Point(24, 37);
-            this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(36, 13);
-            this.lbUser.TabIndex = 4;
-            this.lbUser.Text = "E-Mail";
+            this.TbUser.Location = new System.Drawing.Point(96, 12);
+            this.TbUser.Name = "TbUser";
+            this.TbUser.Size = new System.Drawing.Size(260, 26);
+            this.TbUser.TabIndex = 1;
+            this.TbUser.TextChanged += new System.EventHandler(this.TbUser_TextChanged);
+            this.TbUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbUser_KeyPress);
             // 
-            // btnLogin
+            // LbPassword
             // 
-            this.btnLogin.Location = new System.Drawing.Point(91, 96);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnLogin.TabIndex = 2;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
+            this.LbPassword.AutoSize = true;
+            this.LbPassword.Location = new System.Drawing.Point(12, 48);
+            this.LbPassword.Name = "LbPassword";
+            this.LbPassword.Size = new System.Drawing.Size(78, 20);
+            this.LbPassword.TabIndex = 2;
+            this.LbPassword.Text = "Password";
             // 
-            // tbUser
+            // TbPassword
             // 
-            this.tbUser.Location = new System.Drawing.Point(66, 34);
-            this.tbUser.Name = "tbUser";
-            this.tbUser.Size = new System.Drawing.Size(100, 20);
-            this.tbUser.TabIndex = 0;
+            this.TbPassword.Location = new System.Drawing.Point(96, 45);
+            this.TbPassword.Name = "TbPassword";
+            this.TbPassword.Size = new System.Drawing.Size(260, 26);
+            this.TbPassword.TabIndex = 3;
+            this.TbPassword.UseSystemPasswordChar = true;
+            this.TbPassword.TextChanged += new System.EventHandler(this.TbPassword_TextChanged);
+            this.TbPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbPassword_KeyPress);
             // 
-            // lbPassword
+            // BtnLogin
             // 
-            this.lbPassword.AutoSize = true;
-            this.lbPassword.Location = new System.Drawing.Point(10, 63);
-            this.lbPassword.Name = "lbPassword";
-            this.lbPassword.Size = new System.Drawing.Size(50, 13);
-            this.lbPassword.TabIndex = 3;
-            this.lbPassword.Text = "Passwort";
+            this.BtnLogin.Enabled = false;
+            this.BtnLogin.Location = new System.Drawing.Point(285, 80);
+            this.BtnLogin.Name = "BtnLogin";
+            this.BtnLogin.Size = new System.Drawing.Size(75, 35);
+            this.BtnLogin.TabIndex = 4;
+            this.BtnLogin.Text = "Login";
+            this.BtnLogin.UseVisualStyleBackColor = true;
+            this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
-            // tbPassword
+            // LbError
             // 
-            this.tbPassword.Location = new System.Drawing.Point(66, 60);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(100, 20);
-            this.tbPassword.TabIndex = 1;
-            this.tbPassword.UseSystemPasswordChar = true;
+            this.LbError.AutoSize = true;
+            this.LbError.Location = new System.Drawing.Point(13, 112);
+            this.LbError.Name = "LbError";
+            this.LbError.Size = new System.Drawing.Size(0, 20);
+            this.LbError.TabIndex = 5;
+            // 
+            // BtnSkip
+            // 
+            this.BtnSkip.Location = new System.Drawing.Point(96, 80);
+            this.BtnSkip.Name = "BtnSkip";
+            this.BtnSkip.Size = new System.Drawing.Size(75, 35);
+            this.BtnSkip.TabIndex = 6;
+            this.BtnSkip.Text = "skip";
+            this.BtnSkip.UseVisualStyleBackColor = true;
+            this.BtnSkip.Click += new System.EventHandler(this.BtnSkip_Click);
+            // 
+            // BtnTest
+            // 
+            this.BtnTest.Location = new System.Drawing.Point(177, 80);
+            this.BtnTest.Name = "BtnTest";
+            this.BtnTest.Size = new System.Drawing.Size(75, 35);
+            this.BtnTest.TabIndex = 7;
+            this.BtnTest.Text = "test";
+            this.BtnTest.UseVisualStyleBackColor = true;
+            this.BtnTest.Click += new System.EventHandler(this.BtnTest_Click);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(201, 150);
-            this.Controls.Add(this.credentialsBox);
+            this.ClientSize = new System.Drawing.Size(378, 144);
+            this.Controls.Add(this.BtnTest);
+            this.Controls.Add(this.BtnSkip);
+            this.Controls.Add(this.LbError);
+            this.Controls.Add(this.BtnLogin);
+            this.Controls.Add(this.TbPassword);
+            this.Controls.Add(this.LbPassword);
+            this.Controls.Add(this.TbUser);
+            this.Controls.Add(this.LbUser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximumSize = new System.Drawing.Size(207, 179);
-            this.MinimumSize = new System.Drawing.Size(207, 179);
             this.Name = "Login";
             this.Text = "Login";
-            this.credentialsBox.ResumeLayout(false);
-            this.credentialsBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
-
-        private System.Windows.Forms.Button btnSendReceive;
-
-        private System.Windows.Forms.Button button1;
-
-        private System.Windows.Forms.GroupBox credentialsBox;
-
-        private System.Windows.Forms.GroupBox groupBox1;
 
         #endregion
 
-        private System.Windows.Forms.Label lbPassword;
-        private System.Windows.Forms.Label lbUser;
-        private System.Windows.Forms.TextBox tbUser;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label LbUser;
+        private System.Windows.Forms.TextBox TbUser;
+        private System.Windows.Forms.Label LbPassword;
+        private System.Windows.Forms.TextBox TbPassword;
+        private System.Windows.Forms.Button BtnLogin;
+        private System.Windows.Forms.Label LbError;
+        private System.Windows.Forms.Button BtnSkip;
+        private System.Windows.Forms.Button BtnTest;
     }
 }
-
