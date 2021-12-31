@@ -64,7 +64,11 @@ namespace client
             timer.AutoReset = true;
             timer.Enabled = true;
         }
-
+        
+        /// <summary>
+        /// Callback function for async receiving udp-packets
+        /// </summary>
+        /// <param name="asyncResult"></param>
         private void ReceiveCallback(IAsyncResult asyncResult)
         {
             byte[] bytes = udpClient.EndReceive(asyncResult, ref ep);
@@ -72,6 +76,12 @@ namespace client
             ReceivePacket(bytes);
         }
 
+        /// <summary>
+        /// Timer function to determine if packet is lost.
+        /// Packet timeout after 2 sec.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             long totalSeconds = GetTotalSeconds();
@@ -161,6 +171,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Function to send a packet again if timeout occurs or data is crumbled.
+        /// </summary>
+        /// <param name="packet">The packet that needs to be sent again</param>
         private void SendAgain(Packet packet)
         {
             byte[] dgram = packet.ToByteArray();
@@ -275,6 +289,10 @@ namespace client
             SendAck(packet.GetNumber());
         }
 
+        /// <summary>
+        /// A dictionary that stores all the sent packets for error correction.
+        /// </summary>
+        /// <param name="packet">The packet that needs to be added to the dictionary</param>
         private void AddPacketToDictionary(Packet packet)
         {
             long totalSeconds = GetTotalSeconds();
@@ -282,12 +300,21 @@ namespace client
             packets.Add(packet.GetNumber(), packetTuple);
         }
 
+        /// <summary>
+        /// Calculates the time difference between now and the minval
+        /// </summary>
+        /// <returns>returns the timespan as seconds as long</returns>
         private long GetTotalSeconds()
         {
             TimeSpan timeSpan = DateTime.UtcNow - DateTime.MinValue;
             return (long)timeSpan.TotalSeconds;
         }
 
+        /// <summary>
+        /// Prints the packet to Debug Console for debug purposes
+        /// </summary>
+        /// <param name="packet">the packet that needs to be printed</param>
+        /// <param name="sentReceived">string to determine the purpose of the packet</param>
         private void PrintPacket(Packet packet, string sentReceived)
         {
             switch (sentReceived)
@@ -309,6 +336,11 @@ namespace client
             Debug.WriteLine(ToString(packet.ToByteArray()) + Environment.NewLine);
         }
 
+        /// <summary>
+        /// Converts a byte array string.
+        /// </summary>
+        /// <param name="array">array as input</param>
+        /// <returns>returns the converted array as string</returns>
         private string ToString(byte[] array)
         {
             string str = "";

@@ -29,7 +29,7 @@ namespace client.Network
         /// </summary>
         /// <param name="packetNumber">Packet to deny</param>
         /// <param name="error">Error code</param>
-        /// <returns></returns>
+        /// <returns>returns a packet that contains only a deny of another packet</returns>
         public Packet BuildDeny(uint packetNumberToDeny, Error error)
         {
             byte[] payload = new byte[DENY_PAYLOAD_LENGTH];
@@ -42,7 +42,7 @@ namespace client.Network
         /// Builds an acknowledgement packet.
         /// </summary>
         /// <param name="packetNumber">Packet to acknowledge</param>
-        /// <returns></returns>
+        /// <returns>returns a packet to acknowledge another packet(number)</returns>
         public Packet BuildAck(uint packetNumberToAck)
         {
             byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
@@ -51,10 +51,11 @@ namespace client.Network
         }
 
         /// <summary>
-        /// 
+        /// Builds the login request for the login window with credentials
         /// </summary>
-        /// <param name="auth"></param>
-        /// <returns></returns>
+        /// <param name="email">Email in readable format</param>
+        /// <param name="passwordHash">password in hash format</param>
+        /// <returns>returns the packet that is send to the server as a new login request</returns>
         public Packet BuildLoginRequest(string email, string passwordHash)
         {
             string auth = email  + "::" +  passwordHash;
@@ -62,13 +63,24 @@ namespace client.Network
             return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginRequest, payload);
         }
 
+        /// <summary>
+        /// Builds the the packet to request the subjects and grades for a student in a semester.
+        /// </summary>
+        /// <param name="auth">Is a combined string of email::password(hash)</param>
+        /// <param name="semester">is an integer of the dedicated semester</param>
+        /// <returns>Returns a packet to request information about the a semester of a student</returns>
         public Packet BuildGetSubjectsAndGradesRequest(string auth, int semester)
         {
             string payload = auth + semester;
             byte[] payloadData = Encoding.UTF8.GetBytes(payload);
             return new Packet(GetPacketNumberAndInc(), userID, OpCode.GetSubjectsAndGradesRequest, payloadData);
         }
-
+        
+        /// <summary>
+        /// Builds a packet to set the grades for the modified subjects
+        /// </summary>
+        /// <param name="auth">identification with email::password</param>
+        /// <returns>returns the packet with the used ID, the request to change the grades and the grades itself</returns>
         public Packet BuildSetGradesRequest(string auth/*, ... */)
         {
             /* ... */

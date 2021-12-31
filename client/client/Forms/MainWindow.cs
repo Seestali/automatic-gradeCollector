@@ -5,7 +5,7 @@ using client.Utils;
 
 namespace client.Forms
 {   
-    
+    //TODO: Comments
     
     public partial class MainWindow : Form
     {
