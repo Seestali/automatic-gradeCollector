@@ -18,7 +18,6 @@ namespace client
         private const int PORT = 42069;
         private const int TEN_SECONDS = 10000;
         private const int TIMEOUT = 2000;
-        private const byte TRUE = 1;
 
         private static Manager instance;
         private readonly Form[] forms;
@@ -65,11 +64,6 @@ namespace client
         {
             byte[] bytes = udpClient.EndReceive(asyncResult, ref ep);
             udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
-
-            Debug.WriteLine("\nPACKET RECEIVED!\n");
-            PrintBytes(bytes);
-            Debug.WriteLine("\n");
-
             ReceivePacket(bytes);
         }
 
@@ -95,9 +89,7 @@ namespace client
             Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Debug.WriteLine("Packet sent:");
-            Debug.WriteLine("PacketNumberToDeny={0}, Error={1}", packetNumberToDeny, error);
-            PrintBytes(dgram);
+            PrintPacket(packet, "sent");
         }
 
         public void SendAck(uint packetNumberToAck)
@@ -105,9 +97,7 @@ namespace client
             Packet packet = packetAssembler.BuildAck(packetNumberToAck);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Debug.WriteLine("Packet sent:");
-            Debug.WriteLine("PacketNumberToAck={0}", packetNumberToAck);
-            PrintBytes(dgram);
+            PrintPacket(packet, "sent");
         }
 
         public void SendLoginRequest(string eMail, string password)
@@ -118,9 +108,7 @@ namespace client
             AddPacketToDictionary(packet);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Debug.WriteLine("Packet sent:");
-            Debug.WriteLine("E-Mail={0}, Password={1}, PasswordHash={2}", eMail, password, passwordHash);
-            PrintBytes(dgram);
+            PrintPacket(packet, "sent");
         }
 
         public void SendGetSubjectsAndGradesRequest(int semester)
@@ -129,9 +117,7 @@ namespace client
             AddPacketToDictionary(packet);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Debug.WriteLine("Packet sent:");
-            Debug.WriteLine("Auth={0}, Semester={1}", auth.Item2, semester);
-            PrintBytes(dgram);
+            PrintPacket(packet, "sent");
         }
 
         public void SendSetGradesRequest(/* ... */)
@@ -140,17 +126,14 @@ namespace client
             AddPacketToDictionary(packet);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Debug.WriteLine("Packet sent:");
-            Debug.WriteLine("Auth={0}", auth.Item2);
-            PrintBytes(dgram);
+            PrintPacket(packet, "sent");
         }
 
         private void SendAgain(Packet packet)
         {
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Debug.WriteLine("Packet sent again:");
-            PrintBytes(dgram);
+            PrintPacket(packet, "sent again");
         }
 
         public void ReceivePacket(byte[] array)
@@ -165,6 +148,8 @@ namespace client
                 SendDeny(e.GetPacketNumber(), Error.ChecksumMismatch);
                 return;
             }
+
+            PrintPacket(packet, "received");
 
             switch (packet.GetOpCode())
             {
@@ -191,7 +176,24 @@ namespace client
 
         public void HandleDeny(Packet packet)
         {
-
+            byte[] payload = packet.GetPayloadData();
+            switch ((Error)payload[1])
+            {
+                case Error.AuthFailed:
+                    ((Login)GetForm(CustomForms.Login)).SetErrorText("Ungülte E-Mail-Adresse oder Passwort.");
+                    break;
+                case Error.ChecksumMismatch:
+                    uint packetNumber = ByteUtil.GetUInt32FromByteArray(payload, 0);
+                    Tuple<Packet, long> tuple;
+                    packets.TryGetValue(packetNumber, out tuple);
+                    Packet packetToSendAgain = tuple.Item1;
+                    SendAgain(packetToSendAgain);
+                    break;
+                case Error.PayloadInvalid:
+                    // TODO: unhandled
+                    break;
+            }
+            packets.Remove(packet.GetNumber());
         }
 
         public void HandleAck(Packet packet)
@@ -201,17 +203,8 @@ namespace client
 
         public void HandleLoginAnswer(Packet packet)
         {
-            byte[] payloadData = packet.GetPayloadData();
-            if (payloadData[0] == TRUE)
-            {
-                auth = new Tuple<bool, string>(true, auth.Item2);
-            }
-            else
-            {
-                ((Login)GetForm(CustomForms.Login)).SetErrorText("Login failed");
-            }
-            SendAck(packet.GetNumber());
             ((Login)GetForm(CustomForms.Login)).LoginVerified();
+            SendAck(packet.GetNumber());
         }
 
         public void HandleSubjectsAndGradesAnswer(Packet packet)
@@ -237,14 +230,35 @@ namespace client
             return (long)timeSpan.TotalSeconds;
         }
 
-        private void PrintBytes(byte[] array)
+        private void PrintPacket(Packet packet, string sentReceived)
+        {
+            switch (sentReceived)
+            {
+                case "received":
+                    Debug.WriteLine("Packet received:");
+                    break;
+                case "sent":
+                    Debug.WriteLine("Packet sent:");
+                    break;
+                case "sent again":
+                    Debug.WriteLine("Packet sent again:");
+                    break;
+                default:
+                    break;
+            }
+            Debug.WriteLine("PacketNr={0} UserID={1} OpCode={2} CRC={3} PayloadLength={4}", 
+                packet.GetNumber(), packet.GetUserID(), packet.GetOpCode(), packet.GetCRC(), packet.GetPayLoadLength());
+            Debug.WriteLine(ToString(packet.ToByteArray()) + Environment.NewLine);
+        }
+
+        private string ToString(byte[] array)
         {
             string str = "";
             foreach (byte b in array)
             {
                 str += b + " ";
             }
-            Debug.WriteLine(str);
+            return str;
         }
     }
 }
