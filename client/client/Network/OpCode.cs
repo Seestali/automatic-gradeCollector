@@ -7,11 +7,11 @@
     {
         Deny,
         Ack,
-        LoginReq,
-        LoginAns,
-        SubjectsAndGradesReq,
-        SubjectsAndGradesAns,
-        SetGradesReq,
-        SetGradesAns
+        LoginRequest,
+        LoginAnswer,
+        GetSubjectsAndGradesRequest,
+        GetSubjectsAndGradesAnswer,
+        SetGradesRequest,
+        SetGradesAnswer
     }
 }
