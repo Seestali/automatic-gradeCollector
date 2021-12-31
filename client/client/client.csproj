@@ -64,7 +64,6 @@
     <Compile Include="Network\Error.cs" />
     <Compile Include="Network\OpCode.cs" />
     <Compile Include="Network\Packet.cs" />
-    <Compile Include="Network\UdpProtocol.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
