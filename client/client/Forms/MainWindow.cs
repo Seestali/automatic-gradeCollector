@@ -34,6 +34,8 @@ namespace client.Forms
         private void cbSemester_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO: Send packet to request subjects and grades
+            //as int semester
+            //Manager.GetInstance().SendGetSubjectsAndGradesRequest();
         }
 
         private void btnDone_Click(object sender, EventArgs e)

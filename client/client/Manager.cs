@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.Net.Sockets;
 using System.Net;
@@ -11,14 +12,6 @@ using client.Utils;
 
 namespace client
 {
-    //TODO: class between UI and PacketAssembler.cs
-    //TODO: consider relocation
-    //TODO: manages user input on interface and instructs assembler class to build right packet
-    //TODO: receives orders from UI and forwards constructions to packet assembler class
-    //TODO: returns status / information of packets to UI
-    //TODO: handle DEC packets and invalid packet
-    //TODO: create unittest class
-    //TODO: gives ready packets to UDP class
     public class Manager
     {
         private const string HOSTNAME = "vollsm.art";
@@ -73,9 +66,9 @@ namespace client
             byte[] bytes = udpClient.EndReceive(asyncResult, ref ep);
             udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
 
-            Console.WriteLine("\nPACKET RECEIVED!\n");
+            Debug.WriteLine("\nPACKET RECEIVED!\n");
             PrintBytes(bytes);
-            Console.WriteLine("\n");
+            Debug.WriteLine("\n");
 
             ReceivePacket(bytes);
         }
@@ -102,8 +95,8 @@ namespace client
             Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Console.WriteLine("Packet sent:");
-            Console.WriteLine("PacketNumberToDeny={0}, Error={1}", packetNumberToDeny, error);
+            Debug.WriteLine("Packet sent:");
+            Debug.WriteLine("PacketNumberToDeny={0}, Error={1}", packetNumberToDeny, error);
             PrintBytes(dgram);
         }
 
@@ -112,8 +105,8 @@ namespace client
             Packet packet = packetAssembler.BuildAck(packetNumberToAck);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Console.WriteLine("Packet sent:");
-            Console.WriteLine("PacketNumberToAck={0}", packetNumberToAck);
+            Debug.WriteLine("Packet sent:");
+            Debug.WriteLine("PacketNumberToAck={0}", packetNumberToAck);
             PrintBytes(dgram);
         }
 
@@ -125,8 +118,8 @@ namespace client
             AddPacketToDictionary(packet);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Console.WriteLine("Packet sent:");
-            Console.WriteLine("E-Mail={0}, Password={1}, PasswordHash={2}", eMail, password, passwordHash);
+            Debug.WriteLine("Packet sent:");
+            Debug.WriteLine("E-Mail={0}, Password={1}, PasswordHash={2}", eMail, password, passwordHash);
             PrintBytes(dgram);
         }
 
@@ -136,8 +129,8 @@ namespace client
             AddPacketToDictionary(packet);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Console.WriteLine("Packet sent:");
-            Console.WriteLine("Auth={0}, Semester={1}", auth.Item2, semester);
+            Debug.WriteLine("Packet sent:");
+            Debug.WriteLine("Auth={0}, Semester={1}", auth.Item2, semester);
             PrintBytes(dgram);
         }
 
@@ -147,8 +140,8 @@ namespace client
             AddPacketToDictionary(packet);
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Console.WriteLine("Packet sent:");
-            Console.WriteLine("Auth={0}", auth.Item2);
+            Debug.WriteLine("Packet sent:");
+            Debug.WriteLine("Auth={0}", auth.Item2);
             PrintBytes(dgram);
         }
 
@@ -156,7 +149,7 @@ namespace client
         {
             byte[] dgram = packet.ToByteArray();
             udpClient.Send(dgram, dgram.Length);
-            Console.WriteLine("Packet sent again:");
+            Debug.WriteLine("Packet sent again:");
             PrintBytes(dgram);
         }
 
@@ -251,7 +244,7 @@ namespace client
             {
                 str += b + " ";
             }
-            Console.WriteLine(str);
+            Debug.WriteLine(str);
         }
     }
 }
