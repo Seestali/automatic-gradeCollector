@@ -14,12 +14,12 @@ namespace client.UnitTests
         [Theory]
         [InlineData(0,OpCode.Deny)]
         [InlineData(1,OpCode.Ack)]
-        [InlineData(2,OpCode.LoginReq)]
-        [InlineData(3,OpCode.LoginAns)]
-        [InlineData(4,OpCode.SubjectsAndGradesReq)]
-        [InlineData(5,OpCode.SubjectsAndGradesAns)]
-        [InlineData(6,OpCode.SetGradesReq)]
-        [InlineData(7,OpCode.SetGradesAns)]
+        [InlineData(2,OpCode.LoginRequest)]
+        [InlineData(3,OpCode.LoginAnswer)]
+        [InlineData(4,OpCode.GetSubjectsAndGradesRequest)]
+        [InlineData(5,OpCode.GetSubjectsAndGradesAnswer)]
+        [InlineData(6,OpCode.SetGradesRequest)]
+        [InlineData(7,OpCode.SetGradesAnswer)]
         public void CheckOpCodes_OpCodesPass(byte expected, byte opCode)
         {
             Assert.Equal<byte>(expected,opCode);
