@@ -28,73 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbSemester = new System.Windows.Forms.ComboBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.btnDone = new System.Windows.Forms.Button();
-            this.lbUser = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CbSemester = new System.Windows.Forms.ComboBox();
+            this.LbUser = new System.Windows.Forms.Label();
+            this.tbUser = new System.Windows.Forms.TextBox();
+            this.LbxSubjectsAndGrades = new System.Windows.Forms.ListBox();
+            this.BtnDone = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // cbSemester
+            // CbSemester
             // 
-            this.cbSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSemester.Items.AddRange(new string[] {
+            this.CbSemester.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbSemester.Items.AddRange(new object[] {
             "Semester 1",
             "Semester 2",
             "Semester 3",
             "Semester 4",
             "Semester 5",
             "Semester 6"});
-            this.cbSemester.Location = new System.Drawing.Point(13, 13);
-            this.cbSemester.Name = "cbSemester";
-            this.cbSemester.Size = new System.Drawing.Size(125, 28);
-            this.cbSemester.TabIndex = 0;
-            this.cbSemester.SelectedIndexChanged += new System.EventHandler(this.cbSemester_SelectedIndexChanged);
+            this.CbSemester.Location = new System.Drawing.Point(13, 13);
+            this.CbSemester.Name = "CbSemester";
+            this.CbSemester.Size = new System.Drawing.Size(125, 28);
+            this.CbSemester.TabIndex = 0;
+            this.CbSemester.SelectedIndexChanged += new System.EventHandler(this.CbSemester_SelectedIndexChanged);
             // 
-            // listBox1
+            // LbUser
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(13, 48);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(673, 304);
-            this.listBox1.TabIndex = 1;
+            this.LbUser.AutoSize = true;
+            this.LbUser.Location = new System.Drawing.Point(346, 15);
+            this.LbUser.Name = "LbUser";
+            this.LbUser.Size = new System.Drawing.Size(74, 20);
+            this.LbUser.TabIndex = 3;
+            this.LbUser.Text = "Benutzer";
             // 
-            // btnDone
+            // tbUser
             // 
-            this.btnDone.Location = new System.Drawing.Point(611, 377);
-            this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(75, 35);
-            this.btnDone.TabIndex = 2;
-            this.btnDone.Text = "Fertig";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.tbUser.Location = new System.Drawing.Point(426, 12);
+            this.tbUser.Name = "tbUser";
+            this.tbUser.ReadOnly = true;
+            this.tbUser.Size = new System.Drawing.Size(260, 26);
+            this.tbUser.TabIndex = 4;
             // 
-            // lbUser
+            // LbxSubjectsAndGrades
             // 
-            this.lbUser.AutoSize = true;
-            this.lbUser.Location = new System.Drawing.Point(346, 15);
-            this.lbUser.Name = "lbUser";
-            this.lbUser.Size = new System.Drawing.Size(74, 20);
-            this.lbUser.TabIndex = 3;
-            this.lbUser.Text = "Benutzer";
+            this.LbxSubjectsAndGrades.FormattingEnabled = true;
+            this.LbxSubjectsAndGrades.ItemHeight = 20;
+            this.LbxSubjectsAndGrades.Location = new System.Drawing.Point(13, 48);
+            this.LbxSubjectsAndGrades.Name = "LbxSubjectsAndGrades";
+            this.LbxSubjectsAndGrades.Size = new System.Drawing.Size(673, 304);
+            this.LbxSubjectsAndGrades.TabIndex = 1;
             // 
-            // textBox1
+            // BtnDone
             // 
-            this.textBox1.Location = new System.Drawing.Point(426, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(260, 26);
-            this.textBox1.TabIndex = 4;
+            this.BtnDone.Location = new System.Drawing.Point(611, 377);
+            this.BtnDone.Name = "BtnDone";
+            this.BtnDone.Size = new System.Drawing.Size(75, 35);
+            this.BtnDone.TabIndex = 2;
+            this.BtnDone.Text = "Fertig";
+            this.BtnDone.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(698, 424);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.lbUser);
-            this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.cbSemester);
+            this.Controls.Add(this.tbUser);
+            this.Controls.Add(this.LbUser);
+            this.Controls.Add(this.BtnDone);
+            this.Controls.Add(this.LbxSubjectsAndGrades);
+            this.Controls.Add(this.CbSemester);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainWindow";
             this.Text = "MainWindow";
@@ -105,10 +106,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbSemester;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.Label lbUser;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox CbSemester;
+        private System.Windows.Forms.ListBox LbxSubjectsAndGrades;
+        private System.Windows.Forms.Button BtnDone;
+        private System.Windows.Forms.Label LbUser;
+        private System.Windows.Forms.TextBox tbUser;
     }
 }

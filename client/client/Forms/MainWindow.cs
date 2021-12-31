@@ -1,5 +1,4 @@
 ﻿using System;
-using client.Utils;
 using System.Windows.Forms;
 
 namespace client.Forms
@@ -17,7 +16,7 @@ namespace client.Forms
             InitializeComponent();
         }
 
-        private void cbSemester_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbSemester_SelectedIndexChanged(object sender, EventArgs e)
         {
             // TODO: Send packet to request subjects and grades
         }
