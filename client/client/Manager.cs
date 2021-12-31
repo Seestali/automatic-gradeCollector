@@ -22,7 +22,6 @@ namespace client
     public class Manager
     {
         private const string HOSTNAME = "vollsm.art";
-        //private const string MY_SMARTPHONE = "192.168.178.45";
         private const int PORT = 42069;
         private const int TEN_SECONDS = 10000;
         private const int TIMEOUT = 2000;
@@ -31,8 +30,8 @@ namespace client
         private static Manager instance;
         private readonly Form[] forms;
         private readonly PacketAssembler packetAssembler;
+        private IPEndPoint ep;
         private readonly UdpClient udpClient;
-        private readonly Tuple<UdpClient, IPEndPoint> udpServer;
         private readonly Dictionary<uint, Tuple<Packet, long>> packets;
         private readonly System.Timers.Timer timer;
         private Tuple<bool, string> auth;
@@ -59,10 +58,9 @@ namespace client
             packets = new Dictionary<uint, Tuple<Packet, long>>();
             packetAssembler = new PacketAssembler();
 
+            ep = new IPEndPoint(IPAddress.Any, PORT);
             udpClient = new UdpClient(HOSTNAME, PORT);
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, PORT);
-            udpServer = new Tuple<UdpClient, IPEndPoint>(new UdpClient(ep), ep);
-            udpServer.Item1.BeginReceive(new AsyncCallback(ReceiveCallback), udpServer);
+            udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
 
             timer = new System.Timers.Timer(TEN_SECONDS);
             timer.Elapsed += Timer_Elapsed;
@@ -72,9 +70,8 @@ namespace client
 
         private void ReceiveCallback(IAsyncResult asyncResult)
         {
-            IPEndPoint ep = udpServer.Item2;
-            byte[] bytes = udpServer.Item1.EndReceive(asyncResult, ref ep);
-            udpServer.Item1.BeginReceive(new AsyncCallback(ReceiveCallback), udpServer);
+            byte[] bytes = udpClient.EndReceive(asyncResult, ref ep);
+            udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), null);
 
             Console.WriteLine("\nPACKET RECEIVED!\n");
             PrintBytes(bytes);
