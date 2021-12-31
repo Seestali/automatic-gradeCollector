@@ -5,7 +5,7 @@ namespace client.Network
     /// <summary>
     /// Represents a packet to sent or to receive.
     /// </summary>
-    //TODO: finish comments
+
     //TODO: finish class if needed
     public class Packet
     {
@@ -18,7 +18,7 @@ namespace client.Network
         public const byte CRC32_BEGIN = 6;
         public const byte PAYLOAD_LENGTH_BEGIN = 10;
 
-        private byte[] data;
+        private readonly byte[] data;
 
         /// <summary>
         /// Ctor to create a packet out of the single contents.
@@ -28,42 +28,30 @@ namespace client.Network
         /// <param name="opCode">Op code</param>
         /// <param name="payloadLength">Length of payload data</param>
         /// <param name="payloadData">Payload data</param>
-        public Packet(uint number, byte userID, OpCode opCode, uint payloadLength, byte[] payloadData)
+        public Packet(uint number, byte userID, OpCode opCode, byte[] payloadData)
         {
-            byte[] content = new byte[BEFORE_CRC + payloadLength];
-            ByteUtil.InsertUInt32ToByteArray(ref content, 0, number);
-            //content[0] = (byte)(number >> 24);
-            //content[1] = (byte)(number >> 16);
-            //content[2] = (byte)(number >> 8);
-            //content[3] = (byte)number;
+            byte[] content = new byte[BEFORE_CRC + payloadData.Length];
+            ByteUtil.InsertUInt32ToByteArray(content, 0, number);
             content[4] = userID;
             content[5] = (byte)opCode;
-            ByteUtil.InsertUInt32ToByteArray(ref content, 6, payloadLength);
-            //content[6] = (byte)(payloadLength >> 24);
-            //content[7] = (byte)(payloadLength >> 16);
-            //content[8] = (byte)(payloadLength >> 8);
-            //content[9] = (byte)payloadLength;
+            ByteUtil.InsertUInt32ToByteArray(content, 6, (uint)payloadData.Length);
 
-            for (uint i = 0; i < payloadLength; i++)
+            for (uint i = 0; i < payloadData.Length; i++)
                 content[BEFORE_CRC + i] = payloadData[i];
             
-            uint crc = CRC32.calculateChecksum(ref content);
+            uint crc = CRC32.CalculateChecksum(content);
 
-            data = new byte[HEADER_LENGTH + payloadLength];
+            data = new byte[HEADER_LENGTH + payloadData.Length];
             
-            for (byte i = 0; i < 6; i++)
+            for (byte i = 0; i < CRC32_BEGIN; i++)
                 data[i] = content[i];
             
-            ByteUtil.InsertUInt32ToByteArray(ref data, 6, crc);
-            //data[6] = (byte)(crc >> 24);
-            //data[7] = (byte)(crc >> 16);
-            //data[8] = (byte)(crc >> 8);
-            //data[9] = (byte)crc;
+            ByteUtil.InsertUInt32ToByteArray(data, 6, crc);
             
-            for (byte i = 10; i < 14; i++)
-                data[i] = content[i];
+            for (byte i = BEFORE_CRC; i < HEADER_LENGTH; i++)
+                data[i] = content[i - CRC32_LENGTH];
             
-            for (ushort i = 0; i < payloadLength; i++)
+            for (ushort i = 0; i < payloadData.Length; i++)
                 data[HEADER_LENGTH + i] = payloadData[i];
         }
 
@@ -82,8 +70,7 @@ namespace client.Network
         /// <returns>Packet number</returns>
         public uint GetNumber()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, NUMBER_BEGIN);
-            //return (uint)(data[0] << 24 + data[1] << 16 + data[2] << 8 + data[3]);
+            return ByteUtil.GetUInt32FromByteArray(data, NUMBER_BEGIN);
         }
 
         /// <summary>
@@ -110,8 +97,7 @@ namespace client.Network
         /// <returns>CRC32 checksum</returns>
         public uint GetCRC()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, CRC32_BEGIN);
-            //return (uint)(data[6] << 24 + data[7] << 16 + data[8] << 8 + data[9]);
+            return ByteUtil.GetUInt32FromByteArray(data, CRC32_BEGIN);
         }
 
         /// <summary>
@@ -120,8 +106,7 @@ namespace client.Network
         /// <returns>Length of the Payload data</returns>
         public uint GetPayLoadLength()
         {
-            return ByteUtil.GetUInt32FromByteArray(ref data, PAYLOAD_LENGTH_BEGIN)
-            //return (uint)(data[10] << 24 + data[11] << 16 + data[12] << 8 + data[13]);
+            return ByteUtil.GetUInt32FromByteArray(data, PAYLOAD_LENGTH_BEGIN);
         }
 
         /// <summary>
@@ -145,6 +130,16 @@ namespace client.Network
         public byte[] ToByteArray()
         {
             return data;
+        }
+
+        public byte[] GetContentWithoutCRC()
+        {
+            byte[] content = new byte[data.Length - CRC32_LENGTH];
+            for (byte i = 0; i < CRC32_BEGIN; i++)
+                content[i] = data[i];
+            for (byte i = CRC32_BEGIN + CRC32_LENGTH; i < data.Length; i++)
+                content[i - CRC32_LENGTH] = data[i];
+            return content;
         }
     }
 }

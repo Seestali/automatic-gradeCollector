@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using client.Network.Packet;
+using client.Network;
 
 namespace client.UnitTests
 {

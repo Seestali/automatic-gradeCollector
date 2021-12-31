@@ -1,4 +1,5 @@
 ﻿using client.Utils;
+using client.Exception;
 using System.Text;
 
 namespace client.Network
@@ -31,13 +32,9 @@ namespace client.Network
         public Packet BuildDeny(uint packetNumberToDeny, Error error)
         {
             byte[] payload = new byte[DENY_PAYLOAD_LENGTH];
-            ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToDeny);
-            //payload[0] = (byte)(packetNumber >> 24);
-            //payload[1] = (byte)(packetNumber >> 16);
-            //payload[2] = (byte)(packetNumber >> 8);
-            //payload[3] = (byte)packetNumber;
+            ByteUtil.InsertUInt32ToByteArray(payload, 0, packetNumberToDeny);
             payload[4] = (byte)error;
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Deny, DENY_PAYLOAD_LENGTH, payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Deny, payload);
         }
 
         /// <summary>
@@ -45,15 +42,11 @@ namespace client.Network
         /// </summary>
         /// <param name="packetNumber"></param>
         /// <returns></returns>
-        public Packet BuildAck(ushort packetNumberToAck)
+        public Packet BuildAck(uint packetNumberToAck)
         {
             byte[] payload = new byte[ACK_PAYLOAD_LENGTH];
-            ByteUtil.InsertUInt32ToByteArray(ref payload, 0, packetNumberToAck);
-            //payload[0] = (byte)(packetNumber >> 24);
-            //payload[1] = (byte)(packetNumber >> 16);
-            //payload[2] = (byte)(packetNumber >> 8);
-            //payload[3] = (byte)packetNumber;
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Ack, ACK_PAYLOAD_LENGTH, payload);
+            ByteUtil.InsertUInt32ToByteArray(payload, 0, packetNumberToAck);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.Ack, payload);
         }
 
         /// <summary>
@@ -61,20 +54,24 @@ namespace client.Network
         /// </summary>
         /// <param name="auth"></param>
         /// <returns></returns>
-        public Packet BuildLoginReq(string auth)
+        public Packet BuildLoginRequest(string email, string passwordHash)
         {
+            string auth = email  + "::" +  passwordHash;
             byte[] payload = Encoding.UTF8.GetBytes(auth);
-            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginReq, (uint)payload.Length, payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.LoginRequest, payload);
         }
 
-        public Packet BuildGetSubjectsAndGrades()
+        public Packet BuildGetSubjectsAndGradesRequest(string auth, int semester)
         {
-            return null;
+            string payload = auth + semester;
+            byte[] payloadData = Encoding.UTF8.GetBytes(payload);
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.GetSubjectsAndGradesRequest, payloadData);
         }
 
-        public Packet BuildSetGrades()
+        public Packet BuildSetGradesRequest(string auth/*, ... */)
         {
-            return null;
+            /* ... */
+            return new Packet(GetPacketNumberAndInc(), userID, OpCode.SetGradesRequest, null);
         }
 
         // TODO:    disassemble packets
@@ -85,6 +82,11 @@ namespace client.Network
         public Packet DisassemblePacket(byte[] data)
         {
             Packet packet = new Packet(data);
+            byte[] content = packet.GetContentWithoutCRC();
+            if (packet.GetCRC() != CRC32.CalculateChecksum(content))
+            {
+                throw new ChecksumMismatchException(packet.GetNumber());
+            }
             if (userID == 0)    // If local user ID is still zero, take ID from received packet.
             {
                 userID = packet.GetUserID();
