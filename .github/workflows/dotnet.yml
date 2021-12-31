@@ -10,14 +10,16 @@ env:
     
 jobs:
   build:
-
     name: build-${{matrix.os}}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest]
+    env:
+      working-directory: ./client/client
 
     steps:
+    
     - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -25,9 +27,9 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
-      working-directory: .client/client
+      working-directory: ${{env.working-directory}}
       run: dotnet restore
       
     - name: Build
-      working-directory: .client/client
+      working-directory: ${{env.working-directory}}
       run: dotnet build --configuration Release --no-restore
