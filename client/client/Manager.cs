@@ -12,6 +12,11 @@ using client.Utils;
 
 namespace client
 {
+    /// <summary>
+    /// Manager Class. 
+    /// 
+    /// Manages form switching and sending and receiving UDP packets.
+    /// </summary>
     public class Manager
     {
         private const string HOSTNAME = "vollsm.art";
@@ -59,7 +64,11 @@ namespace client
             timer.AutoReset = true;
             timer.Enabled = true;
         }
-
+        
+        /// <summary>
+        /// Callback function for async receiving udp-packets
+        /// </summary>
+        /// <param name="asyncResult"></param>
         private void ReceiveCallback(IAsyncResult asyncResult)
         {
             byte[] bytes = udpClient.EndReceive(asyncResult, ref ep);
@@ -67,6 +76,12 @@ namespace client
             ReceivePacket(bytes);
         }
 
+        /// <summary>
+        /// Timer function to determine if packet is lost.
+        /// Packet timeout after 2 sec.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             long totalSeconds = GetTotalSeconds();
@@ -79,11 +94,21 @@ namespace client
             }
         }
 
+        /// <summary>
+        /// Gets one of the two forms of the application.
+        /// </summary>
+        /// <param name="form">Which form to return</param>
+        /// <returns>Requested form</returns>
         public Form GetForm(CustomForms form)
         {
             return forms[(int)form];
         }
 
+        /// <summary>
+        /// Sends a deny packet.
+        /// </summary>
+        /// <param name="packetNumberToDeny">Packet number to deny</param>
+        /// <param name="error">Error code</param>
         public void SendDeny(uint packetNumberToDeny, Error error)
         {
             Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
@@ -92,6 +117,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends an acknowledgement packet.
+        /// </summary>
+        /// <param name="packetNumberToAck">Packet number to acknowledge</param>
         public void SendAck(uint packetNumberToAck)
         {
             Packet packet = packetAssembler.BuildAck(packetNumberToAck);
@@ -100,6 +129,11 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends a LoginRequest packet.
+        /// </summary>
+        /// <param name="eMail">User e-mail address</param>
+        /// <param name="password">User password</param>
         public void SendLoginRequest(string eMail, string password)
         {
             string passwordHash = Hash.GetHashString(password);
@@ -111,6 +145,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends a GetSubjectsAndGradesRequest packet.
+        /// </summary>
+        /// <param name="semester">Semester of which the requested subjects and grades are</param>
         public void SendGetSubjectsAndGradesRequest(int semester)
         {
             Packet packet = packetAssembler.BuildGetSubjectsAndGradesRequest(auth.Item2, semester);
@@ -120,6 +158,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends a SetGradesRequest packet. Not done yet!
+        /// </summary>
+        /// <param name="???">???</param>
         public void SendSetGradesRequest(/* ... */)
         {
             Packet packet = packetAssembler.BuildSetGradesRequest(auth.Item2/*, ... */);
@@ -129,6 +171,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Function to send a packet again if timeout occurs or data is crumbled.
+        /// </summary>
+        /// <param name="packet">The packet that needs to be sent again</param>
         private void SendAgain(Packet packet)
         {
             byte[] dgram = packet.ToByteArray();
@@ -136,6 +182,12 @@ namespace client
             PrintPacket(packet, "sent again");
         }
 
+        /// <summary>
+        /// Processes a received packet by disassembling it and doing checks.
+        /// 
+        /// Branches by op code of packet to subroutines.
+        /// </summary>
+        /// <param name="array">Packet represented as byte array</param>
         public void ReceivePacket(byte[] array)
         {
             Packet packet;
@@ -174,6 +226,10 @@ namespace client
             }
         }
 
+        /// <summary>
+        /// Subroutine to handle a deny packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleDeny(Packet packet)
         {
             byte[] payload = packet.GetPayloadData();
@@ -196,27 +252,50 @@ namespace client
             packets.Remove(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a acknowledgement packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleAck(Packet packet)
         {
             packets.Remove(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a LoginAnswer packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleLoginAnswer(Packet packet)
         {
             ((Login)GetForm(CustomForms.Login)).LoginVerified();
             SendAck(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a SubjectsAndGradesAnswer packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleSubjectsAndGradesAnswer(Packet packet)
         {
+            //TODO: save data in list for datagrid
+            //classes seperated with "," else ":"
+            packet.GetPayloadData();
             SendAck(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a SetGradesAnswer packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleSetGradesAnswer(Packet packet)
         {
             SendAck(packet.GetNumber());
         }
 
+        /// <summary>
+        /// A dictionary that stores all the sent packets for error correction.
+        /// </summary>
+        /// <param name="packet">The packet that needs to be added to the dictionary</param>
         private void AddPacketToDictionary(Packet packet)
         {
             long totalSeconds = GetTotalSeconds();
@@ -224,12 +303,21 @@ namespace client
             packets.Add(packet.GetNumber(), packetTuple);
         }
 
+        /// <summary>
+        /// Calculates the time difference between now and the minval
+        /// </summary>
+        /// <returns>returns the timespan as seconds as long</returns>
         private long GetTotalSeconds()
         {
             TimeSpan timeSpan = DateTime.UtcNow - DateTime.MinValue;
             return (long)timeSpan.TotalSeconds;
         }
 
+        /// <summary>
+        /// Prints the packet to Debug Console for debug purposes
+        /// </summary>
+        /// <param name="packet">the packet that needs to be printed</param>
+        /// <param name="sentReceived">string to determine the purpose of the packet</param>
         private void PrintPacket(Packet packet, string sentReceived)
         {
             switch (sentReceived)
@@ -251,6 +339,11 @@ namespace client
             Debug.WriteLine(ToString(packet.ToByteArray()) + Environment.NewLine);
         }
 
+        /// <summary>
+        /// Converts a byte array string.
+        /// </summary>
+        /// <param name="array">array as input</param>
+        /// <returns>returns the converted array as string</returns>
         private string ToString(byte[] array)
         {
             string str = "";

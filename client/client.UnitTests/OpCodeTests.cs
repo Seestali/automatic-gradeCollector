@@ -20,9 +20,9 @@ namespace client.UnitTests
         [InlineData(5,OpCode.GetSubjectsAndGradesAnswer)]
         [InlineData(6,OpCode.SetGradesRequest)]
         [InlineData(7,OpCode.SetGradesAnswer)]
-        public void CheckOpCodes_OpCodesPass(byte expected, byte opCode)
+        public void CheckOpCodes_OpCodesPass(byte expected, OpCode opCode)
         {
-            Assert.Equal<byte>(expected,opCode);
+            Assert.Equal(expected,(byte)opCode);
         }
     }
 }
