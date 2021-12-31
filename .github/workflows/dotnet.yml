@@ -25,7 +25,9 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
+      working-directory: .client/client
       run: dotnet restore
       
     - name: Build
+      working-directory: .client/client
       run: dotnet build --configuration Release --no-restore
