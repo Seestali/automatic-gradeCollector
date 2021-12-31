@@ -5,18 +5,19 @@ using System.Text;
 namespace client.Network
 {
     /// <summary>
-    /// 
+    /// Assembles and disassembles packets due to the communication protocol.
     /// </summary>
     public class PacketAssembler
     {
-        // TODO: Handle invalid packets (manage assembling class) 
-
         public const byte DENY_PAYLOAD_LENGTH = 5;
         public const byte ACK_PAYLOAD_LENGTH = 4;
 
         private uint packetNumber;
         private byte userID;
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public PacketAssembler()
         {
             packetNumber = 0;
@@ -24,10 +25,10 @@ namespace client.Network
         }
 
         /// <summary>
-        /// 
+        /// Builds a deny packet
         /// </summary>
-        /// <param name="packetNumber"></param>
-        /// <param name="error"></param>
+        /// <param name="packetNumber">Packet to deny</param>
+        /// <param name="error">Error code</param>
         /// <returns></returns>
         public Packet BuildDeny(uint packetNumberToDeny, Error error)
         {
@@ -38,9 +39,9 @@ namespace client.Network
         }
 
         /// <summary>
-        /// 
+        /// Builds an acknowledgement packet.
         /// </summary>
-        /// <param name="packetNumber"></param>
+        /// <param name="packetNumber">Packet to acknowledge</param>
         /// <returns></returns>
         public Packet BuildAck(uint packetNumberToAck)
         {

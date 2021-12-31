@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace client.Network
+﻿namespace client.Network
 {
     /// <summary>
     /// 32-bit CRC value (CRC32, Cyclic Redundancy Check).
