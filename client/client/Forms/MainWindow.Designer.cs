@@ -32,7 +32,7 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.lbUser = new System.Windows.Forms.Label();
             this.tbUser = new System.Windows.Forms.TextBox();
-            this.dgSubjectsGrades = new System.Windows.Forms.DataGrid();
+            this.dgSubjectsGrades = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize) (this.dgSubjectsGrades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,12 +74,13 @@
             // 
             // dgSubjectsGrades
             // 
-            this.dgSubjectsGrades.DataMember = "";
-            this.dgSubjectsGrades.HeaderForeColor = System.Drawing.SystemColors.ControlText;
-            this.dgSubjectsGrades.Location = new System.Drawing.Point(14, 47);
+            this.dgSubjectsGrades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgSubjectsGrades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSubjectsGrades.Location = new System.Drawing.Point(12, 47);
             this.dgSubjectsGrades.Name = "dgSubjectsGrades";
-            this.dgSubjectsGrades.Size = new System.Drawing.Size(672, 304);
-            this.dgSubjectsGrades.TabIndex = 5;
+            this.dgSubjectsGrades.RowTemplate.Height = 28;
+            this.dgSubjectsGrades.Size = new System.Drawing.Size(674, 324);
+            this.dgSubjectsGrades.TabIndex = 6;
             // 
             // MainWindow
             // 
@@ -94,13 +95,16 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainWindow";
             this.Text = "MainWindow";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             ((System.ComponentModel.ISupportInitialize) (this.dgSubjectsGrades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.DataGrid dgSubjectsGrades;
+        private System.Windows.Forms.DataGridView dgSubjectsGrades;
+
+        private System.Windows.Forms.DataGridView dgSubjectAndGrades;
+
+        private System.Windows.Forms.DataGridView dataGridView1;
 
         private System.Windows.Forms.TextBox tbUser;
 
