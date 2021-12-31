@@ -7,9 +7,6 @@ namespace client.UnitTests
 {
     public class HashTests
     {
-
-
-        //TODO: empty string
         [Fact]
         public void GetHashString_StringInput_ReturnsSame()
         {

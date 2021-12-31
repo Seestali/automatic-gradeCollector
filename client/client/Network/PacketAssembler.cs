@@ -71,7 +71,8 @@ namespace client.Network
         /// <returns>Returns a packet to request information about the a semester of a student</returns>
         public Packet BuildGetSubjectsAndGradesRequest(string auth, int semester)
         {
-            string payload = auth + semester;
+            //TODO:Fix function
+            string payload = auth + "::" + semester;
             byte[] payloadData = Encoding.UTF8.GetBytes(payload);
             return new Packet(GetPacketNumberAndInc(), userID, OpCode.GetSubjectsAndGradesRequest, payloadData);
         }

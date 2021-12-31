@@ -48,25 +48,43 @@ namespace client.UnitTests
         [Fact]
         public void GetNumber_ReturnCorrectPacketNumber()
         {
-
+            uint packetNumber = 56;
+            byte userID = 42;
+            OpCode opCode = OpCode.LoginRequest;
+            string auth = "max.mustermann@email.com::643F6BA68C9333859694078A905B90C4F036D01CF7E81D6EF0A6CA79A344B6B7";
+            byte[] payload = Encoding.UTF8.GetBytes(auth);
+            Packet packet = new Packet(packetNumber, userID, opCode, payload);
+            Assert.Equal(packetNumber, packet.GetNumber());
         }
 
         [Fact]
         public void GetUserID_ReturnCorrectUserID()
         {
-
+            uint packetNumber = 56;
+            byte userID = 42;
+            OpCode opCode = OpCode.LoginRequest;
+            string auth = "max.mustermann@email.com::643F6BA68C9333859694078A905B90C4F036D01CF7E81D6EF0A6CA79A344B6B7";
+            byte[] payload = Encoding.UTF8.GetBytes(auth);
+            Packet packet = new Packet(packetNumber, userID, opCode, payload);
+            Assert.Equal(userID, packet.GetUserID());
         }
 
         [Fact]
         public void GetOpCode_ReturnCorrectOpCode()
         {
-
+            uint packetNumber = 56;
+            byte userID = 42;
+            OpCode opCode = OpCode.LoginRequest;
+            string auth = "max.mustermann@email.com::643F6BA68C9333859694078A905B90C4F036D01CF7E81D6EF0A6CA79A344B6B7";
+            byte[] payload = Encoding.UTF8.GetBytes(auth);
+            Packet packet = new Packet(packetNumber, userID, opCode, payload);
+            Assert.Equal((byte)opCode,(byte)packet.GetOpCode());
         }
 
         [Fact]
         public void GetCRC_ReturnCorrectCRC()
         {
-
+           
         }
 
         [Fact]

@@ -277,6 +277,9 @@ namespace client
         /// <param name="packet">Packet represented as byte array</param>
         public void HandleSubjectsAndGradesAnswer(Packet packet)
         {
+            //TODO: save data in list for datagrid
+            //classes seperated with "," else ":"
+            packet.GetPayloadData();
             SendAck(packet.GetNumber());
         }
 
