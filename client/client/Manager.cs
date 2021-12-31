@@ -12,6 +12,11 @@ using client.Utils;
 
 namespace client
 {
+    /// <summary>
+    /// Manager Class. 
+    /// 
+    /// Manages form switching and sending and receiving UDP packets.
+    /// </summary>
     public class Manager
     {
         private const string HOSTNAME = "vollsm.art";
@@ -79,11 +84,21 @@ namespace client
             }
         }
 
+        /// <summary>
+        /// Gets one of the two forms of the application.
+        /// </summary>
+        /// <param name="form">Which form to return</param>
+        /// <returns>Requested form</returns>
         public Form GetForm(CustomForms form)
         {
             return forms[(int)form];
         }
 
+        /// <summary>
+        /// Sends a deny packet.
+        /// </summary>
+        /// <param name="packetNumberToDeny">Packet number to deny</param>
+        /// <param name="error">Error code</param>
         public void SendDeny(uint packetNumberToDeny, Error error)
         {
             Packet packet = packetAssembler.BuildDeny(packetNumberToDeny, error);
@@ -92,6 +107,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends an acknowledgement packet.
+        /// </summary>
+        /// <param name="packetNumberToAck">Packet number to acknowledge</param>
         public void SendAck(uint packetNumberToAck)
         {
             Packet packet = packetAssembler.BuildAck(packetNumberToAck);
@@ -100,6 +119,11 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends a LoginRequest packet.
+        /// </summary>
+        /// <param name="eMail">User e-mail address</param>
+        /// <param name="password">User password</param>
         public void SendLoginRequest(string eMail, string password)
         {
             string passwordHash = Hash.GetHashString(password);
@@ -111,6 +135,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends a GetSubjectsAndGradesRequest packet.
+        /// </summary>
+        /// <param name="semester">Semester of which the requested subjects and grades are</param>
         public void SendGetSubjectsAndGradesRequest(int semester)
         {
             Packet packet = packetAssembler.BuildGetSubjectsAndGradesRequest(auth.Item2, semester);
@@ -120,6 +148,10 @@ namespace client
             PrintPacket(packet, "sent");
         }
 
+        /// <summary>
+        /// Sends a SetGradesRequest packet. Not done yet!
+        /// </summary>
+        /// <param name="???">???</param>
         public void SendSetGradesRequest(/* ... */)
         {
             Packet packet = packetAssembler.BuildSetGradesRequest(auth.Item2/*, ... */);
@@ -136,6 +168,12 @@ namespace client
             PrintPacket(packet, "sent again");
         }
 
+        /// <summary>
+        /// Processes a received packet by disassembling it and doing checks.
+        /// 
+        /// Branches by op code of packet to subroutines.
+        /// </summary>
+        /// <param name="array">Packet represented as byte array</param>
         public void ReceivePacket(byte[] array)
         {
             Packet packet;
@@ -174,6 +212,10 @@ namespace client
             }
         }
 
+        /// <summary>
+        /// Subroutine to handle a deny packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleDeny(Packet packet)
         {
             byte[] payload = packet.GetPayloadData();
@@ -196,22 +238,38 @@ namespace client
             packets.Remove(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a acknowledgement packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleAck(Packet packet)
         {
             packets.Remove(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a LoginAnswer packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleLoginAnswer(Packet packet)
         {
             ((Login)GetForm(CustomForms.Login)).LoginVerified();
             SendAck(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a SubjectsAndGradesAnswer packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleSubjectsAndGradesAnswer(Packet packet)
         {
             SendAck(packet.GetNumber());
         }
 
+        /// <summary>
+        /// Subroutine to handle a SetGradesAnswer packet.
+        /// </summary>
+        /// <param name="packet">Packet represented as byte array</param>
         public void HandleSetGradesAnswer(Packet packet)
         {
             SendAck(packet.GetNumber());

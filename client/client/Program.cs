@@ -13,6 +13,9 @@ namespace client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Manager.GetInstance() instantiates the manager
+            // GetForm() gets the first Form to display and pass it to Run()
             Application.Run(Manager.GetInstance().GetForm(Forms.CustomForms.Login));
         }
     }

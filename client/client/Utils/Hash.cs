@@ -6,6 +6,9 @@ using Microsoft.CSharp.RuntimeBinder;
 
 namespace client.Utils
 {
+    /// <summary>
+    /// Provide SHA256 hash functionality
+    /// </summary>
     public static class Hash
     {
 
