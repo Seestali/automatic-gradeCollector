@@ -51,6 +51,7 @@ class Database:
         if student is None:
             return False
         else:
+            password = password.lower()
             if hashlib.sha256(password.encode('utf-8')).hexdigest() == student[5]:
                 return True
             else:

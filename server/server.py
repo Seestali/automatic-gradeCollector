@@ -26,7 +26,7 @@ server_socket.bind(('', port))
 print('The server is ready to receive')
 
 
-# Function to resend a message after a certain amount of timeø
+# Function to resend a message after a certain amount of time
 def resendMessage(message, address, userID, packageNumber):
     '''
     Function to resend a message after a certain amount of time. It will be called by a thread and therminates itselft.
