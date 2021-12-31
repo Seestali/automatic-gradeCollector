@@ -1,4 +1,4 @@
-name: .NET client build
+name: .NET client build/test
 
 on:
   push:
@@ -35,3 +35,6 @@ jobs:
     - name: Build
       working-directory: ${{env.working-directory}}
       run: dotnet build --configuration Release --no-restore
+      
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
