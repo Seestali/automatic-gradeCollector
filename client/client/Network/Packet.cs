@@ -140,7 +140,7 @@ namespace client.Network
             byte[] content = new byte[data.Length - CRC32_LENGTH];
             for (byte i = 0; i < CRC32_BEGIN; i++)
                 content[i] = data[i];
-            for (byte i = CRC32_BEGIN + CRC32_LENGTH; i < data.Length; i++)
+            for (int i = CRC32_BEGIN + CRC32_LENGTH; i < data.Length; i++)
                 content[i - CRC32_LENGTH] = data[i];
             return content;
         }
