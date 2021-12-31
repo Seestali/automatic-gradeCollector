@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace client.Forms
+﻿namespace client.Forms
 {
+    /// <summary>
+    /// List of all Forms used by the manager.
+    /// </summary>
     public enum CustomForms :  byte
     {
         Login,
