@@ -131,7 +131,10 @@ namespace client.Network
         {
             return data;
         }
-
+        /// <summary>
+        /// Returns packet without CRC-block
+        /// </summary>
+        /// <returns>packet wo CRC</returns>
         public byte[] GetContentWithoutCRC()
         {
             byte[] content = new byte[data.Length - CRC32_LENGTH];

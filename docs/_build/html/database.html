@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>database module &mdash; automatic-gradeCollectorServer 29.12.2021 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="server module" href="server.html" />
+    <link rel="prev" title="client module" href="client.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> automatic-gradeCollectorServer
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">server</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="backend.html">backend module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client.html">client module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">database module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server.html">server module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_server.html">test_server module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">automatic-gradeCollectorServer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">server</a> &raquo;</li>
+      <li>database module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/database.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-database">
+<span id="database-module"></span><h1>database module<a class="headerlink" href="#module-database" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="database.Database">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">database.</span></span><span class="sig-name descname"><span class="pre">Database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This Class creates a connection to the database and provides methods to add, edit and remove modules, students and grades.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.addModule">
+<span class="sig-name descname"><span class="pre">addModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beschreibung</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leistung</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ects</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.addModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.addModule" title="Permalink to this definition"></a></dt>
+<dd><p>This method adds a module.
+:param name: the module’s name
+:param beschreibung: the module’s description
+:param leistung: the type of exam for the module
+:param ects: the module’s ects
+:return: True if the module was added, False if the module already exists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.addStudent">
+<span class="sig-name descname"><span class="pre">addStudent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studiengang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vorname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nachname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.addStudent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.addStudent" title="Permalink to this definition"></a></dt>
+<dd><p>This method adds a student to the database.
+:param studiengang: the student’s study program
+:param vorname: the student’s first name
+:param nachname: the student’s last name
+:param email: the student’s email
+:param password: the student’s password
+:return: True if the student was added, False if the student already exists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.addStudentModule">
+<span class="sig-name descname"><span class="pre">addStudentModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studentID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moduleID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semester</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.addStudentModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.addStudentModule" title="Permalink to this definition"></a></dt>
+<dd><p>This method adds a student to a module.
+:param studentID: the student’s id
+:param moduleID: the module’s id
+:param semester: the semester
+:return: True if the student was added, False if the student was already in the module in the same semester</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.editModule">
+<span class="sig-name descname"><span class="pre">editModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beschreibung</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leistung</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ects</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.editModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.editModule" title="Permalink to this definition"></a></dt>
+<dd><p>This method edits a module.
+:param name: the new module’s name
+:param beschreibung: the new module’s description
+:param leistung: the new module’s type of exam
+:param ects: the new module’s ects
+:param id: the module’s id
+:return: True if the module was edited, False if the module does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.editStudent">
+<span class="sig-name descname"><span class="pre">editStudent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studiengang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vorname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nachname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.editStudent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.editStudent" title="Permalink to this definition"></a></dt>
+<dd><p>This method edits a student.
+:param studiengang: the new student’s study program
+:param vorname: the new student’s first name
+:param nachname: the new student’s last name
+:param password: the new student’s password
+:param email: the new student’s email
+:return: True if the student was edited, False if the student does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.editStudentModule">
+<span class="sig-name descname"><span class="pre">editStudentModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studentID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moduleID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.editStudentModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.editStudentModule" title="Permalink to this definition"></a></dt>
+<dd><p>This method edits a student module combination.
+:param studentID: the student’s id
+:param moduleID: the module’s id
+:param note: the student’s grade
+:return: True if the student module combination was edited, False if the student module combination does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getModule">
+<span class="sig-name descname"><span class="pre">getModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getModule" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets the module by the id.
+:param id: the module’s id
+:return: the module or False if the module does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getModuleId">
+<span class="sig-name descname"><span class="pre">getModuleId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getModuleId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getModuleId" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets the module id from the module name.
+:param name: the module’s name
+:return: the module id or False if the module does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getModules">
+<span class="sig-name descname"><span class="pre">getModules</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studentID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semester</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getModules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getModules" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets all modules of the student by the student id and semester.
+:param studentID: the student’s id
+:param semester: the semester
+:return: the modules of the student</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getModulesByStudentID">
+<span class="sig-name descname"><span class="pre">getModulesByStudentID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studentID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getModulesByStudentID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getModulesByStudentID" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets all modules of the student by the student id.  The semester is not needed.
+:param studentID: the student’s id
+:return: all modules of the student</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getStudentData">
+<span class="sig-name descname"><span class="pre">getStudentData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getStudentData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getStudentData" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets the student data from the email.
+:param email: the student’s email
+:return: the student data or False if the student does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getStudentId">
+<span class="sig-name descname"><span class="pre">getStudentId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getStudentId"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getStudentId" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets the student id from the email.
+:param email: the student’s email
+:return: the student id or False if the student does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getStudentMail">
+<span class="sig-name descname"><span class="pre">getStudentMail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getStudentMail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getStudentMail" title="Permalink to this definition"></a></dt>
+<dd><p>This method gets the student email from the id.
+:param id: the student’s id
+:return: the student email or False if the student does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getTableModules">
+<span class="sig-name descname"><span class="pre">getTableModules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getTableModules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getTableModules" title="Permalink to this definition"></a></dt>
+<dd><p>‘
+This method shows the modules table.
+:return: the modules table</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.getTableStudents">
+<span class="sig-name descname"><span class="pre">getTableStudents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.getTableStudents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.getTableStudents" title="Permalink to this definition"></a></dt>
+<dd><p>This method shows the students table.
+:return: the students table</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.removeModule">
+<span class="sig-name descname"><span class="pre">removeModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.removeModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.removeModule" title="Permalink to this definition"></a></dt>
+<dd><p>‘
+This method removes a module.
+:param id: the module’s id
+:return: True if the module was removed, False if the module does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.removeStudent">
+<span class="sig-name descname"><span class="pre">removeStudent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.removeStudent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.removeStudent" title="Permalink to this definition"></a></dt>
+<dd><p>This method removes a student.
+:param id: the student’s id
+:return: True if the student was removed, False if the student does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.removeStudentModule">
+<span class="sig-name descname"><span class="pre">removeStudentModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">studentID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moduleID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.removeStudentModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.removeStudentModule" title="Permalink to this definition"></a></dt>
+<dd><p>This method removes a student from a module.
+:param studentID: the student’s id
+:param moduleID: the module’s id
+:return: True if the student was removed, False if the student module combination does not exist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="database.Database.validateStudent">
+<span class="sig-name descname"><span class="pre">validateStudent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.validateStudent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#database.Database.validateStudent" title="Permalink to this definition"></a></dt>
+<dd><p>This method validates a student.
+:param email: the student’s email
+:param password: the student’s password
+:return: True if the student exists and the password is correct, False if the student does not exist or the password is wrong</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="client.html" class="btn btn-neutral float-left" title="client module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="server.html" class="btn btn-neutral float-right" title="server module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Michael Oder &amp; Ben Leitzbach.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
