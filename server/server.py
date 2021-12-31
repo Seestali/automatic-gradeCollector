@@ -161,11 +161,13 @@ def main():
             if userID in connectedSockets:
                 # split the payload
                 email, password, semester = payload.split(b'::')
-                semester = int.from_bytes(semester, byteorder='big')
+                #semester = int.from_bytes(semester, byteorder='big')
+                semester = int(semester.decode())
                 # check if student data are valid
                 if db.validateStudent(email.decode(), password.decode()):
                     # get all classes and grades of the student
                     rawClasses = db.getModules(db.getStudentId(email.decode()), semester)
+                    print(db.getStudentId(email.decode()), semester)
                     classes = {}
                     # reformat the data in order to send it to the client
                     for x in rawClasses:
